@@ -25,6 +25,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\AvailableProductController;
+use App\Http\Controllers\EsewaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,10 @@ Route::post('/user/change-password', [SellerController::class,'postChangePasswor
 //login
 Route::get('/seller-dashboard-login', [LoginController::class,'userLogin'])->name('user-login');
 Route::post('/seller/login', [LoginController::class,'sellerLogin'])->name('seller-login');
+
+//recharge
+Route::get('/recharge-points', [EsewaController::class,'index'])->name('recharge-points');
+Route::get('/payment-verify', [EsewaController::class,'verifyPayment'])->name('verify-payment');
 
 //order
 Route::get('/place-order', [UnverifiedProductController::class,'view'])->name('order-form');
