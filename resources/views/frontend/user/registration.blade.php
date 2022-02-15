@@ -239,7 +239,7 @@
                       <div class="form-group">
                         <div class="form-check">
                           <input type="checkbox" class="form-check-input" name="terms_condition" id="exampleCheck1" required>
-                          <label class="form-check-label" for="exampleCheck1"> I accept all the <a href="{{ route('register-terms-condition') }}" target="__blank">terms and conditions</a></label>
+                          <label class="form-check-label" for="exampleCheck1"> I accept all the <a href="{{ route('register-terms-condition') }}" target="__blank" style="color: blue;">terms and conditions</a></label>
                         </div>
                       </div>
                     </div>

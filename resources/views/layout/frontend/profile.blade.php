@@ -5,6 +5,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <a class="dropdown-item" href="{{ route('view-balance') }}">My Balance  ({{ $seller->wallet_points }})</a>
+      <a class="dropdown-item" href="{{ route('recharge-points') }}">Recharge Points</a>
       <a class="dropdown-item" href="{{ route('buy-leads') }}">Dashboard</a>
       <a class="dropdown-item" href="{{ route('profile-details') }}">My profile</a>
       <a class="dropdown-item" href="{{ route('invite') }}">Invite Friend</a>
