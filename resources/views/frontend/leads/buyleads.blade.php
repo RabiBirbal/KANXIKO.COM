@@ -193,26 +193,11 @@
 <div class="footer">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
-				<h4>About</h4>
-				<p class="text-justify">An online marketplace is an e-commerce site that connects sellers with buyers. It’s often known as an electronic marketplace and all transactions are managed by the website owner. Companies use online marketplaces to reach customers who want to purchase their products and services.</p>
+			<div class="col-md-12 col-sm-12 col-lg-12">
+				<h5>Copyright2022 | All Rights Reserved</h5>
+				<a href="http://yohoniads.com/"><h6>Powered by: Yohoni Ad Marketing</h6></a>
 			</div>
-			<div class="col-md-4">
-				 <h4>Contact Info</h4>
-       			 <span><p>Call us: 9856754310</p></span>
-        		<span><p>612 CTC Mall, Kathmandu</p></span>
-        	  <span><p>Email: kanxiko.com@gmail.com</p></span>
-			</div>
-			 <div class="col-md-4">
-        <h4>Important Link</h4>
-         <span><p>Call us: 9856754310</p></span>
-        <span><p>612 CTC Mall, Kathmandu</p></span>
-        <span><p>Email: kanxiko.com@gmail.com</p></span>
-      </div>
 		</div>
-		<hr>
-		<h5>Copyright2022 | All Rights Reserved</h5>
-		<a href="http://yohoniads.com/"><h6>Powered by: Yohoni Ad Marketing</h6></a>
 	</div>
 </div>
 <!-- footer ends -->
