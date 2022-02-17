@@ -20,6 +20,7 @@ class CreateWalletsTable extends Migration
             $table->string('points');
             $table->text('remarks');
             $table->foreignId('lead_id')->nullable()->constrained('leads')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('esewa_id')->nullable()->constrained('esewas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

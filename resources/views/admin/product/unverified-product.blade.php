@@ -43,7 +43,7 @@
                           <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                           <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                              <th scope="col">SN</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Qty</th>
@@ -58,9 +58,10 @@
                             </tr>
                           </thead>
                           <tbody id="myTable">
+                            <p hidden>{{ $n=1; }}</p>
                             @foreach ($product as $data)
                             <tr>
-                              <td>{{ $data->id }}</td>
+                              <td>{{ $n }}</td>
                               <td>{{ $data->name }}</td>
                               <td>
                                 @if($data->product_image == null)
@@ -138,6 +139,7 @@
                                 </form>
                               </td>
                             </tr>
+                            <p hidden>{{ $n++; }}</p>
                             @endforeach
                           </tbody>
                         </table>

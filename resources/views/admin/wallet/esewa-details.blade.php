@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Dashboard | Wallet</title>
+    <title>Dashboard | eSewa</title>
 
     @include('layout/admin/css')
   </head>
@@ -27,7 +27,7 @@
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Wallet Details</h2>
+                <h2>eSewa Payments Details</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -44,27 +44,27 @@
                           <thead>
                             <tr>
                               <th scope="col">SN</th>
-                              <th scope="col">Wallet ID</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Action</th>
-                              <th scope="col">Points</th>
-                              <th scope="col">Remarks</th>
-                              <th scope="col">Credited Date</th>
-                              <th scope="col">Action</th>
+                              <th scope="col">Payment ID</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Random ID</th>
+                              <th scope="col">eSewa Reference ID</th>
+                              <th scope="col">Seller Email</th>
+                              <th scope="col">Paid Date</th>
+                              {{-- <th scope="col">Action</th> --}}
                             </tr>
                           </thead>
                           <tbody id="myTable">
                             <p hidden>{{ $n=1; }}</p>
-                            @foreach ($wallet as $data)
+                            @foreach ($esewa as $data)
                             <tr>
                               <td>{{ $n }}</td>
-                              <td>{{ $data->id }}</td>
+                              <td>{{ $data->esewa_id }}</td>
+                              <td>{{ $data->amount }}</td>
+                              <td>{{ $data->random_id }}</td>
+                              <td>{{ $data->refId }}</td>
                               <td>{{ $data->email }}</td>
-                              <td>{{ $data->action }}</td>
-                              <td>{{ $data->points }}</td>
-                              <td>{{ $data->remarks }}</td>
                               <td>{{ $data->created_at->format('M d, Y H:m:s A') }}</td>
-                              <td>
+                              {{-- <td>
                                 <form action="{{ route('edit_wallet') }}" method="post">
                                   @csrf
                                   <input type="hidden" name="wallet_id" value="{{ $data['id'] }}">
@@ -75,7 +75,7 @@
                                   <input type="hidden" name="wallet_id" value="{{ $data['id'] }}">
                                   <button type="submit" onclick="return confirm('Are you sure want to continue?')" class="btn btn-danger">Remove</button>
                                 </form>
-                              </td>
+                              </td> --}}
                             </tr>
                             <p hidden>{{ $n++; }}</p>
                             @endforeach

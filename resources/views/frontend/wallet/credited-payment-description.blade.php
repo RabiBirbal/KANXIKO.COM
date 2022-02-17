@@ -95,6 +95,10 @@
         <th>Credited Date</th>
         <th>Points</th>
         <th>Remarks</th>
+		@if($wallet->esewa_id)
+		<th>Payment Type</th>
+		<th>Esewa Reference ID</th>
+		@endif
       </tr>
     </thead>
     <tbody>
@@ -102,6 +106,10 @@
         <td>{{ $wallet->created_at->format('M d,Y') }}</td>
         <td>{{ $wallet->points }}</td>
         <td>{{ $wallet->remarks }}</td>
+		@if($wallet->esewa_id)
+		<td>eSewa</td>
+		<td>{{ $wallet->refId }}</td>
+		@endif
       </tr>
     </tbody>
   </table>

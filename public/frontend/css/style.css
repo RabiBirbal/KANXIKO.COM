@@ -451,6 +451,7 @@ font-family: Helvetica Neue;
 /*how it works*/
 body{
   background: #eee;
+  margin-bottom:50px;
 }
 span{
   font-size:15px;
@@ -529,6 +530,10 @@ font-family: Helvetica Neue;
   margin-bottom: 0px;
   background: #353735;
   padding: 5px;
+  /* margin-top: 150px; */
+}
+.content{
+  margin-bottom: 90px;
 }
 .footer h4{
   color: #fff;

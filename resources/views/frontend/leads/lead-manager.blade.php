@@ -83,12 +83,12 @@
 </div>
 <!-- lead manager button ends -->
 <!-- table -->
-<div class="container-fluid">        
+<div class="container-fluid content">        
 	<div class="card-box table-responsive">
 		<table id="datatable" class="table table-striped table-bordered" style="width:100%">
 		<thead>
 			<tr>
-				<th>lead ID</th>
+				<th>SN</th>
 				<th>Lead Purchase Date</th>
 				<th>Lead Owner</th>
 				<th>Enquiry Detail</th>
@@ -100,9 +100,10 @@
 			</tr>
 			</thead>
 			<tbody>
+				<p hidden>{{ $n=1; }}</p>
 				@foreach ($lead as $data)
 				<tr class="table-warning">
-					<td>{{ $data->id }}</td>
+					<td>{{ $n }}</td>
 					<td>{{ $data->created_at->format('M d, Y') }}</td>
 					<td>{{ $data->buyer_name }}</td>
 					<td>
@@ -117,6 +118,7 @@
 						<td><button type="submit" class="btn btn-primary">Save</button></td>
 					</form>
 				</tr>
+				<p hidden>{{ $n++; }}</p>
 				@endforeach
 			</tbody>
 		</table>

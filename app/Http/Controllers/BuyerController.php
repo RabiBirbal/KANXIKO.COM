@@ -19,6 +19,7 @@ class BuyerController extends Controller
     {
         $admin=User::find(Session::get('admin')['id']);
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
+        ->orderby('product_id','desc')
         ->get();
         // dd($product);
         return view('admin/order/buyer',compact("product","admin"));

@@ -136,6 +136,9 @@ Route::post('/wallet/details/delete',[WalletController::class,'destroy'])->name(
 Route::post('/wallet/details/edit',[WalletController::class,'edit'])->name('edit_wallet');
 Route::post('/wallet/details/update',[WalletController::class,'update'])->name('update_wallet');
 
+//eSewa
+Route::get('/9851240938/eSewa-payment-details',[EsewaController::class,'show'])->name('esewa');
+
 //banner
 Route::get('/9851240938/banner/add-homepage-banner',[BannerController::class,'index'])->name('homepage_banner');
 Route::post('/banner/add-banner',[BannerController::class,'store'])->name('store_banner');

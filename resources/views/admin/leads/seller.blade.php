@@ -43,7 +43,8 @@
                           <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                           <thead>
                             <tr>
-                              <th scope="col">ID</th>
+                              <th scope="col">SN</th>
+                              <th scope="col">Lead ID</th>
                                 <th scope="col">Seller Name</th>
                                 <th scope="col">Buyer Name</th>
                                 <th scope="col">Product Name</th>
@@ -56,8 +57,10 @@
                             </tr>
                           </thead>
                           <tbody id="myTable">
+                            <p hidden>{{ $n=1; }}</p>
                             @foreach ($lead as $data)
                             <tr>
+                              <td>{{ $n }}</td>
                               <td>{{ $data->id }}</td>
                               <td>{{ $data->first_name }} {{ $data->last_name }}</td>
                               <td>{{ $data->buyer_name }}</td>
@@ -73,6 +76,7 @@
                                 <a href="{{ url('products/details/delete/'.$data['id']) }}" onclick="return confirm('Are you sure want to continue?')" class="btn btn-danger">Remove</a>
                               </td> --}}
                             </tr>
+                            <p hidden>{{ $n++; }}</p>
                             @endforeach
                           </tbody>
                         </table>

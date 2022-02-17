@@ -43,6 +43,8 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                           <thead>
                             <tr>
+                              <th scope="col">SN</th>
+                              <th scope="col">Seller ID</th>
                               <th scope="col">First Name</th>
                               <th scope="col">Last Name</th>
                               <th scope="col">Wallet Points</th>
@@ -54,8 +56,11 @@
                             </tr>
                           </thead>
                           <tbody id="myTable">
+                            <p hidden>{{ $n=1; }}</p>
                             @foreach($seller as $data)
                             <tr>
+                              <td>{{$n}}</td>
+                              <td>{{$data->id}}</td>
                               <td>{{$data->first_name}}</td>
                               <td>{{$data->last_name}}</td>
                               <td>{{$data->wallet_points}}</td>
@@ -87,6 +92,7 @@
                                 </form>
                               </td>
                             </tr>
+                            <p hidden>{{ $n++; }}</p>
                             @endforeach
                           </tbody>
                         </table>

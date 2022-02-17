@@ -98,31 +98,29 @@
 	                <h2>Recharge Points</h2>
 	                <p>Recharge Your Points and pay from eSewa wallet.</p>
 	                <ol class="list-unstyled">
-	                    <li><span class="text-primary text-medium">1. </span>You can recharge your wallet points easily.</li>
-	                    <li><span class="text-primary text-medium">2. </span>Our system will take you to eSewa payment page where you can make a payment.</li>
 	                    Note: 1 points = Nrs. 1
 	                </ol>
 	            </div>
-	            <form action="https://uat.esewa.com.np/epay/main" method="POST">
+	            <form action="https://esewa.com.np/epay/main" method="POST">
                     @csrf
 	                <div class="card-body" style="background-color: white">
-                        <strong><label for="points">Points: </label></strong>
+                        <strong><label for="points">Buy Points: </label></strong>
                         <input value="" name="amt" id="amt" type="text" class="form-control">
-                        <strong><label for="txAmt" class="mt-3">Tax Amount: </label></strong>
-                        <input value="5" name="txAmt" id="txAmt" type="text" class="form-control" readonly>
-                        <strong><label for="Service Charge" class="mt-3">Service Charge: </label></strong>
-                        <input value="2" name="psc" id="psc" type="text" class="form-control" readonly>
-                        <strong><label for="Delivery Charge" class="mt-3">Delivery Charge: </label></strong>
-                        <input value="3" name="pdc" id="pdc" type="text" class="form-control" readonly>
-                        <input value="epay_payment" name="scd" type="hidden">
-                        <input value="1234567011" name="pid" type="hidden">
+                        {{-- <strong><label for="txAmt" class="mt-3">Tax Amount: </label></strong> --}}
+                        <input value="0" name="txAmt" id="txAmt" type="hidden" class="form-control" readonly>
+                        {{-- <strong><label for="Service Charge" class="mt-3">Service Charge: </label></strong> --}}
+                        <input value="0" name="psc" id="psc" type="hidden" class="form-control" readonly>
+                        {{-- <strong><label for="Delivery Charge" class="mt-3">Delivery Charge: </label></strong> --}}
+                        <input value="0" name="pdc" id="pdc" type="hidden" class="form-control" readonly>
+                        <input value="NP-ES-EMN" name="scd" type="hidden">
+                        <input value="{{ Str::random(10) }}" name="pid" type="hidden">
                         <strong><label for="totalamount" class="mt-3">Total Amount: </label></strong>
                         <input value="0" name="tAmt" id="tAmt" type="text" class="form-control" readonly>
                         <input value="http://127.0.0.1:8000/payment-verify?q=su" type="hidden" name="su">
                         <input value="http://127.0.0.1:8000/payment-verify?q=fu" type="hidden" name="fu">                
                     </div>
 	                <div class="card-footer">
-                        <input value="Submit" type="submit" class="btn btn-primary">
+                        <input value="Buy Now" type="submit" class="btn btn-primary">
                     </div>
 	            </form>
 	        </div>

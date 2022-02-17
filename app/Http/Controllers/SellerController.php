@@ -28,7 +28,7 @@ class SellerController extends Controller
     public function index()
     {
         $admin=User::find(Session::get('admin')['id']);
-        $seller= Seller::all();
+        $seller= Seller::orderby('id','desc')->get();
         return view('admin/user/seller',compact("seller","admin"));
     }
 

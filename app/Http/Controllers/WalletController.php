@@ -105,7 +105,8 @@ class WalletController extends Controller
     public function showCreditDetails(Request $request)
     {
         $seller=Seller::find(Session::get('seller')['id']);
-        $wallet=Wallet::find($request->wallet_id);
+        $wallet=Wallet::join('esewas', 'esewas.id', '=', 'wallets.esewa_id')
+        ->first();
         return view('frontend/wallet/credited-payment-description',compact("wallet","seller"));
     }
 

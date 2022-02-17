@@ -67,11 +67,12 @@
 </div>
 <!-- lead manager button ends -->
 <!-- table -->
-<div class="container-fluid">        
+<div class="container-fluid content">        
 	<div class="card-box table-responsive">
 		<table id="datatable" class="table table-striped table-bordered" style="width:100%">
 		<thead>
 			<tr>
+				<th>SN</th>
 				<th>Date</th>
 				<th>Product</th>
 				<th>Product Image</th>
@@ -84,9 +85,11 @@
 			</tr>
 			</thead>
 			<tbody>
+				<p hidden>{{ $n=1; }}</p>
 				@foreach ($product as $data)
 				@if($data->availability > 0)
 				<tr class="table-warning">
+					<td>{{ $n }}</td>
 					<td>{{ $data->created_at->format('M d,Y') }} <br>Enquiry Date</td>
 					<td><strong>Product Name:</strong><br>{{ $data->name }}</td>
 					<td>
@@ -114,6 +117,7 @@
 					</td>
 				  </tr>
 				  @endif
+				  <p hidden>{{ $n++; }}</p>
 				  @endforeach
 			</tbody>
 		</table>

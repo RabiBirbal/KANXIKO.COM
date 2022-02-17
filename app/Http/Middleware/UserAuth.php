@@ -48,6 +48,12 @@ class UserAuth
         if($request->path()=="user/my-balance" && !$request->session()->has('seller')){
             return redirect()->route('user-login');
         } 
+        if($request->path()=="recharge-points" && !$request->session()->has('seller')){
+            return redirect()->route('user-login');
+        }
+        if($request->path()=="payment-verify" && !$request->session()->has('seller')){
+            return redirect()->route('user-login');
+        }
 
         //admin
         if($request->path()=="9851240938/kanxiko-admin" && $request->session()->has('admin')){

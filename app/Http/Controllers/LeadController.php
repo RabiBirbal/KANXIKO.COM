@@ -23,6 +23,7 @@ class LeadController extends Controller
     {   
         $admin=User::find(Session::get('admin')['id']);
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
+        ->orderby('products.id','desc')
         ->get();
         $seller=Seller::find(Session::get('seller')['id']);
         return view('frontend/leads/buyleads',compact("product","seller","admin"));
@@ -39,6 +40,7 @@ class LeadController extends Controller
         $lead= Lead::join('products', 'products.id', '=', 'leads.product_id')
         ->join('buyers', 'buyers.id', '=', 'leads.buyer_id')
         ->join('sellers', 'sellers.id', '=', 'leads.seller_id')
+        ->orderby('products.id','desc')
         ->get();
         return view('admin/leads/seller',compact("admin","lead"));
     }
@@ -47,6 +49,7 @@ class LeadController extends Controller
     {
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->where('leads_category','Free')
+        ->orderby('products.id','desc')
         ->get();
         $seller=Seller::find(Session::get('seller')['id']);
         return view('frontend/leads/free-leads',compact("product","seller"));
@@ -56,6 +59,7 @@ class LeadController extends Controller
     {
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->where('leads_category','Premium')
+        ->orderby('products.id','desc')
         ->get();
         $seller=Seller::find(Session::get('seller')['id']);
         return view('frontend/leads/premium-leads',compact("product","seller"));
@@ -65,6 +69,7 @@ class LeadController extends Controller
     {
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->where('leads_category','Regular')
+        ->orderby('products.id','desc')
         ->get();
         $seller=Seller::find(Session::get('seller')['id']);
         return view('frontend/leads/regular-leads',compact("product","seller"));
@@ -130,6 +135,7 @@ class LeadController extends Controller
         $lead= Buyer::join('products', 'products.id', '=', 'buyers.product_id')
         ->join('leads', 'leads.buyer_id', '=', 'buyers.id')
         ->where('seller_id',$seller->id)
+        ->orderby('leads.id','desc')
         ->get();
         return view('frontend/leads/lead-manager',compact("seller","lead"));
     }

@@ -29,7 +29,7 @@ class UnverifiedProductController extends Controller
     public function index()
     {
         $admin=User::find(Session::get('admin')['id']);
-        $product=Unverified_product::all();
+        $product=Unverified_product::orderby('id','desc')->get();
         return view('admin/product/unverified-product',compact("product","admin"));
     }
 

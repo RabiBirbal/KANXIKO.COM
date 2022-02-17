@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Esewa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use curl_init;
 use App\Models\Seller;
+use App\Models\Wallet;
+use App\Models\User;
 
 class EsewaController extends Controller
 {
@@ -32,17 +35,12 @@ class EsewaController extends Controller
         $refId = $request->refId;
         // dump($status,$amt,$oid,$refId);
         if($status == 'su'){
-            $url = "https://uat.esewa.com.np/epay/main";
+            $url = "https://esewa.com.np/epay/main";
             $data =[
                 'amt'=> $amt,
-                'pdc'=> '2',
-                'psc'=> '3',
-                'txAmt'=> '5',
-                'tAmt'=> '100',
-                'pid'=>$refId,
-                'scd'=> 'epay_payment',
-                'su'=>'http://merchant.com.np/page/esewa_payment_success?q=su',
-                'fu'=>'http://merchant.com.np/page/esewa_payment_failed?q=fu'
+                'rid'=> $refId,
+                'pid'=> $oid,
+                'scd'=> 'NP-ES-EMN'
             ];
 
                 $curl = curl_init($url);
@@ -52,22 +50,46 @@ class EsewaController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
-                if(strpos($response,'Success')== 0){
+                if(strcmp($response,"Success") == true){
                     // $verified = true;
-                    Session::put('success','Payment verified successfull.');
+                    $data = new Esewa;
+                    $data->amount=$amt;
+                    $data->random_id=$oid;
+                    $data->refId=$refId;
+                    $data->save();
+
+                    // $pdc=3;
+                    // $psc=2;
+                    // $txAmt=5;
+                    // $points=$amt - $pdc -$psc - $txAmt;
+
+                    $wallet=new Wallet;
+                    $wallet->email=Session::get('seller')['email'];
+                    $wallet->action="Credited";
+                    $wallet->points=$amt;
+                    $wallet->remarks=$amt. " point has been credited to your wallet.";
+                    $wallet->esewa_id=$data->id;
+                    $wallet->save();
+
+                    $seller=Seller::find(Session::get('seller')['id']);
+                    $seller->wallet_points=$seller->wallet_points+$amt;
+                    $seller->update();
+
+                    Session::put('success','Payment verification successfull.');
                     return redirect()->route('view-balance');
                     // dd("Verified Successfull");
                 }
                 else{
                     // $verified = false;
-                    Session::put('success','Payment verified failed.');
+                    Session::put('error','Payment verification failed.');
                     return redirect()->route('recharge-points');
                     // dd("Verified Failed");
                 }
                 
         }
         else{
-
+            Session::put('error','Payment failed.');
+            return redirect()->route('recharge-points');
         }
     }
     public function create()
@@ -92,9 +114,13 @@ class EsewaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $admin=User::find(Session::get('admin')['id']);
+        $esewa=Esewa::join('wallets', 'wallets.esewa_id', '=', 'esewas.id')
+        ->orderby('esewas.id','desc')
+        ->get();
+        return view('admin/wallet/esewa-details',compact("admin","esewa"));
     }
 
     /**

@@ -40,6 +40,7 @@
             <li><a><i class="fa fa-money"></i> Wallet Management <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{{ route('wallet') }}">Credit/Debit Wallet Point</a></li>
+                <li><a href="{{ route('esewa') }}">eSewa Payment Details</a></li>
                 <li><a href="{{ route('wallet_details') }}">Wallet Details</a></li>
               </ul>
             </li>
