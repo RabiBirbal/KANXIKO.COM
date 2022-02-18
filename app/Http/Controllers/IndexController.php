@@ -58,7 +58,7 @@ class IndexController extends Controller
         $footwear=Category::where('name','footwear')->first();
         $footwearlist=Subcategory::where('category_id',$footwear->id)->get();
 
-        $jewellary=Category::where('name','artificial-jewellery')->first();
+        $jewellary=Category::where('name','artificial-jewelry')->first();
         $jewellarylist=Subcategory::where('category_id',$jewellary->id)->get();
 
         $cosmetic=Category::where('name','cosmetic-products')->first();

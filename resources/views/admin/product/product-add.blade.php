@@ -11,8 +11,14 @@
     <title>Dashboard | Clothing </title>
 
     @include('layout/admin/css')
+    <style>
+      textarea{ 
+        height:150px; 
+        min-height:150px;  
+        max-height:150px;
+    }
+    </style>
   </head>
-
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -58,7 +64,7 @@
                                             <input type="text" id="quantity" name="quantity" required="required" class="form-control" autofocus>
                                         </div>
                                     </div>
-                                    <div class="item form-group">
+                                    {{-- <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="category">Category <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
@@ -75,6 +81,11 @@
                                         <div class="col-md-6 col-sm-6 ">
                                             <select class="form-control" name="subcategory">
                                               <option value="0">Choose Subcategory</option>
+                                              <optgroup label="Aluminu and Upvc Products " class="Aluminum-and-Upvc-Products box1">
+                                                @foreach ($aluminumList as $data)
+                                                  <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                @endforeach
+                                              </optgroup>
                                                 <optgroup label="Clothing" class="Clothing box1">
                                                   @foreach ($clothinglist as $data)
                                                     <option value="{{ $data->name }}">{{ $data->name }}</option>
@@ -200,10 +211,15 @@
                                                     <option value="{{ $data->name }}">{{ $data->name }}</option>
                                                   @endforeach
                                                 </optgroup>
+                                                <optgroup label="CA Lawyer Service" class="CA-Lawyer-Service box1">
+                                                  @foreach ($CAlist as $data)
+                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                  @endforeach
+                                                </optgroup>
                                               </select>
                                         </div>
-                                    </div>
-                                    <div class="item form-group Clothing size">
+                                    </div> --}}
+                                    {{-- <div class="item form-group Clothing size">
                                         <label class="col-form-label col-md-3 col-sm-6 label-align" for="size">Size <span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-6 ">
@@ -230,7 +246,7 @@
                                                 <option value="Grey">Grey</option>
                                               </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="product_image">Image Sample
                                         </label>
@@ -259,28 +275,29 @@
                                     <div class="col-md-12">
                                         <h2>Choose Leads Category and Points</h2>
                                         <hr class="mb-3">
-                                        <div class="col-md-2 mb-3 text-right">
-                                        <span>Leads Category*</span>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                        <select class="form-control" id="subcategory" onclick="getValue();" name="leads_category" required>
-                                            <option value="0" selected>Choose Leads Category</option>
-                                            <option value="Premium">Premium</option>
-                                            <option value="Regular">Regular</option>
-                                            <option value="Free">Free</option>
-                                        </select>
-                                        </div>
-                                        <div class="col-md-2 mb-3 text-right">
-                                        <span>Points*</span>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                        <input type="number" name="point" class="form-control" required/>
-                                        </div>
-                                        <div class="col-md-2 mb-3 text-right">
-                                          <span>Availability*</span>
+                                        <div class="item form-group">
+                                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="description">Leads Category <span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-6 mb-3">
+                                          <select class="form-control" id="subcategory" onclick="getValue();" name="leads_category" required>
+                                              <option value="0" selected>Choose Leads Category</option>
+                                              <option value="Premium">Premium</option>
+                                              <option value="Regular">Regular</option>
+                                              <option value="Free">Free</option>
+                                          </select>
                                           </div>
-                                          <div class="col-md-3 mb-3">
-                                          <input type="number" name="availability" class="form-control" value="1"/ required>
+                                        </div>
+                                        <div class="item form-group">
+                                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="description">Points <span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-2 mb-3">
+                                          <input type="number" name="point" class="form-control" required/>
+                                          </div>
+                                          <label class="col-form-label col-md-2 col-sm-2 label-align" for="description">Availability <span class="required">*</span>
+                                          </label>
+                                          <div class="col-md-2 mb-3">
+                                            <input type="number" name="availability" class="form-control" value="1"/ required>
+                                          </div>
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>
@@ -330,7 +347,7 @@
     {{-- alert script --}}
     @include('admin/alert-script');
 
-    <script>
+    {{-- <script>
         $(document).ready(function(){
             $(".select1").change(function(){
                 $(this).find("option:selected").each(function(){
@@ -349,7 +366,7 @@
                 });
             }).change();
         });
-      </script>
+      </script> --}}
       <script>
         $(document).ready(function(){
             $(".select1").change(function(){

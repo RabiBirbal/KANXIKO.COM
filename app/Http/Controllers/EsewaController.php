@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PointsCreditedSucessfullMail;
 use App\Models\Esewa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use curl_init;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Seller;
 use App\Models\Wallet;
 use App\Models\User;
@@ -75,6 +76,7 @@ class EsewaController extends Controller
                     $seller->wallet_points=$seller->wallet_points+$amt;
                     $seller->update();
 
+                    Mail::to(Session::get('seller')['email'])->send(new PointsCreditedSucessfullMail($wallet));
                     Session::put('success','Payment verification successfull.');
                     return redirect()->route('view-balance');
                     // dd("Verified Successfull");

@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('quantity');
             $table->string('size')->nullable();
             $table->string('color')->nullable();
-            $table->string('category');
-            $table->string('subcategory');
+            $table->string('category')->nullable();
+            $table->string('subcategory')->nullable();
             $table->string('product_image')->nullable();
             $table->string('budget');
             $table->string('leads_category');

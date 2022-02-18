@@ -34,10 +34,10 @@
                       <div id="login-box" class="col-md-12">
                           <form action="{{ route('step1') }}" method="post" enctype="multipart/form-data" data-parsley-validate id="login-form" class="form"  >
                             @csrf
-                        <h3 class="text-center text-info"> Send Your Enquiry</h3>
+                            <h3 class="text-center text-info"> Send Your Enquiry</h3>
                               <div class="form-group mb-0">
                               <div class="row">
-                                  <div class="col-md-6">
+                                  {{-- <div class="col-md-6">
                                        <!-- <input type="text" class="form-control" placeholder="product name *" value="" /> -->
                                     <select class="select1 form-control mb-3" name="category">
                                       @foreach ($category as $data)
@@ -103,7 +103,7 @@
                                             <option value="{{ $data->name }}">{{ $data->name }}</option>
                                           @endforeach
                                         </optgroup>
-                                        <optgroup label="Artificial Jewellery " class="Artificial-Jewellery box1">
+                                        <optgroup label="Artificial Jewelry " class="Artificial-Jewelry box1">
                                           @foreach ($jewellarylist as $data)
                                             <option value="{{ $data->name }}">{{ $data->name }}</option>
                                           @endforeach
@@ -173,21 +173,26 @@
                                             <option value="{{ $data->name }}">{{ $data->name }}</option>
                                           @endforeach
                                         </optgroup>
+                                        <optgroup label="CA Lawyer Service" class="CA-Lawyer-Service box1">
+                                          @foreach ($CAlist as $data)
+                                            <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                          @endforeach
+                                        </optgroup>
                                       </select>
                                   </div>
                               </div>
-                          </div>
+                          </div> --}}
                           <div class="form-group mb-0">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <input type="text" class="form-control" name="product_name" placeholder="Product/Service Name *" value="" required/>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                   <input type="text" class="form-control" name="quantity" placeholder="Quantity/Duration/Other*" value="" required/>
                                 </div>
                             </div>
                         </div>
-                           <div class="form-group mb-0">
+                           {{-- <div class="form-group mb-0">
                               <div class="row">
                                   <div class="col-md-6 mb-3">
                                        <!-- <input type="text" class="form-control" placeholder="product name *" value="" /> -->
@@ -213,22 +218,22 @@
                                     </select>
                                   </div>
                               </div>
-                          </div>
+                          </div> --}}
                            <div class="form-group mb-0">
                               <div class="row">
-                                  <div class="col-md-6">
+                                <div class="col-md-11 budget mb-3">
+                                  <input type="number" class="form-control" name="budget" placeholder="Budget (if any)" value=""/>
+                                </div>
+                                  <div class="col-md-11">
                                     <input type="file" id="file-ip-1" accept="image/*" class="form-control-file border" onchange="showPreview1(event);" name="product-img">
                                     <div class="preview mt-2">
                                       <img src="" id="file-ip-1-preview" height="150px;">
                                     </div>
                                   </div>
-                                  <div class="col-md-6 budget">
-                                    <input type="number" class="form-control" name="budget" placeholder="Budget (if any)" value=""/>
-                                  </div>
                               </div>
                           </div>
                            <div class="form-groupmb-0">
-                              <textarea type="text" class="form-control" name="description" placeholder="description*" value="" required></textarea>
+                              <textarea type="text" rows="5" cols="50" class="form-control" name="description" placeholder="description*" value="" required></textarea>
                           </div>
                                <div class="form-check">
                                   <input type="checkbox" class="form-check-input" name="terms_condition" id="exampleCheck1" required>
@@ -276,7 +281,7 @@
     @include('layout/frontend/js')
     {{-- alert script --}}
     @include('admin/alert-script')
-    <script>
+    {{-- <script>
         $(document).ready(function(){
             $(".select1").change(function(){
                 $(this).find("option:selected").each(function(){
@@ -295,7 +300,7 @@
                 });
             }).change();
         });
-      </script>
+      </script> --}}
       <!-- image preview -->
       <script type="text/javascript">
         function showPreview1(event){

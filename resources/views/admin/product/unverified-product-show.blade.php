@@ -11,6 +11,13 @@
     <title>Dashboard | Products</title>
 
     @include('layout/admin/css')
+    <style>
+      textarea{ 
+        height:150px; 
+        min-height:150px;  
+        max-height:150px;
+    }
+    </style>
   </head>
 
   <body class="nav-md">
@@ -109,12 +116,12 @@
                           <textarea class="form-control" name="description" readonly>{{ $productlist['description'] }}</textarea>
                         </div>
                         <div class="col-md-12">
-                            <h2>Choose Leads Category and Points</h2>
-                            <hr class="mb-3">
-                            <div class="col-md-2 mb-3 text-right">
-                            <span>Leads Category</span>
-                            </div>
-                            <div class="col-md-3 mb-3">
+                          <h2>Choose Leads Category and Points</h2>
+                          <hr class="mb-3">
+                          <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="description">Leads Category <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 mb-3">
                             <select class="form-control" id="subcategory" onclick="getValue();" name="leads_category" required>
                                 <option value="0" selected>Choose Leads Category</option>
                                 <option value="Premium">Premium</option>
@@ -122,18 +129,21 @@
                                 <option value="Free">Free</option>
                             </select>
                             </div>
-                            <div class="col-md-2 mb-3 text-right">
-                            <span>Points</span>
+                          </div>
+                          <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="description">Points <span class="required">*</span>
+                            </label>
+                            <div class="col-md-2 mb-3">
+                            <input type="number" name="point" class="form-control" required/>
                             </div>
-                            <div class="col-md-4 mb-3">
-                            <input type="number" name="point" class="form-control" required autofocus/>
+                            <label class="col-form-label col-md-2 col-sm-2 label-align" for="description">Availability <span class="required">*</span>
+                            </label>
+                            <div class="col-md-2 mb-3">
+                              <input type="number" name="availability" class="form-control" value="1"/ required>
                             </div>
-                            <div class="col-md-2 mb-3 text-right">
-                              <span>Availability</span>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                              <input type="number" name="availability" class="form-control" value="1" required autofocus/>
-                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-12">
                             <h2>Buyer Details</h2>
                             <hr>

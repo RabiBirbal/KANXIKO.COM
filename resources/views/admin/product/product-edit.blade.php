@@ -61,7 +61,7 @@
                                             <input type="text" id="quantity" name="quantity" value="{{ $product['quantity'] }}" required="required" class="form-control" autofocus>
                                         </div>
                                     </div>
-                                    <div class="item form-group">
+                                    {{-- <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="size">Size 
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
@@ -94,7 +94,7 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="category">Category <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select class="form-control" id="subcategory" onclick="getValue();" name="category" required>
+                                            <select class="form-control" id="subcategory" onclick="getValue();" name="category">
                                                 <option value="{{ $product->category }}" selected>{{ $product->category }}</option>
                                                 @foreach ($category as $data)
                                                 <option>{{ $data->name }}</option>
@@ -106,22 +106,22 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="subcategory">Sub-Category <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select class="form-control" id="subcategory" onclick="getValue();" name="subcategory" required>
+                                            <select class="form-control" id="subcategory" onclick="getValue();" name="subcategory" >
                                                 <option value="{{ $product->subcategory }}" selected>{{ $product->subcategory }}</option>
                                                 @foreach ($subcategory as $data)
                                                 <option>{{ $data->name }}</option>
                                                 @endforeach
                                               </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image Sample
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            @if($data->product_image == null)
+                                            @if($product->product_image == null)
                                                 <img src="{{ asset('frontend/image/no-image.jpg') }}" width="150px" alt="product_image">
                                             @else
-                                                <img src="{{ asset('upload/images/'.$data['product_image']) }}" width="150px" alt="product_image">
+                                                <img src="{{ asset('upload/images/'.$product['product_image']) }}" width="150px" alt="product_image">
                                             @endif
                                         </div>
                                     </div>

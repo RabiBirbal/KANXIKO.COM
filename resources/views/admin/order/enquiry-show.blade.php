@@ -9,7 +9,13 @@
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>Dashboard | Enquiry</title>
-
+    <style>
+      textarea{ 
+        height:125px; 
+        min-height:125px;  
+        max-height:125px;
+    }
+    </style>
     @include('layout/admin/css')
   </head>
 

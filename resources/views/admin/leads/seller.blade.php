@@ -44,7 +44,6 @@
                           <thead>
                             <tr>
                               <th scope="col">SN</th>
-                              <th scope="col">Lead ID</th>
                                 <th scope="col">Seller Name</th>
                                 <th scope="col">Buyer Name</th>
                                 <th scope="col">Product Name</th>
@@ -61,7 +60,6 @@
                             @foreach ($lead as $data)
                             <tr>
                               <td>{{ $n }}</td>
-                              <td>{{ $data->id }}</td>
                               <td>{{ $data->first_name }} {{ $data->last_name }}</td>
                               <td>{{ $data->buyer_name }}</td>
                               <td>{{ $data->name }}</td>

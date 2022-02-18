@@ -6,6 +6,15 @@
 	<title>Form</title>
 	@include('layout/frontend/css')
  <style>
+    textarea{ 
+        width: 350px; 
+        min-width:350px; 
+        max-width:350px; 
+
+        height:150px; 
+        min-height:150px;  
+        max-height:150px;
+    }
  	.page-form{
         background-image: url({{ url('frontend/image/form-pic.jpg') }});
         background-repeat: no-repeat;
@@ -99,7 +108,7 @@
                                       
         </div> <!-- form-group// -->                                
         <div class="form-group">
-            <button type="submit" onclick="return confirm('Are you sure want to continue?')" value="submit" class="btn btn-primary btn-block"> Send </button>
+            <button type="submit" onclick="return confirm('Are you sure want to continue?')" id="submit" value="submit" class="btn btn-primary btn-block"> Send </button>
         </div> <!-- form-group// -->                                                                       
     </form>
 </article>

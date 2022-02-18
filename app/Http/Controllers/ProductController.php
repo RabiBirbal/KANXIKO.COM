@@ -68,7 +68,7 @@ class ProductController extends Controller
         $footwear=Category::where('name','footwear')->first();
         $footwearlist=Subcategory::where('category_id',$footwear->id)->orderby('name','asc')->get();
 
-        $jewellary=Category::where('name','artificial-jewellery')->first();
+        $jewellary=Category::where('name','artificial-jewelry')->first();
         $jewellarylist=Subcategory::where('category_id',$jewellary->id)->orderby('name','asc')->get();
 
         $cosmetic=Category::where('name','cosmetic-products')->first();
@@ -110,10 +110,16 @@ class ProductController extends Controller
         $hardware=Category::where('name','hardware-and-sanitary-products')->first();
         $hardwarelist=Subcategory::where('category_id',$hardware->id)->orderby('name','asc')->get();
 
+        $CA=Category::where('name','CA-Lawyer-Service')->first();
+        $CAlist=Subcategory::where('category_id',$CA->id)->orderby('name','asc')->get();
+
+        $aluminum=Category::where('name','Aluminum-and-Upvc-Products')->first();
+        $aluminumList=Subcategory::where('category_id',$aluminum->id)->orderby('name','asc')->get();
+
         return view('admin/product/product-add',compact("category","clothinglist","furniturelist","waterfilterlist",
         "houseappliancelist","machinerylist","computerlist","constructionlist","mobilelist","servicelist","admin",
         "studylist","footwearlist","jewellarylist","cosmeticlist","stationarylist","giftlist","bakerylist","montessorilist",
-        "watchlist","decorationlist","tourslist","sportslist","logisticlist","musiclist","carslist","hardwarelist"));
+        "watchlist","decorationlist","tourslist","sportslist","logisticlist","musiclist","carslist","hardwarelist","CAlist","aluminumList"));
     }
 
     /**

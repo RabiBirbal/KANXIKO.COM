@@ -131,7 +131,7 @@
                                 </div>
                               </div> --}}
                               <td>
-                                  <a href="{{ url('unverified-product/detail/'.Crypt::encryptString($data->id)) }}"><button type="submit" class="btn btn-success">Verify</button></a>
+                                  <a href="{{ url('/9851240938/unverified-product/detail/'.Crypt::encryptString($data->id)) }}"><button type="submit" class="btn btn-success">Verify</button></a>
                                 <form action="{{ route('delete_unverified_product') }}" method="post">
                                   @csrf
                                   <input type="hidden" name="id" value="{{ $data['id'] }}">

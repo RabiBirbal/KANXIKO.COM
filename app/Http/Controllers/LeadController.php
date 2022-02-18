@@ -40,7 +40,7 @@ class LeadController extends Controller
         $lead= Lead::join('products', 'products.id', '=', 'leads.product_id')
         ->join('buyers', 'buyers.id', '=', 'leads.buyer_id')
         ->join('sellers', 'sellers.id', '=', 'leads.seller_id')
-        ->orderby('products.id','desc')
+        ->orderby('leads.id','desc')
         ->get();
         return view('admin/leads/seller',compact("admin","lead"));
     }
