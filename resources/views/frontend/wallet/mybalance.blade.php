@@ -100,7 +100,7 @@
 	</div>
 	<div class="row container-fluid">
 		<div class="col-md-12 text-right">
-			<button class="btn btn-success"><h2>Points: {{ $seller->wallet_points }}</h2></button>
+			<button class="btn btn-success"><h5>Points: {{ $seller->wallet_points }}</h5></button>
 		</div>
 	</div>
 	<!-- my balance ends -->
@@ -124,15 +124,15 @@
 					{{-- <div class="col-md-2">
 						<img src="image/bank-logo.png">
 					</div> --}}
-					<div class="col-md-6 col-sm-12 col-xm-12">
-						<h3>{{ $data->remarks }}</h3>
+					<div class="col-md-10 col-sm-12 col-xm-12 mt-2">
+						<h4>{{ $data->remarks }}</h4>
 						<p>{{ $data->created_at->format("H:m:s A") }}</p>
 						<p>Points: <b>{{ $data->points }}</b></p>
 					</div>
-					<div class="col-md-3 col-sm-12 col-xm-12">	
+					<div class="col-md-2 col-sm-12 col-xm-12">	
 						<form action="{{ route('credit-payment-detail') }}" method="post">
 							@csrf
-							<input type="hidden" value="{{ $data['id'] }}" name="wallet_id">
+							<input type="hidden" value="{{ $data['id'] }}" name="id">
 							<button class="btn btn-success">View Details</button>
 						</form>		
 					</div>
@@ -142,7 +142,7 @@
 		<!-- credit money ends -->
 		<!-- debit money ends -->
 		@else
-		<div class="credit-transfer">
+		<div class="debit-transfer">
 			<div class="container">
 				<div class="row">
 					{{-- <div class="col-md-2">
@@ -156,7 +156,7 @@
 					<div class="col-md-3 col-sm-12 col-xm-12">					
 						<form action="{{ route('debit-payment-detail') }}" method="post">
 							@csrf
-							<input type="hidden" value="{{ $data['id'] }}" name="wallet_id">
+							<input type="hidden" value="{{ $data['id'] }}" name="id">
 							<button class="btn btn-danger">View Details</button>
 						</form>	
 					</div>

@@ -6,6 +6,8 @@ use App\Models\AvailableProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Contracts\Session\Session as SessionSession;
 
 class AvailableProductController extends Controller
@@ -19,7 +21,12 @@ class AvailableProductController extends Controller
     {
         $admin=User::find(Session::get('admin')['id']);
         $product = AvailableProduct::orderby('id','desc')->get();
-        return view('admin/product/available-product',compact("admin","product"));
+        $category['a']=Category::orderby('name','asc')->get();
+        $category['b']=[];
+        foreach($category['a'] as $c){
+            $category['b'][]=Subcategory::where('category_id',$c->id)->orderby('name','asc')->get();
+        };
+        return view('admin/product/available-product',compact("admin","product","category"));
     }
 
     /**
@@ -42,21 +49,35 @@ class AvailableProductController extends Controller
     {
         $data = new AvailableProduct;
         $data->name = $request->name;
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension(); //getting image extension
-            $filename=time().'.'.$extension;
-            $file->move('upload/images/',$filename);
-            $data->product_image=$filename;
+        $data->category = $request->category;
+        $data->subcategory = $request->subcategory;
+        if($request->category != '0'){
+            if($request->subcategory != '0'){
+                if($request->hasfile('image')){
+                    $file=$request->file('image');
+                    $extension=$file->getClientOriginalExtension(); //getting image extension
+                    $filename=time().'.'.$extension;
+                    $file->move('upload/images/',$filename);
+                    $data->product_image=$filename;
+                }
+                else{
+                    return $request;
+                    $data->product_image='';
+                }
+
+                $data->save();
+                Session::put('success','Product has been added successfully.');
+                return back();
+            }
+            else{
+                Session::put('error','Please choose the subcategory.');
+                return back();
+            }
         }
         else{
-            return $request;
-            $data->product_image='';
-        }
-
-        $data->save();
-        Session::put('success','Product has been added successfully.');
-        return back();
+            Session::put('error','Please choose the category.');
+            return back();
+        }    
     }
 
     /**
@@ -80,7 +101,12 @@ class AvailableProductController extends Controller
     {
         $admin=User::find(Session::get('admin')['id']);
         $data = AvailableProduct::find($request->id);
-        return view('admin/product/available-product-edit',compact("data","admin"));
+        $category['a']=Category::orderby('name','asc')->get();
+        $category['b']=[];
+        foreach($category['a'] as $c){
+            $category['b'][]=Subcategory::where('category_id',$c->id)->orderby('name','asc')->get();
+        };
+        return view('admin/product/available-product-edit',compact("data","admin","category"));
     }
 
     /**
@@ -94,6 +120,8 @@ class AvailableProductController extends Controller
     {
         $data = AvailableProduct::find($request->id);
         $data->name=$request->name;
+        $data->category=$request->category;
+        $data->subcategory=$request->subcategory;
         if($request->hasfile('image')){
             $file=$request->file('image');
             $extension=$file->getClientOriginalExtension(); //getting image extension

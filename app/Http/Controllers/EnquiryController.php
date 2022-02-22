@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\AvailableProduct;
 use App\Models\Enquiry;
+use App\Models\Unverified_product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class EnquiryController extends Controller
 {
@@ -15,7 +17,7 @@ class EnquiryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($name,$id)
     {
         $product = AvailableProduct::find($id);
         return view('frontend/order/enquiry',compact("product"));
@@ -39,15 +41,23 @@ class EnquiryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Enquiry;
-        $data->product_name=$request->product_name;
+        $data = new Unverified_product;
+        $data->name=$request->product_name;
+        $data->category=$request->category;
+        $data->subcategory=$request->subcategory;
         $data->product_image=$request->product_image;
         $data->description=$request->description;
-        $data->customer_name=$request->name;
-        $data->customer_email=$request->email;
-        $data->customer_address=$request->address;
-        $data->phone_code=$request->phone_code;
-        $data->customer_phone=$request->phone;
+        $data->quantity= "1";
+        $data->terms_condition=$request->terms;
+        $data->buyer_name=$request->buyer_name;
+        $data->buyer_email=$request->buyer_email;
+        $data->buyer_address=$request->buyer_address;
+        $data->buyer_contact=$request->phone;
+        $data->buyer_district= "null";
+        $data->buyer_province= "null";
+        $data->is_verified='0';
+        $data->terms_condition= "on";
+        $data->email_verification_code=Str::random(40);
 
         $data->save();
         Session::put('success','Enquiry has been created successfully');

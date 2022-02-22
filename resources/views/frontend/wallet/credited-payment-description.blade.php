@@ -54,12 +54,12 @@
 				{{-- <div class="col-md-2">
 					<img src="image/bank-logo.png">
 				</div> --}}
-				<div class="col-md-4">
+				<div class="col-md-10">
 					<h3>{{ $wallet->remarks }}</h3>
 					<p>{{ $wallet->created_at->format('M d, Y H:m:s A') }}</p>
 					<p>COMPLETED</p>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2 text-right">
 					<div class="dropdown">
 						@if($wallet->action == "Credited")
 						<button class="btn btn-success " type="button" id="users profile" >

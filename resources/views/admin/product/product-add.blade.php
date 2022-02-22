@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Dashboard | Clothing </title>
+    <title>Dashboard | Product </title>
 
     @include('layout/admin/css')
     <style>
@@ -54,25 +54,33 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Product/Service Name <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="name" name="name" required="required" class="form-control" autofocus>
+                                            <input type="text" id="name" name="name" required="required" class="form-control" value="{{ old('name') }}" autofocus>
                                         </div>
                                     </div>
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="quantity">Quantity/Duration/Other <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="quantity" name="quantity" required="required" class="form-control" autofocus>
+                                            <input type="text" id="quantity" name="quantity" required="required" class="form-control" value="{{ old('quantity') }}" autofocus>
                                         </div>
                                     </div>
-                                    {{-- <div class="item form-group">
+                                    {{-- example of getting data from category and subcategory table --}}
+                                    {{-- @foreach ($category['a'] as $i => $a)
+                                      <strong>{{ $a->name }}</strong>
+                                      @foreach ($category['b'][$i] as $b)
+                                        <span>{{ $b->name }}</span>
+                                      @endforeach
+                                    @endforeach --}}
+                                    <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="category">Category <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <select class="select1 form-control" name="category">
-                                                @foreach ($category as $data)
-                                                <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                @endforeach
-                                              </select>
+                                              <option value="0">Choose Category</option>s
+                                              @foreach ($category['a'] as $i => $a)
+                                                <option value="{{ $a->name }}">{{ $a->name }}</option>
+                                              @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -81,145 +89,17 @@
                                         <div class="col-md-6 col-sm-6 ">
                                             <select class="form-control" name="subcategory">
                                               <option value="0">Choose Subcategory</option>
-                                              <optgroup label="Aluminu and Upvc Products " class="Aluminum-and-Upvc-Products box1">
-                                                @foreach ($aluminumList as $data)
-                                                  <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                              @foreach ($category['a'] as $i => $a)
+                                              <optgroup label="{{ $a->name }} " class="{{ $a->name }} box1">
+                                                @foreach ($category['b'][$i] as $b)
+                                                  <option value="{{ $b->name }}">{{ $b->name }}</option>
                                                 @endforeach
                                               </optgroup>
-                                                <optgroup label="Clothing" class="Clothing box1">
-                                                  @foreach ($clothinglist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Furniture" class="Furniture box1">
-                                                  @foreach ($furniturelist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Waterfilter" class="Water-Filter box1">
-                                                  @foreach ($waterfilterlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="House Appliances" class="House-Appliances box1">
-                                                  @foreach ($houseappliancelist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Machinery" class="Machinery box1">
-                                                  @foreach ($machinerylist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Computer & Accessories" class="Computer-Accessories box1">
-                                                  @foreach ($computerlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Construction" class="Construction box1">
-                                                  @foreach ($constructionlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Mobile" class="Mobile-Accessories box1">
-                                                  @foreach ($mobilelist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Services" class="Services box1">
-                                                  @foreach ($servicelist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Study Abroad" class="Study-Abroad box1">
-                                                  @foreach ($studylist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Footwear" class="Footwear box1">
-                                                  @foreach ($footwearlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Artificial Jewellery " class="Artificial-Jewellery box1">
-                                                  @foreach ($jewellarylist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Cosmetic Products " class="Cosmetic-Products box1">
-                                                  @foreach ($cosmeticlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Books and Stationary " class="Books-and-Stationary box1">
-                                                  @foreach ($stationarylist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Gift Items " class="Gift-Items box1">
-                                                  @foreach ($giftlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Bakery Products " class="Bakery-Products box1">
-                                                  @foreach ($bakerylist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Montessori Products and Toys " class="Montessori-Products-and-Toys box1">
-                                                  @foreach ($montessorilist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Watch and Sunglasses " class="Watch-and-Sunglasses box1">
-                                                  @foreach ($watchlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Decoration Products " class="Decoration-Products box1">
-                                                  @foreach ($decorationlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Tours and Travels " class="Tours-and-Travels box1">
-                                                  @foreach ($tourslist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Sport Products " class="Sport-Products box1">
-                                                  @foreach ($sportslist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Logistic and Transportation " class="Logistic-and-Transportation box1">
-                                                  @foreach ($logisticlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Musical Instruments " class="Musical-Instruments box1">
-                                                  @foreach ($musiclist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Cars and Motorcycle Spare parts " class="Cars-and-Motorcycle-Spare-parts box1">
-                                                  @foreach ($carslist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="Hardware and sanitary products " class="Hardware-and-sanitary-products box1">
-                                                  @foreach ($hardwarelist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                                <optgroup label="CA Lawyer Service" class="CA-Lawyer-Service box1">
-                                                  @foreach ($CAlist as $data)
-                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                                  @endforeach
-                                                </optgroup>
-                                              </select>
+                                              @endforeach
+                                            </select>
                                         </div>
-                                    </div> --}}
-                                    {{-- <div class="item form-group Clothing size">
+                                    </div>
+                                    <div class="item form-group Clothing size">
                                         <label class="col-form-label col-md-3 col-sm-6 label-align" for="size">Size <span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-6 ">
@@ -246,7 +126,7 @@
                                                 <option value="Grey">Grey</option>
                                               </select>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="product_image">Image Sample
                                         </label>
@@ -262,7 +142,7 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="budget">Budget <span class="required">(if any)</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="number" id="budget" name="budget" required="required" class="form-control" autofocus>
+                                            <input type="number" id="budget" name="budget" required="required" class="form-control" value="{{ old('budget') }}" autofocus>
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -291,7 +171,7 @@
                                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="description">Points <span class="required">*</span>
                                           </label>
                                           <div class="col-md-2 mb-3">
-                                          <input type="number" name="point" class="form-control" required/>
+                                          <input type="number" name="point" class="form-control"  value="{{ old('point') }}"required/>
                                           </div>
                                           <label class="col-form-label col-md-2 col-sm-2 label-align" for="description">Availability <span class="required">*</span>
                                           </label>
@@ -300,7 +180,7 @@
                                           </div>
                                         </div>
                                     </div>
-                                    <div class="ln_solid"></div>
+                                    {{-- <div class="ln_solid"></div> --}}
                                     <h2>Customer Details</h2>
                                     @include('layout/admin/buyer-form')
                                     <div class="ln_solid"></div>
@@ -347,7 +227,7 @@
     {{-- alert script --}}
     @include('admin/alert-script');
 
-    {{-- <script>
+    <script>
         $(document).ready(function(){
             $(".select1").change(function(){
                 $(this).find("option:selected").each(function(){
@@ -366,7 +246,7 @@
                 });
             }).change();
         });
-      </script> --}}
+      </script>
       <script>
         $(document).ready(function(){
             $(".select1").change(function(){

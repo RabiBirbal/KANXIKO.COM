@@ -10,6 +10,7 @@ use App\Models\Wallet;
 use App\Models\Seller;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Esewa;
 
 class WalletController extends Controller
 {
@@ -105,8 +106,15 @@ class WalletController extends Controller
     public function showCreditDetails(Request $request)
     {
         $seller=Seller::find(Session::get('seller')['id']);
-        $wallet=Wallet::join('esewas', 'esewas.id', '=', 'wallets.esewa_id')
-        ->first();
+        $wallets=Wallet::find($request->id);
+        if($wallets->esewa_id){
+            $wallet=Wallet::join('esewas', 'esewas.id', '=', 'wallets.esewa_id')
+            ->where('wallets.id',$request->id)
+            ->first();
+        }
+        else{
+            $wallet=Wallet::find($request->id);
+        }
         return view('frontend/wallet/credited-payment-description',compact("wallet","seller"));
     }
 
@@ -116,7 +124,7 @@ class WalletController extends Controller
         $wallet=Lead::join('products', 'products.id', '=', 'leads.product_id')
         ->join('buyers', 'buyers.id', '=', 'leads.buyer_id')
         ->join('wallets', 'wallets.lead_id', '=', 'leads.id')
-        ->where('wallets.id',$request->wallet_id)
+        ->where('wallets.id',$request->id)
         ->first();
         return view('frontend/wallet/debit-payment-description',compact("wallet","seller"));
     }

@@ -239,7 +239,7 @@
                       <div class="form-group">
                         <div class="form-check">
                           <input type="checkbox" class="form-check-input" name="terms_condition" id="exampleCheck1" required>
-                                  <label class="form-check-label" for="exampleCheck1"> I accept all the <a href="" data-toggle="modal" data-target="#exampleModalCenter""><span class="text-primary"><u> terms and conditions</u></span></a></label>
+                                  <label class="form-check-label" for="exampleCheck1"> I accept all the <a href="" data-toggle="modal" data-target="#exampleModalCenter"><span class="text-primary"><u> terms and conditions</u></span></a></label>
                         </div>
                       </div>
                     </div>

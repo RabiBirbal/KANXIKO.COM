@@ -30,6 +30,14 @@
 	}
 	.dashboard{
 		text-align: center;
+		margin-bottom: -30px;
+		margin-top: -20px;
+	}
+	.navDrop1{
+		width: 50%;
+	}
+	.navDrop2{
+		width: 50%;
 	}
 	}
 	.lead-manager{
@@ -53,10 +61,7 @@
 			<div class="col-md-4 text-light dashboard">
 				<a href="{{ route('buy-leads') }}" class="text-light"><h4>Dashboard</h4></a>
 			</div>
-			<div class="col-md-4 dropdown text-center">
-				@include('layout/frontend/profile')
-			</div>
-			<div class="dropdown text-right col-md-4">
+			<div class="dropdown text-center col-md-4 navDrop2">
 				<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Lead Category
 				</a>
@@ -66,6 +71,9 @@
 				  <a class="dropdown-item" href="{{ route('view-regular-lead') }}">REGULAR</a>
 				  <a class="dropdown-item" href="{{ route('view-free-lead') }}">FREE</a>
 				</div>
+			</div>
+			<div class="col-md-4 dropdown text-right navDrop1">
+				@include('layout/frontend/profile')
 			</div>
 		</div>
 	</div>
@@ -97,7 +105,7 @@
 		@if($data->availability > 0)
 		<tr style="background-color: #DBF3FA">
 			<td>{{ $n }}</td>
-			<td>{{ $data->created_at->format('M d,Y') }} <br>Enquiry Date</td>
+			<td><strong>Enquiry Date</strong> <br>{{ $data->created_at->format('M d,Y') }}</td>
 			<td><strong>Product Name:</strong><br>{{ $data->name }}</td>
 			<td>
 				@if($data->product_image == null)
@@ -128,7 +136,7 @@
 		  @if($data->availability > 0)
 		  <tr class="table-warning">
 			<td>{{ $n }}</td>
-			<td>{{ $data->created_at->format('M d,Y') }} <br>Enquiry Date</td>
+			<td><strong>Enquiry Date</strong> <br>{{ $data->created_at->format('M d,Y') }} </td>
 			<td><strong>Product Name:</strong><br>{{ $data->name }}</td>
 			<td>
 				@if($data->product_image == null)
@@ -159,7 +167,7 @@
 		  @if($data->availability > 0)
 		  <tr class="table-light">
 			<td>{{ $n }}</td>
-			<td>{{ $data->created_at->format('M d,Y') }} <br>Enquiry Date</td>
+			<td><strong>Enquiry Date</strong> <br>{{ $data->created_at->format('M d,Y') }}</td>
 			<td><strong>Product Name:</strong><br>{{ $data->name }}</td>
 			<td>
 				@if($data->product_image == null)

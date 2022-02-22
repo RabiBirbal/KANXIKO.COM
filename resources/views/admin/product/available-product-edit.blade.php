@@ -58,6 +58,34 @@
                                 </div>
                               </div>
                               <div class="form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Category:  <span class="required"></span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 mb-3">
+                                  <select class="select1 form-control" name="category">
+                                    <option value="{{ $data->category }}">{{ $data->category }}</option>
+                                    @foreach ($category['a'] as $i => $a)
+                                      <option value="{{ $a->name }}">{{ $a->name }}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Sub-Category:  <span class="required"></span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 mb-3">
+                                  <select class="form-control" name="subcategory">
+                                    <option value="{{ $data->subcategory }}">{{ $data->subcategory }}</option>
+                                    @foreach ($category['a'] as $i => $a)
+                                    <optgroup label="{{ $a->name }} " class="{{ $a->name }} box1">
+                                      @foreach ($category['b'][$i] as $b)
+                                        <option value="{{ $b->name }}">{{ $b->name }}</option>
+                                      @endforeach
+                                    </optgroup>
+                                    @endforeach
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Change Image:
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -115,6 +143,26 @@
                 preview.style.display="block";
             }
         }
+      </script>
+      <script>
+        $(document).ready(function(){
+            $(".select1").change(function(){
+                $(this).find("option:selected").each(function(){
+                    var optionValue = $(this).attr("value");
+                    if(optionValue){
+                        $(".box1").not("." + optionValue).hide();
+                        $(".size").not("." + optionValue).hide();
+                        $(".color").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } 
+                    else{
+                      $(".box1").not("." + optionValue).hide();
+                      $(".size").not("." + optionValue).hide();
+                      $(".color").not("." + optionValue).hide();
+                    }
+                });
+            }).change();
+        });
       </script>
   </body>
 </html>

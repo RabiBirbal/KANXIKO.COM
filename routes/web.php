@@ -72,8 +72,11 @@ Route::post('/user/order/step1', [UnverifiedProductController::class,'step1'])->
 Route::post('/user/order/add', [UnverifiedProductController::class,'store'])->name('add-order');
 Route::get('/verify/buyer/email/{verification_code}',[UnverifiedProductController::class,'verify_buyer_email'])->name('verify_buyer_email');
 
+//product
+Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');
+
 //enquiry
-Route::get('/send-enquiry-now/{id}',[EnquiryController::class,'index'])->name('get-enquiry');
+// Route::get('/{name}-{id}',[EnquiryController::class,'index'])->name('get-enquiry');
 Route::post('/send-enquiry-now',[EnquiryController::class,'store'])->name('post-enquiry');
 
 //buyer
@@ -96,7 +99,7 @@ Route::get('/registeration/terms-and-condition', [ProductController::class,'view
 Route::get('/user-product-details/{id}', [ProductController::class,'viewProductDetails'])->name('user-product-details');
 
 //balance
-Route::get('/user/my-balance', [WalletController::class,'viewBalance'])->name('view-balance');
+Route::get('/seller/wallet/my-balance', [WalletController::class,'viewBalance'])->name('view-balance');
 Route::post('/user/payment/credit/detail', [WalletController::class,'showCreditDetails'])->name('credit-payment-detail');
 Route::post('/user/payment/debit/detail', [WalletController::class,'showDebitDetails'])->name('debit-payment-detail');
 

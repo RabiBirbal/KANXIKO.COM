@@ -95,7 +95,7 @@ class SellerController extends Controller
                     }
                 else{
                     if($request->refer){
-                        $seller=Seller::find($request->refer / 1111);
+                        $seller=Seller::where('refer_code',$request->refer)->first();
                         if($seller){
                             $data= new Seller;
                             $data->first_name=$request->fname;
@@ -106,7 +106,8 @@ class SellerController extends Controller
                             $data->mobile=$request->mobile;
                             $data->status="1";
                             $data->email_verification_code=Str::random(40);
-                            $data->refer_id=$request->refer / 1111;
+                            $data->refer_id=$seller->id;
+                            $data->refer_code=Str::random(6);
 
                             $data->save();
 
@@ -150,6 +151,7 @@ class SellerController extends Controller
                         $data->mobile=$request->mobile;
                         $data->status="1";
                         $data->email_verification_code=Str::random(40);
+                        $data->refer_code=Str::random(6);
                         
                         $data->save();
 
@@ -313,7 +315,7 @@ class SellerController extends Controller
         $info->update();
 
         Session::put('success','Profile Details has been updated successfully');
-        return back();
+        return redirect()->route('seller');
     }
 
     /**

@@ -17,6 +17,8 @@ class CreateAvailableProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('product_image');
+            $table->string('category');
+            $table->string('subcategory');
             $table->timestamps();
         });
     }

@@ -61,7 +61,7 @@
                                             <input type="text" id="quantity" name="quantity" value="{{ $product['quantity'] }}" required="required" class="form-control" autofocus>
                                         </div>
                                     </div>
-                                    {{-- <div class="item form-group">
+                                    <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="size">Size 
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
@@ -94,26 +94,30 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="category">Category <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select class="form-control" id="subcategory" onclick="getValue();" name="category">
-                                                <option value="{{ $product->category }}" selected>{{ $product->category }}</option>
-                                                @foreach ($category as $data)
-                                                <option>{{ $data->name }}</option>
+                                            <select class="select1 form-control" name="category">
+                                                <option value="{{ $product->category }}">{{ $product->category }}</option>
+                                                @foreach ($category['a'] as $i => $a)
+                                                  <option value="{{ $a->name }}">{{ $a->name }}</option>
                                                 @endforeach
-                                              </select>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="subcategory">Sub-Category <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select class="form-control" id="subcategory" onclick="getValue();" name="subcategory" >
-                                                <option value="{{ $product->subcategory }}" selected>{{ $product->subcategory }}</option>
-                                                @foreach ($subcategory as $data)
-                                                <option>{{ $data->name }}</option>
+                                            <select class="form-control" name="subcategory">
+                                                <option value="{{ $product->subcategory }}">{{ $product->subcategory }}</option>
+                                                @foreach ($category['a'] as $i => $a)
+                                                <optgroup label="{{ $a->name }} " class="{{ $a->name }} box1">
+                                                  @foreach ($category['b'][$i] as $b)
+                                                    <option value="{{ $b->name }}">{{ $b->name }}</option>
+                                                  @endforeach
+                                                </optgroup>
                                                 @endforeach
-                                              </select>
+                                            </select>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image Sample
                                         </label>
@@ -255,7 +259,26 @@
             }
         }
     </script>
-	
+	<script>
+        $(document).ready(function(){
+            $(".select1").change(function(){
+                $(this).find("option:selected").each(function(){
+                    var optionValue = $(this).attr("value");
+                    if(optionValue){
+                        $(".box1").not("." + optionValue).hide();
+                        $(".size").not("." + optionValue).hide();
+                        $(".color").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } 
+                    else{
+                      $(".box1").not("." + optionValue).hide();
+                      $(".size").not("." + optionValue).hide();
+                      $(".color").not("." + optionValue).hide();
+                    }
+                });
+            }).change();
+        });
+      </script>
     {{-- alert script --}}
     @include('admin/alert-script');
   </body>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvailableProduct;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Product;
@@ -34,92 +35,13 @@ class ProductController extends Controller
     public function view()
     {   
         $admin=User::find(Session::get('admin')['id']);
-        $category=Category::orderby('name','asc')->get();
-        $clothing=Category::where('name','Clothing')->first();
-        $clothinglist=Subcategory::where('category_id',$clothing->id)->orderby('name','asc')->get();
+        $category['a']=Category::orderby('name','asc')->get();
+        $category['b']=[];
+        foreach($category['a'] as $c){
+            $category['b'][]=Subcategory::where('category_id',$c->id)->orderby('name','asc')->get();
+        };
 
-        $furniture=Category::where('name','furniture')->first();
-        $furniturelist=Subcategory::where('category_id',$furniture->id)->orderby('name','asc')->get();
-
-        $waterfilter=Category::where('name','water-filter')->first();
-        $waterfilterlist=Subcategory::where('category_id',$waterfilter->id)->orderby('name','asc')->get();
-
-        $houseappliance=Category::where('name','house-appliances')->first();
-        $houseappliancelist=Subcategory::where('category_id',$houseappliance->id)->orderby('name','asc')->get();
-
-        $machinery=Category::where('name','machinery')->first();
-        $machinerylist=Subcategory::where('category_id',$machinery->id)->orderby('name','asc')->get();
-
-        $computer=Category::where('name','computer-accessories')->first();
-        $computerlist=Subcategory::where('category_id',$computer->id)->orderby('name','asc')->get();
-
-        $construction=Category::where('name','construction')->first();
-        $constructionlist=Subcategory::where('category_id',$construction->id)->orderby('name','asc')->get();
-
-        $mobile=Category::where('name','mobile-accessories')->first();
-        $mobilelist=Subcategory::where('category_id',$mobile->id)->orderby('name','asc')->get();
-
-        $service=Category::where('name','services')->first();
-        $servicelist=Subcategory::where('category_id',$service->id)->orderby('name','asc')->get();
-
-        $study=Category::where('name','study-abroad')->first();
-        $studylist=Subcategory::where('category_id',$study->id)->orderby('name','asc')->get();
-
-        $footwear=Category::where('name','footwear')->first();
-        $footwearlist=Subcategory::where('category_id',$footwear->id)->orderby('name','asc')->get();
-
-        $jewellary=Category::where('name','artificial-jewelry')->first();
-        $jewellarylist=Subcategory::where('category_id',$jewellary->id)->orderby('name','asc')->get();
-
-        $cosmetic=Category::where('name','cosmetic-products')->first();
-        $cosmeticlist=Subcategory::where('category_id',$cosmetic->id)->orderby('name','asc')->get();
-
-        $stationary=Category::where('name','books-and-stationary')->first();
-        $stationarylist=Subcategory::where('category_id',$stationary->id)->orderby('name','asc')->get();
-
-        $gift=Category::where('name','gift-items')->first();
-        $giftlist=Subcategory::where('category_id',$gift->id)->orderby('name','asc')->get();
-
-        $bakery=Category::where('name','bakery-products')->first();
-        $bakerylist=Subcategory::where('category_id',$bakery->id)->orderby('name','asc')->get();
-
-        $montessori=Category::where('name','montessori-products-and-toys')->first();
-        $montessorilist=Subcategory::where('category_id',$montessori->id)->orderby('name','asc')->get();
-
-        $watch=Category::where('name','watch-and-sunglasses')->first();
-        $watchlist=Subcategory::where('category_id',$watch->id)->orderby('name','asc')->get();
-
-        $decoration=Category::where('name','decoration-products')->first();
-        $decorationlist=Subcategory::where('category_id',$decoration->id)->orderby('name','asc')->get();
-
-        $tours=Category::where('name','tours-and-travels')->first();
-        $tourslist=Subcategory::where('category_id',$tours->id)->orderby('name','asc')->get();
-
-        $sports=Category::where('name','sport-products')->first();
-        $sportslist=Subcategory::where('category_id',$sports->id)->orderby('name','asc')->get();
-
-        $logistic=Category::where('name','Logistic-and-Transportation')->first();
-        $logisticlist=Subcategory::where('category_id',$logistic->id)->orderby('name','asc')->get();
-
-        $music=Category::where('name','musical-instruments')->first();
-        $musiclist=Subcategory::where('category_id',$music->id)->orderby('name','asc')->get();
-
-        $cars=Category::where('name','cars-and-motorcycle-spare-parts')->first();
-        $carslist=Subcategory::where('category_id',$cars->id)->orderby('name','asc')->get();
-
-        $hardware=Category::where('name','hardware-and-sanitary-products')->first();
-        $hardwarelist=Subcategory::where('category_id',$hardware->id)->orderby('name','asc')->get();
-
-        $CA=Category::where('name','CA-Lawyer-Service')->first();
-        $CAlist=Subcategory::where('category_id',$CA->id)->orderby('name','asc')->get();
-
-        $aluminum=Category::where('name','Aluminum-and-Upvc-Products')->first();
-        $aluminumList=Subcategory::where('category_id',$aluminum->id)->orderby('name','asc')->get();
-
-        return view('admin/product/product-add',compact("category","clothinglist","furniturelist","waterfilterlist",
-        "houseappliancelist","machinerylist","computerlist","constructionlist","mobilelist","servicelist","admin",
-        "studylist","footwearlist","jewellarylist","cosmeticlist","stationarylist","giftlist","bakerylist","montessorilist",
-        "watchlist","decorationlist","tourslist","sportslist","logisticlist","musiclist","carslist","hardwarelist","CAlist","aluminumList"));
+        return view('admin/product/product-add',compact("category","admin"));
     }
 
     /**
@@ -130,50 +52,62 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {   
-        if($request->lead_category == '0'){
-            Session::put('error','Please select leads category');
-            return back();
-        }
-        else{
-            $data= new Product;
-            $data->name=$request->name;
-            $data->quantity=$request->quantity;
-            $data->size=$request->size;
-            $data->color=$request->color;
-            $data->category=$request->category;
-            $data->subcategory=$request->subcategory;
-            $data->budget=$request->budget;
-            $data->description=$request->description;
-            $data->terms_condition="on";
-            $data->leads_category=$request->leads_category;
-            $data->points=$request->point;
-            $data->availability=$request->availability;
-
-            if($request->hasfile('product-img')){
-                $file=$request->file('product-img');
-                $extension=$file->getClientOriginalExtension(); //getting image extension
-                $filename=time().'.'.$extension;
-                $file->move('upload/images/',$filename);
-                $data->product_image=$filename;
+        if($request->category != '0'){
+            if($request->subcategory != '0'){
+                if($request->lead_category == '0'){
+                    Session::put('error','Please select leads category');
+                    return back()->withInput();
+                }
+                else{
+                    $data= new Product;
+                    $data->name=$request->name;
+                    $data->quantity=$request->quantity;
+                    $data->size=$request->size;
+                    $data->color=$request->color;
+                    $data->category=$request->category;
+                    $data->subcategory=$request->subcategory;
+                    $data->budget=$request->budget;
+                    $data->description=$request->description;
+                    $data->terms_condition="on";
+                    $data->leads_category=$request->leads_category;
+                    $data->points=$request->point;
+                    $data->availability=$request->availability;
+        
+                    if($request->hasfile('product-img')){
+                        $file=$request->file('product-img');
+                        $extension=$file->getClientOriginalExtension(); //getting image extension
+                        $filename=time().'.'.$extension;
+                        $file->move('upload/images/',$filename);
+                        $data->product_image=$filename;
+                    }
+                    else{
+                        // return $request;
+                        $data->product_image='';
+                    }
+                    $data->save();
+        
+                    $buyer= new Buyer;
+                    $buyer->product_id=$data->id;
+                    $buyer->buyer_name=$request->customer_name;
+                    $buyer->buyer_email=$request->customer_email;
+                    $buyer->buyer_contact=$request->customer_contact;
+                    $buyer->buyer_address=$request->customer_address;
+                    $buyer->buyer_province=$request->province;
+                    $buyer->buyer_district=$request->district;
+                    
+                    $buyer->save();
+                    Session::put('success','Product Order has been completed successfully');
+                    return redirect()->route('product');
+                }
             }
             else{
-                // return $request;
-                $data->product_image='';
+                Session::put('error','Please choose the subcategory.');
+                return back()->withInput();
             }
-            $data->save();
-
-            $buyer= new Buyer;
-            $buyer->product_id=$data->id;
-            $buyer->buyer_name=$request->customer_name;
-            $buyer->buyer_email=$request->customer_email;
-            $buyer->buyer_contact=$request->customer_contact;
-            $buyer->buyer_address=$request->customer_address;
-            $buyer->buyer_province=$request->province;
-            $buyer->buyer_district=$request->district;
-            
-            $buyer->save();
-            Session::put('success','Product Order has been completed successfully');
-            return redirect()->route('product');
+        }
+        else{
+            Session::put('error','Please choose the category.');
+            return back()->withInput();
         }
     }
 
@@ -203,6 +137,12 @@ class ProductController extends Controller
         ->first();
         return view('frontend/product/product-detail',compact("product"));
     }
+    public function viewProduct($name)
+    {
+        $product=AvailableProduct::where('category',$name)->get();
+        $category=Category::orderby('name','asc')->get();
+        return view('frontend/product/product-view',compact("product","name","category"));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -224,12 +164,15 @@ class ProductController extends Controller
     {
         $admin=User::find(Session::get('admin')['id']);
         $id=$request->product_id;
-        $category=Category::all();
-        $subcategory=Subcategory::all();
+        $category['a']=Category::orderby('name','asc')->get();
+        $category['b']=[];
+        foreach($category['a'] as $c){
+            $category['b'][]=Subcategory::where('category_id',$c->id)->orderby('name','asc')->get();
+        };
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->where('buyers.product_id',$id)
         ->first();
-        return view('admin/product/product-edit',compact("product","category","subcategory","admin"));
+        return view('admin/product/product-edit',compact("product","category","admin"));
     }
 
     /**
@@ -241,36 +184,54 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        $data= Product::find($request->product_id);
-        $data->name=$request->name;
-        $data->quantity=$request->quantity;
-        $data->size=$request->size;
-        $data->color=$request->color;
-        $data->category=$request->category;
-        $data->subcategory=$request->subcategory;
-        $data->budget=$request->budget;
-        $data->description=$request->description;
-        $data->leads_category=$request->leads_category;
-        $data->points=$request->points;
-        $data->availability=$request->availability;
-        if($request->hasfile('product-img')){
-            $file=$request->file('product-img');
-            $extension=$file->getClientOriginalExtension(); //getting image extension
-            $filename=time().'.'.$extension;
-            $file->move('upload/images/',$filename);
-            $data->product_image=$filename;
-        }
-        $data->update();
+        if($request->category != '0'){
+            if($request->subcategory != '0'){
+                if($request->lead_category == '0'){
+                    Session::put('error','Please select leads category');
+                    return back();
+                }
+                else{
+                    $data= Product::find($request->product_id);
+                    $data->name=$request->name;
+                    $data->quantity=$request->quantity;
+                    $data->size=$request->size;
+                    $data->color=$request->color;
+                    $data->category=$request->category;
+                    $data->subcategory=$request->subcategory;
+                    $data->budget=$request->budget;
+                    $data->description=$request->description;
+                    $data->leads_category=$request->leads_category;
+                    $data->points=$request->points;
+                    $data->availability=$request->availability;
+                    if($request->hasfile('product-img')){
+                        $file=$request->file('product-img');
+                        $extension=$file->getClientOriginalExtension(); //getting image extension
+                        $filename=time().'.'.$extension;
+                        $file->move('upload/images/',$filename);
+                        $data->product_image=$filename;
+                    }
+                    $data->update();
 
-        $buyer= Buyer::find($request->buyer_id);
-        $buyer->product_id=$data->id;
-        $buyer->buyer_name=$request->customer_name;
-        $buyer->buyer_email=$request->customer_email;
-        $buyer->buyer_contact=$request->customer_contact;
-        $buyer->buyer_address=$request->customer_address;
-        $buyer->update();
-        Session::put('success','Product order has been updated successfully');
-        return redirect()->route('product');
+                    $buyer= Buyer::find($request->buyer_id);
+                    $buyer->product_id=$data->id;
+                    $buyer->buyer_name=$request->customer_name;
+                    $buyer->buyer_email=$request->customer_email;
+                    $buyer->buyer_contact=$request->customer_contact;
+                    $buyer->buyer_address=$request->customer_address;
+                    $buyer->update();
+                    Session::put('success','Product order has been updated successfully');
+                    return redirect()->route('product');
+                }
+            }
+            else{
+                Session::put('error','Please choose the subcategory.');
+                return back();
+            }
+        }
+        else{
+            Session::put('error','Please choose the category.');
+            return back();
+        }
     }
 
     /**

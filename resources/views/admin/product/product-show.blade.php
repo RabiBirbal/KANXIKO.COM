@@ -73,7 +73,7 @@
                         <div class="col-md-4 mb-3">
                           <input type="text" class="form-control" value="{{ $productlist['name'] }}" readonly/>
                       </div>
-                        {{-- <div class="col-md-2 mb-3 text-right">
+                        <div class="col-md-2 mb-3 text-right">
                             <span>Category</span>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -84,14 +84,14 @@
                         </div>
                         <div class="col-md-4 mb-3">
                           <input type="text" class="form-control" value="{{ $productlist['subcategory'] }}" readonly/>
-                        </div> --}}
+                        </div>
                         <div class="col-md-2 mb-3 text-right">
                             <span>Quantity</span>
                         </div>
                         <div class="col-md-3 mb-3">
                           <input type="text" class="form-control" value="{{ $productlist['quantity'] }}" readonly/>
                         </div>
-                        {{-- <div class="col-md-2 mb-3 text-right">
+                        <div class="col-md-2 mb-3 text-right">
                             <span>Size</span>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                           <input type="text" class="form-control" value="{{ $productlist['color'] }}" readonly/>
-                        </div> --}}
+                        </div>
                         <div class="col-md-2 mb-3 text-right">
                             <span>Budget</span>
                         </div>

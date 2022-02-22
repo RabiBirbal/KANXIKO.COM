@@ -16,8 +16,8 @@ class InviteController extends Controller
     public function index()
     {
         $seller=Seller::find(Session::get('seller')['id']);
-        $refer=Session::get('seller')['id'] * 1111;
-        return view('frontend/invite-friend',compact("refer","seller"));
+        // $refer=Session::get('seller')['id'] * 1111;
+        return view('frontend/invite-friend',compact("seller"));
     }
 
     /**

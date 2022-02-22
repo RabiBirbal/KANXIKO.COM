@@ -53,11 +53,11 @@
                         <p>
                             Invite your friend by sharing your refer code and earn 50 points each in your wallet.
                         </p>
-                        <h2>Refer Code: <small>{{ $refer }}</small></h2>
+                        <h2>Refer Code: <small>{{ $seller->refer_code }}</small></h2>
                     </div>
                     <div class="card-footer">
                         <p>
-                            <input type="text" id="invite" class="form-control" value="{{ url('seller-register/ref='.$refer) }}">
+                            <input type="text" id="invite" class="form-control" value="{{ url('seller-register/ref='.$seller['refer_code']) }}">
                             <button value="copy" onclick="copyToClipboard()" class="btn btn-primary">Copy Link</button>
                         </p>
                     </div>

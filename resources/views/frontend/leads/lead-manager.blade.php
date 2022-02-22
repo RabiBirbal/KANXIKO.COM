@@ -20,20 +20,28 @@
 	.dashboard{
 				margin-top: 30px;
 			}
-		@media only screen and (max-width: 600px) {
-		.btn{
-			margin-left: auto;
-			margin-right: auto;
-			display: block;
-		}
-		.dashboard{
-			text-align: center;
-		}
-		}
-		.lead-manager{
-			/* margin-top: 50px; */
-			background-color: #ec2028;
-		}
+	@media only screen and (max-width: 600px) {
+	.btn{
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	.dashboard{
+		text-align: center;
+		margin-bottom: -30px;
+		margin-top: -20px;
+	}
+	.navDrop1{
+		width: 50%;
+	}
+	.navDrop2{
+		width: 50%;
+	}
+	}
+	.lead-manager{
+		/* margin-top: 50px; */
+		background-color: #ec2028;
+	}
 	.form-control{
 		border-radius: 150px;
 		margin-top: 30px;
@@ -64,10 +72,7 @@
 			<div class="col-md-4 text-light dashboard">
 				<a href="{{ route('buy-leads') }}" class="text-light"><h4>Dashboard</h4></a>
 			</div>
-			<div class="col-md-4 dropdown text-center">
-				@include('layout/frontend/profile')
-			</div>
-			<div class="dropdown text-right col-md-4">
+			<div class="dropdown text-center col-md-4 navDrop2">
 				<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Lead Category
 				</a>
@@ -77,6 +82,9 @@
 				  <a class="dropdown-item" href="{{ route('view-regular-lead') }}">REGULAR</a>
 				  <a class="dropdown-item" href="{{ route('view-free-lead') }}">FREE</a>
 				</div>
+			</div>
+			<div class="col-md-4 dropdown text-right navDrop1">
+				@include('layout/frontend/profile')
 			</div>
 		</div>
 	</div>
@@ -104,13 +112,13 @@
 				@foreach ($lead as $data)
 				<tr class="table-warning">
 					<td>{{ $n }}</td>
-					<td>{{ $data->created_at->format('M d, Y') }}</td>
-					<td>{{ $data->buyer_name }}</td>
+					<td><strong> Purchase Date:</strong><br>{{ $data->created_at->format('M d, Y') }}</td>
+					<td><strong> Buyer Name:</strong><br>{{ $data->buyer_name }}</td>
 					<td>
 						<a href="{{ url('user-product-details',Crypt::encryptString($data->product_id)) }}"><button class="btn btn-primary">View Details</button></a>
 					</td>
-					<td>{{ $data->product_id }}</td>
-					<td>{{ $data->name }}</td>
+					<td><strong> Product ID:</strong><br>{{ $data->product_id }}</td>
+					<td><strong> Product Name:</strong><br>{{ $data->name }}</td>
 					<form action="{{ url('lead/detail/update/'.$data->id) }}" method="post">
 						@csrf
 						<td><textarea name="enquiry_status" id="enquiry_status" cols="30" rows="4">{{ $data['enquiry_status'] }}</textarea></td>

@@ -6,24 +6,14 @@
 	<title>Form</title>
 	@include('layout/frontend/css')
  <style>
-    textarea{ 
-        width: 350px; 
-        min-width:350px; 
-        max-width:350px; 
-
-        height:150px; 
-        min-height:150px;  
-        max-height:150px;
-    }
  	.page-form{
         background-image: url({{ url('frontend/image/form-pic.jpg') }});
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
-        padding-bottom: 400px;
         height: 100vh;
-      }
+    }
     .btn1 {
         margin: 10px;
         margin-left: 200px;
@@ -43,6 +33,15 @@
         line-height: 1.5;
         border-radius: 0.25rem;
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    @media only screen and (max-width: 600px) {
+        .page-form{
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+        }
     }
  </style>
 </head>

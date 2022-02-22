@@ -78,13 +78,10 @@
 <div class="lead-manager">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-4 text-light dashboard">
+			<div class="col-md-6 text-light dashboard">
 				<a href="{{ route('buy-leads') }}" class="text-light"><h4>Dashboard</h4></a>
 			</div>
-            <div class="col-md-4 dropdown text-center mt-4 text-light">
-				<h2>Kanxiko.com</h2>
-			</div>
-			<div class="col-md-4 dropdown text-right mt-4">
+			<div class="col-md-6 dropdown text-right mt-4">
 				@include('layout/frontend/profile')
 			</div>
 		</div>

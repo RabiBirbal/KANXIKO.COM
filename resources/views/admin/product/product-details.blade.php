@@ -65,11 +65,11 @@
                               <td>{{ $n }}</td>
                               <td>{{ $data->id }}</td>
                               <td>{{ $data->name }}</td>
-                              <td>
+                              <td class="text-center">
                                 @if($data->product_image == null)
-                                <img src="{{ asset('frontend/image/no-image.jpg') }}" width="150px" alt="product_image">
+                                <img src="{{ asset('frontend/image/no-image.jpg') }}" width="150px" height="150px" alt="product_image">
                                 @else
-                                <img src="{{ asset('upload/images/'.$data['product_image']) }}" width="150px" alt="product_image">
+                                <img src="{{ asset('upload/images/'.$data['product_image']) }}" width="150px" height="150px" alt="product_image">
                                 @endif
                               </td>
                               <td>{{ $data->quantity }}</td>

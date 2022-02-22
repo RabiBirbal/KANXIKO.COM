@@ -43,6 +43,34 @@
                             <form action="{{ route('post-available-product') }}" method="post" id="demo-form2" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left was-validated">
                               @csrf
                               <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Category <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                  <select class="select1 form-control" name="category">
+                                    <option value="0">Choose Category</option>
+                                    @foreach ($category['a'] as $i => $a)
+                                      <option value="{{ $a->name }}">{{ $a->name }}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Sub-Category <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <select class="form-control" name="subcategory">
+                                  <option value="0">Choose Subcategory</option>
+                                  @foreach ($category['a'] as $i => $a)
+                                  <optgroup label="{{ $a->name }} " class="{{ $a->name }} box1">
+                                    @foreach ($category['b'][$i] as $b)
+                                      <option value="{{ $b->name }}">{{ $b->name }}</option>
+                                    @endforeach
+                                  </optgroup>
+                                  @endforeach
+                                </select>
+                              </div>
+                          </div>
+                              <div class="item form-group">
                                   <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Name <span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 ">
@@ -74,6 +102,8 @@
                                 <th scope="col">SN</th>
                                   <th scope="col">Name</th>
                                   <th scope="col">Image</th>
+                                  <th scope="col">Category</th>
+                                  <th scope="col">Sub-Category</th>
                                   <th scope="col">#Action</th>
                               </tr>
                             </thead>
@@ -83,7 +113,9 @@
                               <tr>
                                 <td>{{ $n }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td><img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="product image" height="200px"></td>
+                                <td class="text-center"><img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="product image" height="200px" width="200px"></td>
+                                <td>{{ $data->category }}</td>
+                                <td>{{ $data->subcategory }}</td>
                                 <td>
                                   <form action="{{ route('edit_available_product') }}" method="post">
                                     @csrf
@@ -142,6 +174,26 @@
                 preview.style.display="block";
             }
         }
+      </script>
+      <script>
+        $(document).ready(function(){
+            $(".select1").change(function(){
+                $(this).find("option:selected").each(function(){
+                    var optionValue = $(this).attr("value");
+                    if(optionValue){
+                        $(".box1").not("." + optionValue).hide();
+                        $(".size").not("." + optionValue).hide();
+                        $(".color").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } 
+                    else{
+                      $(".box1").not("." + optionValue).hide();
+                      $(".size").not("." + optionValue).hide();
+                      $(".color").not("." + optionValue).hide();
+                    }
+                });
+            }).change();
+        });
       </script>
   </body>
 </html>
