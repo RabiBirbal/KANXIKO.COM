@@ -41,6 +41,11 @@
     <div id="login">
          <!--  <h3 class="text-center text-white pt-5">Login form</h3> -->
           <div class="container">
+            <div class="row">
+              <div class="col-md-12 text-right">
+                <a href="{{ route('index') }}" class="btn btn-primary">Go Back</a>
+              </div>
+            </div>
               <div id="login-row" class="row justify-content-center align-items-center">
                   <div id="login-column" class="col-md-6">
                       <div id="login-box" class="col-md-12">

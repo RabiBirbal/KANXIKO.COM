@@ -20,7 +20,11 @@
 		margin-right: auto;
 		display: block;
 	}
-
+	@media only screen and (max-width: 600px) {
+	.image{
+		width: 100%;
+	}
+	}
 </style>
 </head>
 <body>
@@ -44,8 +48,8 @@
 				<h2>Purchased Lead Detail!!!</h2>
 			</div>
 			<div class="col-md-5">
-				<p>Enquiry number: {{ $product->product_id }}</p>
-				<p>Enquiry date: {{ $product->created_at->format('M d, Y') }}</p>
+				<p><b>Enquiry number:</b> {{ $product->product_id }}</p>
+				<p><b>Enquiry date:</b> {{ $product->created_at->format('M d, Y') }}</p>
 			</div>
 		</div>
 	</div>
@@ -68,7 +72,7 @@
 <div class="product-details">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-4 image text-center">
 				@if($product->product_image == null)
 					<img src="{{ asset('frontend/image/no-image.jpg') }}" width="100%" alt="product_image">
 				@else
@@ -77,19 +81,19 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Enquiry Details</h2>
-				<span><b><p>Product name: {{ $product->name }}</p></b></span>
-				<span><b><p>Quantity: {{ $product->quantity }}</p></b></span>
-				<span><b><p>Size: {{ $product->size }}</p></b></span>
-				<span><b><p>Color: {{ $product->color }}</p></b></span>
-				<span><b><p>Budget: {{ $product->budget }}</p></b></span>
-				<span><b><p>Description: <br>{{ $product->description }} </p></b></span>
+				<span><p><b>Product name: </b> {{ $product->name }}</p></span>
+				<span><p><b>Quantity:</b> {{ $product->quantity }}</p></span>
+				<span><p> <b>Size: </b> {{ $product->size }}</p></span>
+				<span><p><b>Color: </b> {{ $product->color }}</p></span>
+				<span><p><b>Budget: </b> {{ $product->budget }}</p></span>
+				<span><p><b>Description: <br> </b> {{ $product->description }}</p> </span>
 			</div>
 			<div class="col-md-4">
 				<h2>Customer Details</h2>
-				<span><b><p>Name: {{ $product->buyer_name }}</p></b></span>
-				<span><b><p>Email: {{ $product->buyer_email }}</p></b></span>
-				<span><b><p>Contact number: {{ $product->buyer_contact }}</p></b></span>
-				<span><b><p>Address: {{ $product->buyer_address }}</p></b></span>
+				<span><p><b>Name: </b> {{ $product->buyer_name }}</span></p>
+				<span><p><b>Email: </b> {{ $product->buyer_email }}</span></p>
+				<span><p><b>Contact number: </b> {{ $product->buyer_contact }}</span></p>
+				<span><p><b>Address:</b> {{ $product->buyer_address }}</p></span>
 			</div>
 		</div>
 	</div>

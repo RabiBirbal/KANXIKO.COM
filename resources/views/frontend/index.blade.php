@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>best online shopping store in nepal | find best seller for readymade garments, home appliances, furnitures, cosmetic products, bag and footware ites etc..  com</title>
+  <title>best online shopping store in nepal, find best seller for readymade garments, home appliances, furnitures, cosmetic products, bag and footware items etc..</title>
   @include('layout/frontend/css')
   <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
   @include('layout/admin/css1')
@@ -62,6 +62,9 @@
       .drop{
         width: 100%;
       }
+      .phone{
+        width: 64%;
+      }
     }
      .advertisement-post{
        background-image: url('frontend/image/banner-image.jpg');
@@ -69,14 +72,18 @@
        background-repeat: no-repeat;
        padding-top: 100px;
        padding-bottom: 100px;
-
      }
       /* Make the image fully responsive */
   .carousel-inner img {
     width: 100%;
     height: 100%;
   }
-  
+  .dropdown-item:hover{
+        background-color: grey;
+      }
+  .drop1{
+          background-color: #F5F5F5;
+        }
 </style>
 </head>
 <body>
@@ -536,10 +543,10 @@
   <a class="btn btn-success dropdown-toggle drop" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Product Category</a>
 
   <!-- your mega menu starts here! -->
-  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
+  <div class="dropdown-menu dropdown-menu-right bg-secondary" aria-labelledby="servicesDropdown">
 
   <!-- the standard dropdown items --> 
-  <h2>Choose Product Category</h2>
+  <h2 class="text-light">Choose Product Category</h2>
 
   <!-- next, a divider to tidy things up -->
   <div class="dropdown-divider"></div>
@@ -548,10 +555,9 @@
   <div class="d-md-flex align-items-start justify-content-start">
     
     <div>   
-    <div class="dropdown-header"><h4>Products</h4></div>
     <div class="row">
       @foreach ($category as $data)
-      <div class="col-md-2">
+      <div class="col-md-3 drop1">
         <a class="dropdown-item" href="{{ url('/products/'.$data['name']) }}">{{ $data->name }}</a>
       </div>
       @endforeach
@@ -641,7 +647,7 @@
                                       <option value="2">+198</option>
                                       <option value="3">+701</option> -->
                                   </select>
-                                  <div>
+                                  <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
                                   <br>
@@ -755,7 +761,7 @@
                                       <option value="2">+198</option>
                                       <option value="3">+701</option> -->
                                   </select>
-                                  <div>
+                                  <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
                                   <br>
@@ -869,7 +875,7 @@
                                       <option value="2">+198</option>
                                       <option value="3">+701</option> -->
                                   </select>
-                                  <div>
+                                  <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
                                   <br>
@@ -983,7 +989,7 @@
                                       <option value="2">+198</option>
                                       <option value="3">+701</option> -->
                                   </select>
-                                  <div>
+                                  <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
                                   <br>
@@ -1017,7 +1023,121 @@
       </div>
   </div>
 </section>
-<!-- kitchen appliance ends -->
+<!-- bag ends -->
+<!-- Footwear -->
+<section class="details-card">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-9 name">
+              <h3>Footwear</h3>
+          </div>
+            <div class="col-md-3 view">
+              <a href="{{ url('/products/Footwear') }}"><h4>View all</h4></a>
+          </div>
+          @foreach ($footwear as $data)
+          <div class="col-md-3">
+            <div class="card-content">
+                <h4 class="text-center pt-2">{{ $data->name }}</h4>
+                <div class="card-img">
+                    <img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="" height="400px" width="300px">
+                </div>
+                <div class="card-desc">
+                    <div class="text-center" >
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Send Enquiry</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">X</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{{ route('post-enquiry') }}" method="post">
+                              @csrf
+                              <input type="hidden" name="product_image" value="{{ $data->product_image }}">
+                              <input type="hidden" name="category" value="{{ $data->category }}">
+                              <input type="hidden" name="subcategory" value="{{ $data->subcategory }}">
+                              <div class="form-group input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                  </div>
+                              <input name="product_name" class="form-control" value="{{ $data['name'] }}" placeholder="Product name" type="text" readonly>
+                              </div> <!-- form-group// -->
+                              <div class="form-group input-group">
+                                  <div class="input-group-prepend">
+                                  <!--  <span class="input-group-text"> <i class="fa fa-envelope"></i> </span> -->
+                                  </div>
+                              <textarea name="description" class="form-control" placeholder="Description field" required></textarea>
+                              </div> <!-- form-group// -->
+                              <div class="form-group input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                  </div>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                              </div> <!-- form-group// -->
+                      
+                              <div class="form-group input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                  </div>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                              </div> <!-- form-group// -->
+                      
+                              <div class="form-group input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
+                                  </div>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                              </div>
+                              <div class="form-group input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                                  </div>
+                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                      <option>+977</option>
+                                  <!--   <option value="1">+972</option>
+                                      <option value="2">+198</option>
+                                      <option value="3">+701</option> -->
+                                  </select>
+                                  <div class="col-md-9 phone">
+                                  <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
+                                  </div>
+                                  <br>
+                                  <div id="showErrorPhone"></div>
+                                  @error('phone')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                                                            
+                              </div> <!-- form-group// -->  
+                              <div class="form-group ml-4">
+                                <input class="form-check-input" type="checkbox" name="terms" value="" id="flexCheckDefault" required>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  I agree all the terms and conditions.
+                                </label>
+                            </div> <!-- form-group// -->                               
+                              <div class="form-group">
+                                  <button type="submit" onclick="return confirm('Are you sure want to continue?')" id="submit" value="submit" class="btn btn-primary btn-block"> Send </button>
+                              </div> <!-- form-group// -->                                                                       
+                          </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {{-- modal ends --}}
+                  </div>
+            </div>
+          </div>
+          @endforeach
+      </div>
+  </div>
+</section>
+<!-- Footwear ends -->
 <!-- owl caraousel -->
 <div class="page-content page-container" id="page-content">
   <div class="padding">
@@ -1109,11 +1229,11 @@
             <div class="flip-card">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
-                  <img src="{{ asset('frontend/image/support.png') }}" alt="Avatar">
-                  <h3>24/7 support</h3>
+                  <img src="{{ asset('frontend/image/price-quality.png') }}" alt="Avatar">
+                  <h3>Price & Quality Comparison</h3>
                 </div>
                 <div class="flip-card-back">
-                  <p>You can get support service 24 hours via email:....</p>
+                  <p>Buyers on this site have many sellers options for buying products. They may have 4/5 Sellers on options from whom they can compare price and qualitity of the product.Furthermore, they can choose the product from any seller providing qualityt product on best price.</p>
                 </div>
               </div>
             </div> 

@@ -29,9 +29,10 @@ class IndexController extends Controller
         $furniture=AvailableProduct::where('category','furniture')->orderby('id','desc')->get()->take(4);
         $clothing=AvailableProduct::where('category','clothing')->orderby('id','desc')->get()->take(4);
         $bag=AvailableProduct::where('category','Bags-and-Suitcase')->orderby('id','desc')->get()->take(4);
+        $footwear=AvailableProduct::where('category','Footwear')->orderby('id','desc')->get()->take(4);
         $category=Category::orderby('name','asc')->get();
 
-        return view('frontend/index',compact("available_product","banner","ads","facebook","houseAppliance","furniture","clothing","bag","category"));
+        return view('frontend/index',compact("available_product","banner","ads","facebook","houseAppliance","furniture","clothing","bag","category","footwear"));
     }
 
     /**

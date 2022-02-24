@@ -179,15 +179,21 @@
                           <input type="text" class="form-control" value="{{ $productlist['buyer_contact'] }}" readonly/>
                         </div>
                         <div class="col-md-2 mb-3 text-right">
-                          <span>District</span>
+                          <span>Province</span>
                       </div>
                       <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control" value="{{ $productlist['buyer_province'] }}" readonly/>
+                      </div>
+                        <div class="col-md-2 mb-3 text-right">
+                          <span>District</span>
+                      </div>
+                      <div class="col-md-3 mb-3">
                         <input type="text" class="form-control" value="{{ $productlist['buyer_district'] }}" readonly/>
                       </div>
                         <div class="col-md-2 mb-3 text-right">
                             <span>Address</span>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-3">
                           <input type="text" class="form-control" value="{{ $productlist['buyer_address'] }}" readonly/>
                         </div>
                     </div>

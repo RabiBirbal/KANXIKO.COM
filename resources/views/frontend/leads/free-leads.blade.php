@@ -11,6 +11,52 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
     <style>
+		main {
+          height:100%;
+          position: relative;
+          overflow-y: auto;
+          height:2000px
+      }
+      .goto-top {
+          display: inline-block;
+        height: 40px;
+          width: 40px;
+          bottom: 20px;
+          right: 20px;
+          position: fixed;
+        padding-top:11px;
+        text-align:center;
+          border-radius:50%;
+          overflow: hidden;
+          white-space: nowrap;
+          opacity:0;
+          -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+            -moz-transition: opacity .3s 0s, visibility 0s .3s;
+                  transition: opacity .3s 0s, visibility 0s .3s;
+          z-index:999;
+        background:#CCCCCC;
+        visibility: hidden;
+        color:#111111;}
+      .goto-top.goto-is-visible, .goto-top.goto-fade-out, .no-touch .goto-top:hover {
+          -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+            -moz-transition: opacity .3s 0s, visibility 0s 0s;
+                  transition: opacity .3s 0s, visibility 0s 0s;}
+      .goto-top.goto-is-visible {
+          visibility: visible;
+          opacity: 1;}
+      .goto-top.goto-fade-out {
+          opacity: .8;}
+      .no-touch .goto-top:hover,.goto-top:hover {
+        background:#f0e9e9}
+      .goto-top.goto-hide{
+        -webkit-transition:all 0.5s ease-in-out;
+                transition:all 0.5s ease-in-out;
+        visibility:hidden;}	
+      @media only screen and (min-width: 768px) {
+      .goto-top {
+          right: 40px;
+          bottom: 40px;}
+      }
 	hr{
 		background-color: #fff;
 	}
@@ -88,6 +134,7 @@
 				<th>Qty</th>
 				<th>Location</th>
 				<th>Points</th>
+				<th scope="col">Leads Category</th>
 				<th>Leads Category</th>
 				<th>Availability</th>
 				<th>Action</th>
@@ -97,7 +144,7 @@
 				<p hidden>{{ $n=1; }}</p>
 				@foreach ($product as $data)
 				@if($data->availability > 0)
-				<tr class="table-light">
+				<tr style="background-color: #B2BEB5">
 					<td>{{ $n }}</td>
 					<td><strong>Enquiry Date</strong> <br>{{ $data->created_at->format('M d,Y') }}</td>
 					<td><strong>Product Name:</strong><br>{{ $data->name }}</td>
@@ -111,7 +158,8 @@
 					<td><strong>Quantity/Duration/Other:</strong> <br>{{ $data->quantity }}</td>
 					<td><strong>District:</strong><br>{{ $data->buyer_district }}</td>
 					<td><strong>Points:</strong><br>{{ $data->points }}</td>
-					<td><b><strong>Leads Category:</strong><br>{{ $data->leads_category }}</b></td>
+					<td><strong>Category:</strong><br>{{ $data->category }}</td>
+					<td><strong>Leads Category:</strong><br>{{ $data->leads_category }}</td>
 					<td><strong>Availability:</strong><br>{{ $data->availability }}</td>
 					<td>
 						<form action="{{ url('buy-lead') }}" method="post">
@@ -134,7 +182,8 @@
 </div>
 <!-- table ends -->
 
-
+<!-- goto top arrow -->
+<a href="#top" class="goto-top mb-5"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 <!-- footer -->
 <div class="footer">
 	<div class="container">
@@ -154,5 +203,26 @@
     	$('#datatable').DataTable();
 	} );
 </script>
+<script>
+	var offset = 300, /* visible when reach */
+		  offset_opacity = 1200, /* opacity reduced when reach */
+		  scroll_top_duration = 700,
+		  $back_to_top = $('.goto-top');
+		  //hide or show the "back to top" link
+		  $(window).scroll(function(){
+			  ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('goto-is-visible') : $back_to_top.removeClass('goto-is-visible goto-fade-out');
+			  if( $(this).scrollTop() > offset_opacity ) { 
+				  $back_to_top.addClass('goto-fade-out');
+			  }
+		  });
+		  //smooth scroll to top
+		  $back_to_top.on('click', function(event){
+			  event.preventDefault();
+			  $('body,html').animate({
+				  scrollTop: 0 ,
+				   }, scroll_top_duration
+			  );
+		  });
+  </script>
 </body>
 </html>

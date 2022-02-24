@@ -2,12 +2,83 @@
 <html>
 <head>
 	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ $name }}</title>
 	@include('layout/frontend/css')
     <style>
+      .dropdown-item:hover{
+        background-color: grey;
+      }
+      main {
+          height:100%;
+          position: relative;
+          overflow-y: auto;
+          height:2000px
+      }
+      .goto-top {
+          display: inline-block;
+        height: 40px;
+          width: 40px;
+          bottom: 20px;
+          right: 20px;
+          position: fixed;
+        padding-top:11px;
+        text-align:center;
+          border-radius:50%;
+          overflow: hidden;
+          white-space: nowrap;
+          opacity:0;
+          -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+            -moz-transition: opacity .3s 0s, visibility 0s .3s;
+                  transition: opacity .3s 0s, visibility 0s .3s;
+          z-index:999;
+        background:#CCCCCC;
+        visibility: hidden;
+        color:#111111;}
+      .goto-top.goto-is-visible, .goto-top.goto-fade-out, .no-touch .goto-top:hover {
+          -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+            -moz-transition: opacity .3s 0s, visibility 0s 0s;
+                  transition: opacity .3s 0s, visibility 0s 0s;}
+      .goto-top.goto-is-visible {
+          visibility: visible;
+          opacity: 1;}
+      .goto-top.goto-fade-out {
+          opacity: .8;}
+      .no-touch .goto-top:hover,.goto-top:hover {
+        background:#f0e9e9}
+      .goto-top.goto-hide{
+        -webkit-transition:all 0.5s ease-in-out;
+                transition:all 0.5s ease-in-out;
+        visibility:hidden;}	
+      @media only screen and (min-width: 768px) {
+      .goto-top {
+          right: 40px;
+          bottom: 40px;}
+      }
         body{
             background-color: #ecf0f1;
             margin-bottom: 50px;
+        }
+        @media only screen and (max-width: 600px) {
+        .name{
+          margin-top: 10px;
+          width: 75%;
+        }
+        .name1{
+          font-size: 22px;
+        }
+        .back{
+          width: 25%;
+        }
+        .drop{
+          width: 100%;
+        }
+        }
+        .drop{
+          margin-left: 20px;
+        }
+        .drop1{
+          background-color: #F5F5F5;
         }
     </style>
 </head>
@@ -17,13 +88,13 @@
   <div class="container-fluid">
     <div class="row">
         <!-- first is the link in your navbar -->
-        <a class="btn btn-success dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Product Category</a>
+        <a class="btn btn-success dropdown-toggle drop" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Product Category</a>
 
         <!-- your mega menu starts here! -->
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="servicesDropdown">
+        <div class="dropdown-menu dropdown-menu-right bg-secondary" aria-labelledby="servicesDropdown">
 
         <!-- the standard dropdown items --> 
-        <h2>Choose Product Category</h2>
+        <h2 class="text-light">Choose Product Category</h2>
 
         <!-- next, a divider to tidy things up -->
         <div class="dropdown-divider"></div>
@@ -32,10 +103,9 @@
         <div class="d-md-flex align-items-start justify-content-start">
             
             <div>   
-            <div class="dropdown-header"><h4>Products</h4></div>
-            <div class="row">
+            <div class="row drop1">
             @foreach ($category as $data)
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <a class="dropdown-item" href="{{ url('/products/'.$data['name']) }}">{{ $data->name }}</a>
             </div>
             @endforeach
@@ -48,11 +118,11 @@
 <section class="details-card">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 col-sm-6 col-lg-6 mb-3">
-            	<h2>{{ $name }}</h2>
+            <div class="col-md-6 col-sm-6 col-lg-6 mb-3 name">
+            	<h2 class="name1">{{ $name }}</h2>
             </div>
-            <div class="col-md-6 col-sm-6 col-lg-6 mb-3 text-right" style="margin-top: -30px;">
-            	<a href="{{ route('index') }}" class="btn btn-primary">Go Back</a>
+            <div class="col-md-6 col-sm-6 col-lg-6 mb-3 text-right back" style="margin-top: -30px;">
+            	<a href="{{ route('index') }}" class="btn btn-primary">Back</a>
             </div>
             @foreach ($product as $data)
           <div class="col-md-3 mb-3">
@@ -157,6 +227,8 @@
         </div>
     </div>
 </section>
+<!-- goto top arrow -->
+<a href="#top" class="goto-top mb-5"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 <!-- footer -->
 <div class="footer">
     <div class="container">
@@ -197,6 +269,27 @@
         }
       });
     });
+</script>
+<script>
+  var offset = 300, /* visible when reach */
+		offset_opacity = 1200, /* opacity reduced when reach */
+		scroll_top_duration = 700,
+		$back_to_top = $('.goto-top');
+    	//hide or show the "back to top" link
+		$(window).scroll(function(){
+			( $(this).scrollTop() > offset ) ? $back_to_top.addClass('goto-is-visible') : $back_to_top.removeClass('goto-is-visible goto-fade-out');
+			if( $(this).scrollTop() > offset_opacity ) { 
+				$back_to_top.addClass('goto-fade-out');
+			}
+		});
+		//smooth scroll to top
+		$back_to_top.on('click', function(event){
+			event.preventDefault();
+			$('body,html').animate({
+				scrollTop: 0 ,
+		 		}, scroll_top_duration
+			);
+		});
 </script>
 </body>
 </html>

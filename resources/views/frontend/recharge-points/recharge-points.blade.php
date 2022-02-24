@@ -113,11 +113,13 @@
                         <input value="{{ Str::random(10) }}" name="pid" type="hidden">
                         <strong><label for="totalamount" class="mt-3">Total Amount: </label></strong>
                         <input value="0" name="tAmt" id="tAmt" type="text" class="form-control" readonly>
-                        <input value="http://127.0.0.1:8000/payment-verify?q=su" type="hidden" name="su">
-                        <input value="http://127.0.0.1:8000/payment-verify?q=fu" type="hidden" name="fu">                
+                        {{-- <input value="http://127.0.0.1:8000/payment-verify?q=su" type="hidden" name="su">
+                        <input value="http://127.0.0.1:8000/payment-verify?q=fu" type="hidden" name="fu">    --}}
+                        <input value="http://kanxiko.com/payment-verify?q=su" type="hidden" name="su">
+                        <input value="http://kanxiko.com/payment-verify?q=fu" type="hidden" name="fu">             
                     </div>
 	                <div class="card-footer">
-                        <input value="Buy Now" type="submit" class="btn btn-primary">
+                        <input value="Buy Now" type="submit" return class="btn btn-primary">
                     </div>
 	            </form>
 	        </div>
