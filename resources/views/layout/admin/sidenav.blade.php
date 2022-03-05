@@ -24,10 +24,18 @@
           <ul class="nav side-menu">
             <li><a><i class="fa fa-users"></i> User Management <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="{{ route('user') }}"> Admin Management</a></li>
-                <li><a href="{{ route('seller') }}"> Seller Management</a></li>
+                @if($admin->is_admin == 1)
+                <li><a href="{{ route('admin') }}"> Add Admin</a></li>
+                <li><a href="{{ route('user') }}"> Admin Details</a></li>
+                <li><a href="{{ route('seller') }}"> Seller Details</a></li>
+                @elseif ($admin->is_admin == 0)
+                <li><a href="{{ route('seller') }}"> Seller Details</a></li>
+                @elseif ($admin->is_admin == 2)
+                <li><a href="{{ route('seller') }}"> Seller Details</a></li>
+                @endif
               </ul>
             </li>
+            @if($admin->is_admin == 1)
             <li><a><i class="fa fa-tasks"></i> Product Management <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{{ route('add_product') }}">Add Product Order</a></li>
@@ -62,6 +70,53 @@
             </li>
             <li><a href="{{ route('category') }}"><i class="fa fa-filter"></i> Category Management</a></li>
             <li><a href="{{ route('embed-facebook') }}"><i class="fa fa-facebook"></i> Embed Facebook</a></li>
+            
+            {{-- buyer department --}}
+            @elseif ($admin->is_admin == 0)
+            <li><a><i class="fa fa-tasks"></i> Product Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('add_product') }}">Add Product Order</a></li>
+                <li><a href="{{ route('available-product') }}">Add Available Product</a></li>
+                <li><a href="{{ route('unverified_product') }}">Unverified Product Orders</a></li>
+                <li><a href="{{ route('product') }}">Product Details</a></li>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-image"></i> Banner Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('homepage_banner') }}">Homepage Banner</a></li>
+                <li><a href="{{ route('user_dashboard_banner') }}">User Dashboard Banner</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ route('category') }}"><i class="fa fa-filter"></i> Category Management</a></li>
+            
+            {{-- seller department --}}
+            @elseif ($admin->is_admin == 2)
+            <li><a><i class="fa fa-tasks"></i> Product Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('add_product') }}">Add Product Order</a></li>
+                <li><a href="{{ route('available-product') }}">Add Available Product</a></li>
+                <li><a href="{{ route('unverified_product') }}">Unverified Product Orders</a></li>
+                <li><a href="{{ route('product') }}">Product Details</a></li>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-shopping-cart"></i> Order Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('buyer') }}">Order Details</a></li>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-list"></i> Leads Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('seller-leads') }}">Leads Details</a></li>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-image"></i> Banner Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('homepage_banner') }}">Homepage Banner</a></li>
+                <li><a href="{{ route('user_dashboard_banner') }}">User Dashboard Banner</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ route('category') }}"><i class="fa fa-filter"></i> Category Management</a></li>
+            @endif
           </ul>
         </div>
       </div>

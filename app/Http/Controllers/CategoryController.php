@@ -16,7 +16,15 @@ class CategoryController extends Controller
      */
     public function index()
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $category=Category::all();
         return view('admin/category/category',compact("category","admin"));
     }
@@ -65,7 +73,15 @@ class CategoryController extends Controller
      */
     public function edit(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id=$request->id;
         $category= Category::find($id);
         return view('admin/category/category-edit',compact("category","admin"));

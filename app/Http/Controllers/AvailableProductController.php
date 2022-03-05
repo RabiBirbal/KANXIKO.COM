@@ -19,7 +19,15 @@ class AvailableProductController extends Controller
      */
     public function index()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $product = AvailableProduct::orderby('id','desc')->get();
         $category['a']=Category::orderby('name','asc')->get();
         $category['b']=[];
@@ -99,7 +107,15 @@ class AvailableProductController extends Controller
      */
     public function edit(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $data = AvailableProduct::find($request->id);
         $category['a']=Category::orderby('name','asc')->get();
         $category['b']=[];

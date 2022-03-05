@@ -63,7 +63,7 @@
                               <td>{{ $data->random_id }}</td>
                               <td>{{ $data->refId }}</td>
                               <td>{{ $data->email }}</td>
-                              <td>{{ $data->created_at->format('M d, Y H:m:s A') }}</td>
+                              <td>{{ $data->created_at->format('M d, Y H:i:s A') }}</td>
                               {{-- <td>
                                 <form action="{{ route('edit_wallet') }}" method="post">
                                   @csrf

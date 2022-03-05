@@ -16,7 +16,15 @@ class BannerController extends Controller
      */
     public function index()
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $banner=Banner::where('category','homepage')->get();
         $ads_banner=Banner::where('category','homepage ads')->get();
         return view('admin/banner/homepage/banner-add',compact("banner","ads_banner","admin"));
@@ -66,7 +74,15 @@ class BannerController extends Controller
      */
     public function showUserDashboardBanner()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $banner=Banner::where('category','user dashboard')->get();
         return view('admin/banner/user_dashboard/banner-add',compact("banner","admin"));
 

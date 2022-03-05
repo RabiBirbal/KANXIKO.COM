@@ -76,10 +76,6 @@
                       <label for="address" class="form-label">Address :</label>
                       <input type="text" class="form-control" value="{{$user['address']}}" name="address" id="address" aria-describedby="emailHelp" required>
                     </div>
-                    <div class="mb-3">
-                      <label for="wallet" class="form-label">Wallet Point :</label>
-                      <input type="text" class="form-control" value="{{$user['address']}}" name="wallet" id="wallet" aria-describedby="emailHelp" required>
-                    </div>
                     
             <!-- Modal footer -->
             <div class="modal-footer">

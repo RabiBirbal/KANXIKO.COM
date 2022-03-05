@@ -145,7 +145,7 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="text-center">
 		<p hidden>{{ $n=1; }}</p>
 		@foreach ($product as $data)
 		@if($data->leads_category == 'Premium')

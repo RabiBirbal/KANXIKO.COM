@@ -27,7 +27,15 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $seller= Seller::orderby('id','desc')->get();
         return view('admin/user/seller',compact("seller","admin"));
     }
@@ -240,7 +248,15 @@ class SellerController extends Controller
 
     public function show(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $seller_id=$request->seller_id;
         $sellerInfo= Seller::join('seller_infos', 'seller_infos.seller_id', '=', 'sellers.id')
         ->where('seller_id',$seller_id)
@@ -266,7 +282,15 @@ class SellerController extends Controller
      */
     public function edit($id)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id1 = Crypt::decryptString($id);
         $sellerInfo= Seller::join('seller_infos', 'seller_infos.seller_id', '=', 'sellers.id')
         ->where('seller_id',$id1)

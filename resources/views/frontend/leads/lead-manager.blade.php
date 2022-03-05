@@ -156,12 +156,12 @@
 				<th>Action</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody class="text-center">
 				<p hidden>{{ $n=1; }}</p>
 				@foreach ($lead as $data)
 				<tr class="table-warning">
 					<td>{{ $n }}</td>
-					<td><strong> Purchase Date:</strong><br>{{ $data->created_at->format('M d, Y') }}</td>
+					<td><strong> Purchase Date:</strong><br>{{ $data->created_at->format('M d, Y') }}<br>{{ $data->created_at->format('H:i:s A') }}</td>
 					<td><strong> Buyer Name:</strong><br>{{ $data->buyer_name }}</td>
 					<td>
 						<a href="{{ url('user-product-details',Crypt::encryptString($data->product_id)) }}" target="__blank"><button class="btn btn-primary">View Details</button></a>

@@ -47,6 +47,7 @@
                               <th scope="col">Mobile</th>
                               <th scope="col">Email</th>
                               <th scope="col">Address</th>
+                              <th scope="col">Roles</th>
                               <th scope="col">Status</th>
                               <th scope="col">Action</th>
                             </tr>
@@ -58,6 +59,13 @@
                               <td>{{$data->mobile}}</td>
                               <td>{{$data->email}}</td>
                               <td>{{$data->address}}</td>
+                              @if($data->is_admin == 1)
+                              <td>Super Admin</td>
+                              @elseif ($data->is_admin == 0)
+                              <td>Buyer Department</td>
+                              @elseif ($data->is_admin == 2)
+                              <td>Seller Department</td>
+                              @endif
                               <td>
                                 <input type="hidden" value="{{$data->id}}" id="order_id" name="order_id">
                                 <select class="form-control" uid='{{$data->id}}' name="status" id="status">

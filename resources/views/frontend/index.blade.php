@@ -60,7 +60,7 @@
         margin-top: 10px;
       }
       .drop{
-        width: 100%;
+        width: 75%;
       }
       .phone{
         width: 64%;
@@ -538,6 +538,44 @@
   </div> --}}
 </div>
 </div>
+  <div class="float-right mr-3 btngrp">
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Login</a>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Login Now</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url('buyer-login') }}" method="post">
+              @csrf
+              <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                  </div>
+              <input name="email" class="form-control" placeholder="Enter Email" type="email" required>
+              </div> <!-- form-group// -->
+              <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+                  </div>
+                  <input name="password" class="form-control" placeholder="Enter Password" type="password" required>
+              </div> <!-- form-group// -->  
+              Dont't have an account? <a href="{{ route('buyer-register') }}">Register Now</a>                           
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block"> Login </button>
+              </div> <!-- form-group// -->                                                                       
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{-- modal ends --}}
+  </div>
 <div class="container-fluid mb-3">
   <!-- first is the link in your navbar -->
   <a class="btn btn-success dropdown-toggle drop" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Product Category</a>

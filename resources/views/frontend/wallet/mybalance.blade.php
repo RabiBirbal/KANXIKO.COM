@@ -126,7 +126,7 @@
 					</div> --}}
 					<div class="col-md-10 col-sm-12 col-xm-12 mt-2">
 						<h4>{{ $data->remarks }}</h4>
-						<p>{{ $data->created_at->format("H:m:s A") }}</p>
+						<p>{{ $data->created_at->format('H:i:s A') }}</p>
 						<p>Points: <b>{{ $data->points }}</b></p>
 					</div>
 					<div class="col-md-2 col-sm-12 col-xm-12">	
@@ -148,12 +148,12 @@
 					{{-- <div class="col-md-2">
 						<img src="image/bank-logo.png">
 					</div> --}}
-					<div class="col-md-6 col-sm-12 col-xm-12">
+					<div class="col-md-10 col-sm-12 col-xm-12">
 						<h3>{{ $data->remarks }}</h3>
-						<p>{{ $data->created_at->format("H:m:s A") }}</p>
+						<p>{{ $data->created_at->format("H:i:s A") }}</p>
 						<p>Points: <b>{{ $data->points }}</b></p>
 					</div>
-					<div class="col-md-3 col-sm-12 col-xm-12">					
+					<div class="col-md-2 col-sm-12 col-xm-12">					
 						<form action="{{ route('debit-payment-detail') }}" method="post">
 							@csrf
 							<input type="hidden" value="{{ $data['id'] }}" name="id">
@@ -169,6 +169,6 @@
 {{-- script --}}
 @include('layout/frontend/js')
 {{-- alert script --}}
-@include('admin/alert-script');
+@include('admin/alert-script')
 </body>
 </html>

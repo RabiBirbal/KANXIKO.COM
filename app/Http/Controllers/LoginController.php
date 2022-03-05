@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BuyerInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -37,28 +38,39 @@ class LoginController extends Controller
             // return "Email and Password did not matched";
         }
         else{
-            if($user->email_verified_at == null){
-                Session::put('error','Sorry!! your email is not verified yet');
-                return back();
+            if($user->is_admin == 1){
+                if($user->status == 1){
+                    $req->session()->put('admin',$user);
+                    Session::put('success','Login successfull');
+                    return redirect()->route('user');
+                }
+                else{
+                    Session::put('error','Sorry!! you are deactivated. Please inform the admin');
+                    return back();
+                }        
+            }
+        elseif($user->is_admin == 0){
+            if($user->status == 1){
+                $req->session()->put('buyer_department',$user);
+                Session::put('success','Login successfull');
+                return redirect()->route('seller');
             }
             else{
-                if($user->is_admin == 1){
-                    if($user->status == 1){
-                        $req->session()->put('admin',$user);
-                        Session::put('success','Login successfull');
-                        return redirect()->route('user');
-                    }
-                    else{
-                        Session::put('error','Sorry!! you are deactivated. Please inform the admin');
-                        return back();
-                    }
+                Session::put('error','Sorry!! you are deactivated. Please inform the admin');
+                return back();
             }
-        else{
-            Session::put('error','Sorry!! you are not admin');
-            return back();
-            // return "Sorry!! you are not admin";
         }
+        else{
+            if($user->status == 1){
+                $req->session()->put('seller_department',$user);
+                Session::put('success','Login successfull');
+                return redirect()->route('seller');
             }
+            else{
+                Session::put('error','Sorry!! you are deactivated. Please inform the admin');
+                return back();
+            }
+        }
         }
     }
 
@@ -101,6 +113,24 @@ class LoginController extends Controller
             // return "Sorry!! you are not admin";
         }
             }
+        }
+    }
+
+    function buyerLogin(Request $req){
+        $buyer= BuyerInfo::where(['email'=>$req->email])->first();
+        // dd($user);
+        // $pass=!hash::check($req->password,$user->password);
+        // dd($pass);
+        if(!$buyer || !hash::check($req->password,$buyer->password)){
+            // return back()->with('fail','Email and Password did not matched');
+            Session::put('error','Email and Password did not matched');
+            return back();
+            // return "Email and Password did not matched";
+        }
+        else{
+            $req->session()->put('buyer',$buyer);
+            Session::put('success','Login successfull');
+            return redirect()->route('index');
         }
     }
 

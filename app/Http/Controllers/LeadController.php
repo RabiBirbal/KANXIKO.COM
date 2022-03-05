@@ -21,7 +21,15 @@ class LeadController extends Controller
      */
     public function index(Request $request)
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->orderby('products.id','desc')
         ->get();
@@ -36,7 +44,15 @@ class LeadController extends Controller
      */
     public function viewLeads()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $lead= Lead::join('products', 'products.id', '=', 'leads.product_id')
         ->join('buyers', 'buyers.id', '=', 'leads.buyer_id')
         ->join('sellers', 'sellers.id', '=', 'leads.seller_id')

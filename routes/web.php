@@ -47,6 +47,14 @@ Route::get('/verify/email/{verification_code}',[SellerController::class,'verify_
 Route::get('/verify/{id}',[SellerController::class,'sendVerificationCode'])->name('verification-code');
 Route::get('/verify-email/{id}',[SellerController::class,'verificationCode']);
 
+//buyer
+Route::get('/buyer-register', [BuyerController::class,'getRegister'])->name('buyer-register');
+Route::post('/buyer-register', [BuyerController::class,'store'])->name('add-buyer');
+Route::get('/buyer/email/verify/{verification_code}',[BuyerController::class,'verify_email'])->name('buyer_email_verify');
+
+//buyer login
+Route::post('/buyer-login', [LoginController::class,'buyerLogin'])->name('buyer-login');
+
 //profile
 Route::get('/profile-details', [SellerController::class,'viewProfile'])->name('profile-details');
 Route::post('/profile-update', [SellerController::class,'update'])->name('update-profile');
@@ -104,6 +112,8 @@ Route::post('/user/payment/credit/detail', [WalletController::class,'showCreditD
 Route::post('/user/payment/debit/detail', [WalletController::class,'showDebitDetails'])->name('debit-payment-detail');
 
 // admin
+Route::get('/9851240938/admin/add', [UserController::class,'getAddAdmin'])->name('admin');
+Route::post('/admin/add', [UserController::class,'store'])->name('add-admin');
 Route::get('/9851240938/admin', [UserController::class,'index'])->name('user');
 Route::post('/user-status-change', [UserController::class, 'changeStatus'])->name('user-status-change');
 Route::post('/admin/edit',[UserController::class,'edit'])->name('edit-admin');
@@ -205,6 +215,8 @@ Route::post('/change/password',[ForgetPasswordController::class,'changePassword'
 // logout
 Route::get('/logout', function () {
     Session::forget('admin');
+    Session::forget('buyer_department');
+    Session::forget('seller_department');
     Session::put('success','Logout Successfull');
     return redirect()->route('admin-login');
 });

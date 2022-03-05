@@ -118,7 +118,15 @@ class EsewaController extends Controller
      */
     public function show()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $esewa=Esewa::join('wallets', 'wallets.esewa_id', '=', 'esewas.id')
         ->orderby('esewas.id','desc')
         ->get();

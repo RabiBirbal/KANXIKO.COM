@@ -73,7 +73,7 @@
                               <td>{{ $data->customer_email }}</td>
                               <td>{{ $data->customer_address }}</td>
                               <td>{{ $data->customer_phone }}</td>
-                              <td>{{ $data->created_at->format('M d,Y H:m:s A') }}</td>
+                              <td>{{ $data->created_at->format('M d,Y H:i:s A') }}</td>
                               <td>
                                   <form action="{{ url('enquiry/delete/'.$data['id']) }}" method="post">
                                     @csrf

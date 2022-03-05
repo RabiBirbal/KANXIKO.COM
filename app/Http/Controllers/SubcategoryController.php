@@ -17,7 +17,15 @@ class SubcategoryController extends Controller
      */
     public function index($name)
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $category=Category::where('name',$name)->first();
         $subcategory=Subcategory::where('category_id',$category->id)->get();
         
@@ -70,7 +78,15 @@ class SubcategoryController extends Controller
      */
     public function edit(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id=$request->id;
         $subcategory= Subcategory::find($id);
         return view('admin/subcategory/subcategory-edit',compact("subcategory","admin"));

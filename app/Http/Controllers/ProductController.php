@@ -22,7 +22,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $product=Product::orderBy('id','desc')->get();
         return view('admin/product/product-details',compact("product","admin"));
     }
@@ -34,7 +42,15 @@ class ProductController extends Controller
      */
     public function view()
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $category['a']=Category::orderby('name','asc')->get();
         $category['b']=[];
         foreach($category['a'] as $c){
@@ -120,7 +136,15 @@ class ProductController extends Controller
 
     public function show(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id=$request->product_id;
         $productlist= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->where('buyers.product_id',$id)
@@ -162,7 +186,15 @@ class ProductController extends Controller
 
     public function edit(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id=$request->product_id;
         $category['a']=Category::orderby('name','asc')->get();
         $category['b']=[];

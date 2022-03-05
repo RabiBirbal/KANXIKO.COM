@@ -43,7 +43,15 @@ class IndexController extends Controller
     
     public function embedFacebook()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $facebook=Facebook::all();
         return view('admin/facebook/embed-facebook',compact("facebook","admin"));
     }

@@ -76,7 +76,7 @@
                               <td>{{ $data->budget }}</td>
                               <td>{{ $data->size }}</td>
                               <td>{{ $data->color }}</td>
-                              <td>{{ $data->created_at }}</td>
+                              <td>{{ $data->created_at->format('M d, Y H:m:s A') }}</td>
                               {{-- <td>
                                 <a href="{{ url('products/details/edit/'.$data['id']) }}" class="btn btn-primary">Edit</a>
                                 <a href="{{ url('products/details/'.$data['id']) }}" class="btn btn-success">View</a>

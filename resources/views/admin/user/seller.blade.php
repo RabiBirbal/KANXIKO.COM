@@ -78,7 +78,7 @@
                                   <option value="0">Deactive</option>
                                 </select>
                               </td>
-                              <td>{{$data->created_at}}</td>
+                              <td>{{$data->created_at->format('M d, Y H:i:s A')}}</td>
                               <td>
                                 <form action="{{ route('show_seller-detail') }}" method="post">
                                   @csrf

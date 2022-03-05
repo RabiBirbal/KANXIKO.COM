@@ -20,8 +20,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $admin=User::find(Session::get('admin')['id']);
-        $user=User::where ('is_admin','1')->orderBy('id','desc')->get();
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
+        $user=User::orderBy('id','desc')->get();
         return view('admin/user/index',compact("user","admin"));
     }
 
@@ -41,9 +49,45 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function getAddAdmin(){
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
+        return view('admin.user.admin-add',compact("admin"));
+    }
     public function store(Request $request)
     {
-        //
+        $rules=[
+            'password' => 'required|string|min:6',
+            'cpassword' => 'required|string|min:6|same:password',
+           ];
+         $v= Validator::make($request->all(),$rules);
+         if($v->fails())
+            {
+              Session::put('error','Password Error Occured');
+              return back();
+            }
+        else{
+                $data = new User;
+                $data->name=$request->name;
+                $data->email=$request->email;
+                $data->mobile=$request->mobile;
+                $data->address=$request->address;
+                $data->password=Hash::make($request->password);
+                $data->is_Admin=$request->role;
+                $data->status="1";
+
+                $data->save();
+                Session::put('success','Staf has been added successfully.');
+                return redirect()->route('user');
+        }
+        
     }
 
     /**
@@ -65,7 +109,15 @@ class UserController extends Controller
      */
     public function getChangePassword($id)
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id1 = Crypt::decryptString($id);
         $user= User::find($id1);
 
@@ -109,7 +161,15 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $admin_id=$request->admin_id;
         $user=User::find($admin_id);
         return view('admin/user/user-edit',compact("user","admin"));

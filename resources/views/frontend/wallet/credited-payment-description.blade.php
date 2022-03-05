@@ -56,7 +56,7 @@
 				</div> --}}
 				<div class="col-md-10">
 					<h3>{{ $wallet->remarks }}</h3>
-					<p>{{ $wallet->created_at->format('M d, Y H:m:s A') }}</p>
+					<p>{{ $wallet->created_at->format('M d, Y H:i:s A') }}</p>
 					<p>COMPLETED</p>
 				</div>
 				<div class="col-md-2 text-right">

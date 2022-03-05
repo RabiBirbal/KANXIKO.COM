@@ -21,7 +21,15 @@ class WalletController extends Controller
      */
     public function index()
     {   
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         return view('admin/wallet/wallet',compact("admin"));
     }
 
@@ -45,7 +53,7 @@ class WalletController extends Controller
     {
         $seller=Seller::where('email',$request->email)->first();
         if($seller){
-            if($request->action = 'credited'){
+            if($request->action = 'Credited'){
                 $data= new Wallet;
                 $data->email=$request->email;
                 $data->action=$request->action;
@@ -90,7 +98,15 @@ class WalletController extends Controller
      */
     public function show()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $wallet=Wallet::orderby('id','desc')->get();
         return view('admin/wallet/wallet-details',compact("wallet","admin"));
     }
@@ -137,7 +153,15 @@ class WalletController extends Controller
      */
     public function edit(Request $request)
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $id=$request->wallet_id;
         $wallet=Wallet::find($id);
         return view('admin/wallet/wallet-edit',compact("wallet","admin"));

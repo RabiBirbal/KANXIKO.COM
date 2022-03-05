@@ -72,7 +72,15 @@ class EnquiryController extends Controller
      */
     public function show()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $enquiry = Enquiry::orderby('id','desc')->get();
         return view('admin/order/enquiry-show',compact("enquiry","admin"));
     }

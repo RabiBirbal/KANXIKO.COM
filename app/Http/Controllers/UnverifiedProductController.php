@@ -28,7 +28,15 @@ class UnverifiedProductController extends Controller
      */
     public function index()
     {
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $product=Unverified_product::orderby('id','desc')->get();
         return view('admin/product/unverified-product',compact("product","admin"));
     }
@@ -154,7 +162,15 @@ class UnverifiedProductController extends Controller
     public function show($id)
     {   
         $id1 = Crypt::decryptString($id);
-        $admin=User::find(Session::get('admin')['id']);
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
         $productlist=Unverified_product::find($id1);
         return view('admin/product/unverified-product-show',compact("productlist","admin"));
     }

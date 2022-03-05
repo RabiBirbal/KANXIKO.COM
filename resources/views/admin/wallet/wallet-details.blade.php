@@ -63,7 +63,7 @@
                               <td>{{ $data->action }}</td>
                               <td>{{ $data->points }}</td>
                               <td>{{ $data->remarks }}</td>
-                              <td>{{ $data->created_at->format('M d, Y H:m:s A') }}</td>
+                              <td>{{ $data->created_at->format('M d, Y H:i:s A') }}</td>
                               <td>
                                 <form action="{{ route('edit_wallet') }}" method="post">
                                   @csrf
