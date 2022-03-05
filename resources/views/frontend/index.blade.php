@@ -282,7 +282,7 @@
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
                                   @if (Session::has('buyer'))
-                                    <input type="text" class="form-control" value="{{ $buyer->contact }}" readonly>  
+                                    <input type="text" class="form-control" name="phone" value="{{ $buyer->contact }}" readonly>  
                                   @else
                                     <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
@@ -409,7 +409,7 @@
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
                                   @if (Session::has('buyer'))
-                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                    <input type="text" class="form-control" name="phone" value="{{ Session::get('buyer')['contact'] }}" readonly>  
                                   @else
                                     <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
@@ -536,7 +536,7 @@
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
                                   @if (Session::has('buyer'))
-                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                    <input type="text" class="form-control" name="phone" value="{{ Session::get('buyer')['contact'] }}" readonly>  
                                   @else
                                     <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
@@ -663,7 +663,7 @@
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
                                   @if (Session::has('buyer'))
-                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                    <input type="text" class="form-control" name="phone" value="{{ Session::get('buyer')['contact'] }}" readonly>  
                                   @else
                                     <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
@@ -790,7 +790,7 @@
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
                                   @if (Session::has('buyer'))
-                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                    <input type="text" class="form-control" name="phone" value="{{ Session::get('buyer')['contact'] }}" readonly>  
                                   @else
                                     <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
