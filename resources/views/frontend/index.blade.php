@@ -60,7 +60,8 @@
         margin-top: 10px;
       }
       .drop{
-        width: 75%;
+        width: 60%;
+        font-size: 14px;
       }
       .phone{
         width: 64%;
@@ -113,432 +114,23 @@
         <span class="carousel-control-next-icon"></span>
       </a>
     </div>
-    <!-- slider ends -->
-    {{-- <div class="scroll-bg">
-      <div class="scroll-div">
-        <div class="scroll-object">
-          <div class="container demo">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="section-title text-center wow zoomIn">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">				
-                  <div class="col-md-12">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                          <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Clothing
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                          <div class="panel-body">
-                            @foreach ($clothinglist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Furniture
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                          <div class="panel-body">
-                            @foreach ($furniturelist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Water Filter
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                          <div class="panel-body">
-                            @foreach ($waterfilterlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                              House Appliances
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                          <div class="panel-body">
-                            @foreach ($houseappliancelist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFive">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                              Machinery
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                          <div class="panel-body">
-                            @foreach ($machinerylist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingSix">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                              Computer Accessories
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                          <div class="panel-body">
-                            @foreach ($computerlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingSeven">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                              Construction
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
-                          <div class="panel-body">
-                            @foreach ($constructionlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingEight">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                              Mobile Accessories
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
-                          <div class="panel-body">
-                            @foreach ($mobilelist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingNine">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                              Services
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
-                          <div class="panel-body">
-                            @foreach ($servicelist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTen">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                              Study Abroad
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
-                          <div class="panel-body">
-                            @foreach ($studylist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading11">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
-                              Footwear
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
-                          <div class="panel-body">
-                            @foreach ($footwearlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading12">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
-                              Artificial Jewellery
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
-                          <div class="panel-body">
-                            @foreach ($jewellarylist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading13">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
-                              Cosmetics Products
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
-                          <div class="panel-body">
-                            @foreach ($cosmeticlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading14">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
-                              Books and Stationary
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
-                          <div class="panel-body">
-                            @foreach ($stationarylist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading15">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
-                              Gift Items
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
-                          <div class="panel-body">
-                            @foreach ($giftlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading16">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse16" aria-expanded="false" aria-controls="collapse16">
-                              Bakery Products
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse16" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading16">
-                          <div class="panel-body">
-                            @foreach ($bakerylist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading17">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse17" aria-expanded="false" aria-controls="collapse17">
-                              Montessori Products and Toys
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading17">
-                          <div class="panel-body">
-                            @foreach ($montessorilist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading18">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse18" aria-expanded="false" aria-controls="collapse18">
-                              Watches and Sunglasses
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse18" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading18">
-                          <div class="panel-body">
-                            @foreach ($watchlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading19">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse19" aria-expanded="false" aria-controls="collapse19">
-                              Decoration Products
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse19" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading19">
-                          <div class="panel-body">
-                            @foreach ($decorationlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading20">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse20" aria-expanded="false" aria-controls="collapse20">
-                              Tours and Travel
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse20" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading20">
-                          <div class="panel-body">
-                            @foreach ($tourslist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading21">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse21" aria-expanded="false" aria-controls="collapse21">
-                              Sport Products
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse21" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading21">
-                          <div class="panel-body">
-                            @foreach ($sportslist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading22">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse22" aria-expanded="false" aria-controls="collapse22">
-                              Logistic and Transportation
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse22" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading22">
-                          <div class="panel-body">
-                            @foreach ($logisticlist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading23">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse23" aria-expanded="false" aria-controls="collapse23">
-                              Musical Instruments
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse23" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading23">
-                          <div class="panel-body">
-                            @foreach ($musiclist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading24">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse24" aria-expanded="false" aria-controls="collapse24">
-                              Cars and Motorcycles Spare Parts
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse24" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading24">
-                          <div class="panel-body">
-                            @foreach ($carslist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading25">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse25" aria-expanded="false" aria-controls="collapse25">
-                              Hardware and Sanitary Products
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapse25" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading25">
-                          <div class="panel-body">
-                            @foreach ($hardwarelist as $data)
-                              <a href="{{ route('buyer-form') }}">{{ $data->name }}, </a>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                    </div>	
-                  </div>
-                </div><!--- END COL -->		
-              </div><!--- END ROW -->			
-      </div>
-    </div><!-- container -->
-  </div> --}}
 </div>
 </div>
   <div class="float-right mr-3 btngrp">
+    @if(Session::has('buyer'))
+    <div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       {{ $buyer->first_name }} {{ $buyer->last_name }}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <small>
+          <a class="dropdown-item" href="{{ route('buyer-profile-detail') }}">My profile</a>
+          <a class="dropdown-item" href="{{ route('buyer-change-password',Crypt::encryptString($buyer->id)) }}">Change Password</a>
+          <a class="dropdown-item" href="{{ route('buyer_logout') }}">Logout</a>
+        </small>
+      </div>
+  </div>
+    @else
     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Login</a>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -551,7 +143,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="{{ url('buyer-login') }}" method="post">
+            <form action="{{ route('buyer-login') }}" method="post">
               @csrf
               <div class="form-group input-group">
                   <div class="input-group-prepend">
@@ -575,6 +167,7 @@
       </div>
     </div>
     {{-- modal ends --}}
+    @endif
   </div>
 <div class="container-fluid mb-3">
   <!-- first is the link in your navbar -->
@@ -659,27 +252,39 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                   </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ $buyer->first_name }} {{ $buyer->last_name }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                   </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ $buyer->email }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
                                   </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
+                                  @if (Session::has('buyer'))
+                                    value="{{ $buyer->address }}" readonly
+                                  @endif required>
                               </div>
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
-                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                  @if (Session::has('buyer'))
+                                    <input type="text" class="form-control" value="{{ $buyer->contact }}" readonly>  
+                                  @else
+                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
                                   <!--   <option value="1">+972</option>
                                       <option value="2">+198</option>
@@ -688,6 +293,7 @@
                                   <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
+                                  @endif
                                   <br>
                                   <div id="showErrorPhone"></div>
                                   @error('phone')
@@ -773,27 +379,39 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                   </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['first_name'] }} {{ Session::get('buyer')['last_name'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                   </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['email'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
                                   </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['address'] }}" readonly
+                                  @endif required>
                               </div>
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
-                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                  @if (Session::has('buyer'))
+                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                  @else
+                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
                                   <!--   <option value="1">+972</option>
                                       <option value="2">+198</option>
@@ -802,6 +420,7 @@
                                   <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
+                                  @endif
                                   <br>
                                   <div id="showErrorPhone"></div>
                                   @error('phone')
@@ -887,27 +506,39 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                   </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['first_name'] }} {{ Session::get('buyer')['last_name'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                   </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['email'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
                                   </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['address'] }}" readonly
+                                  @endif required>
                               </div>
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
-                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                  @if (Session::has('buyer'))
+                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                  @else
+                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
                                   <!--   <option value="1">+972</option>
                                       <option value="2">+198</option>
@@ -916,6 +547,7 @@
                                   <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
+                                  @endif
                                   <br>
                                   <div id="showErrorPhone"></div>
                                   @error('phone')
@@ -1001,27 +633,39 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                   </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['first_name'] }} {{ Session::get('buyer')['last_name'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                   </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['email'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
                                   </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['address'] }}" readonly
+                                  @endif required>
                               </div>
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
-                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                  @if (Session::has('buyer'))
+                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                  @else
+                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
                                   <!--   <option value="1">+972</option>
                                       <option value="2">+198</option>
@@ -1030,6 +674,7 @@
                                   <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
+                                  @endif
                                   <br>
                                   <div id="showErrorPhone"></div>
                                   @error('phone')
@@ -1115,27 +760,39 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                   </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['first_name'] }} {{ Session::get('buyer')['last_name'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                   </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['email'] }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
                                   </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
+                                  @if (Session::has('buyer'))
+                                    value="{{ Session::get('buyer')['address'] }}" readonly
+                                  @endif required>
                               </div>
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
-                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                  @if (Session::has('buyer'))
+                                    <input type="text" class="form-control" value="{{ Session::get('buyer')['contact'] }}" readonly>  
+                                  @else
+                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
                                   <!--   <option value="1">+972</option>
                                       <option value="2">+198</option>
@@ -1144,6 +801,7 @@
                                   <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
+                                  @endif
                                   <br>
                                   <div id="showErrorPhone"></div>
                                   @error('phone')

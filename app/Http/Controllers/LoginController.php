@@ -128,9 +128,15 @@ class LoginController extends Controller
             // return "Email and Password did not matched";
         }
         else{
-            $req->session()->put('buyer',$buyer);
-            Session::put('success','Login successfull');
-            return redirect()->route('index');
+            if($buyer->is_verified == "1"){
+                $req->session()->put('buyer',$buyer);
+                Session::put('success','Login successfull');
+                return redirect()->route('index');
+            }
+            else{
+                Session::put('error','Sorry Login failed. Please verify your email address');
+                return redirect()->route('index');
+            }
         }
     }
 

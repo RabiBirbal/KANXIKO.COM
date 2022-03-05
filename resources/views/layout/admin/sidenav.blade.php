@@ -28,10 +28,13 @@
                 <li><a href="{{ route('admin') }}"> Add Admin</a></li>
                 <li><a href="{{ route('user') }}"> Admin Details</a></li>
                 <li><a href="{{ route('seller') }}"> Seller Details</a></li>
+                <li><a href="{{ route('buyer-detail') }}"> Buyer Details</a></li>
                 @elseif ($admin->is_admin == 0)
                 <li><a href="{{ route('seller') }}"> Seller Details</a></li>
+                <li><a href="{{ route('buyer-detail') }}"> Buyer Details</a></li>
                 @elseif ($admin->is_admin == 2)
                 <li><a href="{{ route('seller') }}"> Seller Details</a></li>
+                <li><a href="{{ route('buyer-detail') }}"> Buyer Details</a></li>
                 @endif
               </ul>
             </li>

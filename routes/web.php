@@ -51,6 +51,11 @@ Route::get('/verify-email/{id}',[SellerController::class,'verificationCode']);
 Route::get('/buyer-register', [BuyerController::class,'getRegister'])->name('buyer-register');
 Route::post('/buyer-register', [BuyerController::class,'store'])->name('add-buyer');
 Route::get('/buyer/email/verify/{verification_code}',[BuyerController::class,'verify_email'])->name('buyer_email_verify');
+Route::get('/buyer/change-password/{id}', [BuyerController::class,'getChangePassword'])->name('buyer-change-password');
+Route::post('/buyer/change-password', [BuyerController::class,'postChangePassword'])->name('change-buyer-password');
+Route::get('/buyer/profile', [BuyerController::class,'viewDetail'])->name('buyer-profile-detail');
+Route::get('/buyer/profile-edit', [BuyerController::class,'edit'])->name('edit-buyer-profile');
+Route::post('/buyer/profile-edit', [BuyerController::class,'update'])->name('update-buyer');
 
 //buyer login
 Route::post('/buyer-login', [LoginController::class,'buyerLogin'])->name('buyer-login');
@@ -127,6 +132,9 @@ Route::post('/seller/delete',[SellerController::class,'destroy'])->name('delete_
 Route::post('/seller/view/details',[SellerController::class,'show'])->name('show_seller-detail');
 Route::get('/seller/edit/{id}',[SellerController::class,'edit'])->name('edit_seller');
 Route::get('/profile/edit/{id}',[SellerController::class,'editProfile'])->name('edit_profile');
+
+//buyer
+Route::get('/9851240938/buyer', [BuyerController::class,'show'])->name('buyer-detail');
 
 // login
 Route::get('/9851240938/kanxiko-admin', [LoginController::class,'index'])->name('admin-login');
@@ -226,3 +234,9 @@ Route::get('/seller/logout', function () {
     Session::put('success','Logout Successfull');
     return redirect()->route('user-login');
 })->name('seller-logout');
+//buyer logout
+Route::get('buyer/logout',function(){
+    Session::forget('buyer');
+    Session::put('success','Logout Successfull');
+    return redirect()->route('index');
+})->name('buyer_logout');

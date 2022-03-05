@@ -6,11 +6,12 @@ use App\Models\AvailableProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Banner;
+use App\Models\BuyerInfo;
 use App\Models\Facebook;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Subcategory;
+use App\Models\Subcategory;use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
@@ -21,6 +22,12 @@ class IndexController extends Controller
      */
     public function index()
     {
+        if(Session::has('buyer')){
+            $buyer=BuyerInfo::find(Session::get('buyer')['id']);
+        }
+        else{
+            $buyer="";
+        }
         $available_product = AvailableProduct::orderby('id','desc')->get();
         $banner=Banner::where('category','homepage')->orderby('id','desc')->get();
         $ads=Banner::where('category','homepage ads')->orderby('id','desc')->get();
@@ -32,7 +39,7 @@ class IndexController extends Controller
         $footwear=AvailableProduct::where('category','Footwear')->orderby('id','desc')->get()->take(4);
         $category=Category::orderby('name','asc')->get();
 
-        return view('frontend/index',compact("available_product","banner","ads","facebook","houseAppliance","furniture","clothing","bag","category","footwear"));
+        return view('frontend/index',compact("buyer","available_product","banner","ads","facebook","houseAppliance","furniture","clothing","bag","category","footwear"));
     }
 
     /**

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\BuyerEmailVerificationMail;
 use App\Models\BuyerInfo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class BuyerController extends Controller
 {
@@ -80,9 +81,9 @@ class BuyerController extends Controller
                 $data->district=$request->district;
 
                 $data->save();
-                // Mail::to($request->email)->send(new BuyerEmailVerificationMail($data));
+                Mail::to($request->email)->send(new BuyerEmailVerificationMail($data));
                 Session::put('success','Registration has been done successfully.');
-                return redirect()->route('user-login');
+                return redirect()->route('index');
             }
     }
 
@@ -95,14 +96,14 @@ class BuyerController extends Controller
         else{
             if($buyer->is_verified=="1"){
                 Session::put('error','Email already Verified');
-                return redirect()->route('user-login');
+                return redirect()->route('index');
             }
             else{
                 $buyer->is_verified="1";
                 $buyer->update();
 
                 Session::put('success','Email has been verified successfully.');
-                return redirect()->route('user-login');
+                return redirect()->route('index');
             }
         }
      }
@@ -113,13 +114,73 @@ class BuyerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
+        $buyer = BuyerInfo::orderby('id','desc')->get();
+
+        return view('admin/buyer/buyer-detail',compact("admin","buyer"));
     }
 
     public function getRegister(){
         return view('frontend/buyer/buyer-register');
+    }
+
+    public function getChangePassword($id)
+    {   
+        $id1 = Crypt::decryptString($id);
+        $buyer= BuyerInfo::find($id1);
+
+        return view('frontend/buyer/change-password',compact("buyer"));
+    }
+
+    public function PostChangePassword(Request $request)
+    {   
+        $buyer= BuyerInfo::find($request->id);
+        if(!hash::check($request->current_password,$buyer->password)){
+            Session::put('error','Current password didnt matched');
+            return back();
+        }
+        else{
+            if(!hash::check($request->password,$buyer->password)){
+                $rules=[
+                    'password' => 'required|string|min:6',
+                    'cpassword' => 'required|string|min:6|same:password',
+                   ];
+                 $v= Validator::make($request->all(),$rules);
+                 if($v->fails())
+                    {
+                      Session::put('error','Password Error Occured');
+                      return back();
+                    }
+                else{
+                    $buyer->password=Hash::make($request->password);
+
+                    $buyer->update();
+                    Session::forget('buyer');
+                    Session::put('success','password Changed Successfull');
+                    return redirect()->route('index');
+                }
+            }
+            else{
+                Session::put('error','Current password and new password could not be same');
+                return back();
+            }
+        }
+    }
+
+    public function viewDetail(){
+        $id=Session::get('buyer')['id'];
+        $buyer=BuyerInfo::find($id);
+        return view('frontend/buyer/buyer-detail',compact("buyer"));
     }
 
     public function view(){
@@ -132,9 +193,12 @@ class BuyerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $id=Session::get('buyer')['id'];
+        $buyer=BuyerInfo::find($id);
+
+        return view('frontend/buyer/buyer-edit',compact("buyer"));
     }
 
     /**
@@ -144,9 +208,20 @@ class BuyerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $buyer = BuyerInfo::find($request->id);
+        $buyer->first_name=$request->fname;
+        $buyer->last_name=$request->lname;
+        $buyer->password=Hash::make($request->password);
+        $buyer->contact=$request->mobile;
+        $buyer->address=$request->address;
+        $buyer->province=$request->province;
+        $buyer->district=$request->district;
+
+        $buyer->update();
+        Session::put('success','Profile updated Successfully');
+        return redirect()->route('buyer-profile-detail');
     }
 
     /**

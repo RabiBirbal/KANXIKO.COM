@@ -118,6 +118,10 @@ class UserAuth
         if($request->path()=="buyer-form" && !$request->session()->has('product')){
             return redirect()->route('order-form');
         }
+        //buyer
+        if($request->path()=="buyer-register" && ($request->session()->has('buyer'))){
+            return redirect()->route('index');
+        }
         return $next($request);
     }
 }
