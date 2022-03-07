@@ -167,35 +167,48 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                   </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" required>
+                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ $buyer->first_name }} {{ $buyer->last_name }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                   </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" required>
+                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
+                                  @if (Session::has('buyer'))
+                                    value="{{ $buyer->email }}" readonly
+                                  @endif required>
                               </div> <!-- form-group// -->
                       
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
                                   </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text" required>
+                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
+                                  @if (Session::has('buyer'))
+                                    value="{{ $buyer->address }}" readonly
+                                  @endif required>
                               </div>
                               <div class="form-group input-group">
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                                   </div>
-                                  <select class="custom-select" name="phone_code" style="max-width: 120px;">
+                                  @if (Session::has('buyer'))
+                                    <input type="text" class="form-control" name="phone" value="{{ $buyer->contact }}" readonly>  
+                                  @else
+                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
                                       <option>+977</option>
                                   <!--   <option value="1">+972</option>
                                       <option value="2">+198</option>
                                       <option value="3">+701</option> -->
                                   </select>
-                                  <div>
+                                  <div class="col-md-9 phone">
                                   <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
                                   </div>
+                                  @endif
                                   <br>
                                   <div id="showErrorPhone"></div>
                                   @error('phone')

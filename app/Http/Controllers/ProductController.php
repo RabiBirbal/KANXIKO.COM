@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\Buyer;
 use App\Models\Unverified_product;
 use App\Models\User;
+use App\Models\BuyerInfo;
 
 class ProductController extends Controller
 {
@@ -163,9 +164,15 @@ class ProductController extends Controller
     }
     public function viewProduct($name)
     {
+        if(Session::has('buyer')){
+            $buyer=BuyerInfo::find(Session::get('buyer')['id']);
+        }
+        else{
+            $buyer="";
+        }
         $product=AvailableProduct::where('category',$name)->get();
         $category=Category::orderby('name','asc')->get();
-        return view('frontend/product/product-view',compact("product","name","category"));
+        return view('frontend/product/product-view',compact("buyer","product","name","category"));
     }
 
     /**
