@@ -168,7 +168,7 @@ class ProductController extends Controller
             $buyer=BuyerInfo::find(Session::get('buyer')['id']);
         }
         else{
-            $buyer="";
+            $buyer=null;
         }
         $product=AvailableProduct::where('category',$name)->get();
         $category=Category::orderby('name','asc')->get();

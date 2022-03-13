@@ -5,6 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ $name }}</title>
 	@include('layout/frontend/css')
+  <style>
+    body {
+       background-position: center;
+       background-color: #eee;
+       background-repeat: no-repeat;
+       background-size: cover;
+       color: #505050;
+       font-family: "Rubik", Helvetica, Arial, sans-serif;
+       font-size: 14px;
+       font-weight: normal;
+       line-height: 1.5;
+       text-transform: none
+      }
+
+      .forgot {
+          background-color: #fff;
+          padding: 12px;
+          border: 1px solid #dfdfdf
+      }
+
+      .padding-bottom-3x {
+          padding-bottom: 72px !important
+      }
+
+      .card-footer {
+          background-color: #fff
+      }
+
+      .btn {
+          margin-top: 30px;
+      }
+
+      .form-control:focus {
+          color: #495057;
+          background-color: #fff;
+          border-color: #76b7e9;
+          outline: 0;
+          box-shadow: 0 0 0 0px #28a745
+      }
+      img{
+          margin-top: -40px;
+          margin-bottom: -30px;
+      }
+      @media only screen and (max-width: 600px) {
+    .btn{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    }
+    .dashboard{
+    text-align: center;
+    }
+    }
+    .lead-manager{
+    /* margin-top: 50px; */
+    background-color: #dcd9cd;
+    padding-bottom: 10px;
+    }
+    .dashboard{
+      margin-top: 30px;
+    }
+</style>
     <style>
       .dropdown-item:hover{
         background-color: grey;
@@ -80,12 +142,40 @@
         .drop1{
           background-color: #F5F5F5;
         }
-    </style>
+  </style>
 </head>
 <body>
     {{-- alert message --}}
   @include('admin/alert-message')
-  <div class="container-fluid">
+  <div class="lead-manager">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-light dashboard">
+          <a href="{{ route('index') }}" class="text-light">
+                      <img src="{{ asset('frontend/image/Kanxiko-01.png') }}" width="100px" alt="logo">
+                  </a>
+        </div>
+        <div class="col-md-6 dropdown text-right">
+          @if(Session::has('buyer'))
+          <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       {{ $buyer->first_name }} {{ $buyer->last_name }}
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <small>
+                          <a class="dropdown-item" href="{{ route('buyer-profile-detail') }}">My profile</a>
+                          <a class="dropdown-item" href="{{ route('my-order') }}">My Orders</a>
+                          <a class="dropdown-item" href="{{ route('buyer-changes-password',Crypt::encryptString($buyer->id)) }}">Change Password</a>
+                          <a class="dropdown-item" href="{{ route('buyer_logout') }}">Logout</a>
+                        </small>
+                      </div>
+                  </div>
+                  @endif
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" style="margin-top: -25px">
     <div class="row">
         <!-- first is the link in your navbar -->
         <a class="btn btn-success dropdown-toggle drop" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Product Category</a>

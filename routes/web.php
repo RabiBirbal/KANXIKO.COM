@@ -51,14 +51,19 @@ Route::get('/verify-email/{id}',[SellerController::class,'verificationCode']);
 Route::get('/buyer-register', [BuyerController::class,'getRegister'])->name('buyer-register');
 Route::post('/buyer-register', [BuyerController::class,'store'])->name('add-buyer');
 Route::get('/buyer/email/verify/{verification_code}',[BuyerController::class,'verify_email'])->name('buyer_email_verify');
-Route::get('/buyer/change-password/{id}', [BuyerController::class,'getChangePassword'])->name('buyer-change-password');
+Route::get('/buyer/change-password/{id}', [BuyerController::class,'getChangePassword'])->name('buyer-changes-password');
 Route::post('/buyer/change-password', [BuyerController::class,'postChangePassword'])->name('change-buyer-password');
 Route::get('/buyer/profile', [BuyerController::class,'viewDetail'])->name('buyer-profile-detail');
 Route::get('/buyer/profile-edit', [BuyerController::class,'edit'])->name('edit-buyer-profile');
 Route::post('/buyer/profile-edit', [BuyerController::class,'update'])->name('update-buyer');
+Route::post('/buyer/detail/delete', [BuyerController::class,'destroy'])->name('delete-buyer');
 
 //buyer login
 Route::post('/buyer-login', [LoginController::class,'buyerLogin'])->name('buyer-login');
+Route::get('/buyer/forget-password', [BuyerController::class,'forgetPassword'])->name('buyer-forget-password');
+Route::post('/buyer/forget-password', [BuyerController::class,'resetPassword'])->name('get-buyer-reset-password-link');
+Route::get('/buyer/reset/password/{token}',[BuyerController::class,'getResetPassword'])->name('get-reset-password');
+Route::post('/buyer/change/password',[BuyerController::class,'changePassword'])->name('buyer-change-password');
 
 //profile
 Route::get('/profile-details', [SellerController::class,'viewProfile'])->name('profile-details');
@@ -84,6 +89,7 @@ Route::get('/place-order', [UnverifiedProductController::class,'view'])->name('o
 Route::post('/user/order/step1', [UnverifiedProductController::class,'step1'])->name('step1');
 Route::post('/user/order/add', [UnverifiedProductController::class,'store'])->name('add-order');
 Route::get('/verify/buyer/email/{verification_code}',[UnverifiedProductController::class,'verify_buyer_email'])->name('verify_buyer_email');
+Route::get('/my-orders', [BuyerController::class,'myOrder'])->name('my-order');
 
 //product
 Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');

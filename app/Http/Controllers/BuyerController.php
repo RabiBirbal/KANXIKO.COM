@@ -12,8 +12,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BuyerEmailVerificationMail;
 use App\Models\BuyerInfo;
+use App\Models\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use App\Mail\ResetPasswordMail;
+use App\Mail\PasswordChangedSuccessful;
 
 class BuyerController extends Controller
 {
@@ -108,6 +111,73 @@ class BuyerController extends Controller
         }
      }
 
+     public function forgetPassword(){
+         return view('frontend.buyer.forget-password');
+     }
+
+     public function resetPassword(Request $request){
+        $buyer=BuyerInfo::where('email',$request->email)->first();
+        if(!$buyer){
+            Session::put('error','The email address that you entered is not valid. Please check the email address.');
+            return back();
+        }
+        else{
+            $data= new PasswordReset;
+            $data->email=$request->email;
+            $data->token=Str::random(40);
+            $data->status="1";
+
+            $data->save();
+            Mail::to($request->email)->send(new ResetPasswordMail($data));
+            Session::put('success','Password reset link has been sent to your email address');
+            return back();
+        }
+    }
+
+    public function getResetPassword($token){
+        $resetPassword=PasswordReset::where('token',$token)->first();
+        if(!$resetPassword){
+            Session::put('error','Invalid URL');
+            return redirect()->route('index');
+        }
+        else{
+            if($resetPassword->status == 0){
+                Session::put('error','Sorry!! Reset link is expire.');
+                return redirect()->route('index');
+            }
+            else{
+                return view('frontend/buyer/reset-password',compact("resetPassword"));
+            }
+        }
+     }
+
+     public function changePassword(Request $request){
+        $buyer = BuyerInfo::where('email',$request->email)->first();
+        $rules=[
+            'password' => 'required|string|min:6',
+            'cpassword' => 'required|string|min:6|same:password',
+           ];
+         $v= Validator::make($request->all(),$rules);
+         if($v->fails())
+            {
+              Session::put('error','Password Error Occured');
+              return back();
+            }
+        else{
+            $buyer->password=Hash::make($request->password);
+
+            $buyer->update();
+
+            $data=PasswordReset::find($request->id);
+            $data->status="0";
+            $data->update();
+            $seller=$buyer;
+            Mail::to($request->email)->send(new PasswordChangedSuccessful($seller));
+            Session::put('success','Password has been changed successfully');
+            return redirect()->route('index');
+        }
+     }
+
     /**
      * Display the specified resource.
      *
@@ -166,6 +236,8 @@ class BuyerController extends Controller
 
                     $buyer->update();
                     Session::forget('buyer');
+                    $seller=$buyer;
+                    Mail::to($request->email)->send(new PasswordChangedSuccessful($seller));
                     Session::put('success','password Changed Successfull');
                     return redirect()->route('index');
                 }
@@ -175,6 +247,15 @@ class BuyerController extends Controller
                 return back();
             }
         }
+    }
+
+    public function myOrder(){
+        $buyer=BuyerInfo::find(Session::get('buyer')['id']);
+        $order=Product::join('buyers', 'buyers.product_id', '=', 'products.id')
+        ->where('buyer_email',Session::get('buyer')['email'])
+        ->orderby('products.id','desc')
+        ->get();
+        return view('frontend.order.order-detail',compact("buyer","order"));
     }
 
     public function viewDetail(){
@@ -230,8 +311,11 @@ class BuyerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $buyer = BuyerInfo::find($request->id);
+        $buyer->delete();
+        Session::put('success','Profile deleted Successfully');
+        return back();
     }
 }

@@ -213,8 +213,6 @@
                               <option value="Surkhet">Surkhet</option>
                             </optgroup>
                             <optgroup label="Province 7" class="seven box1">
-                              <option value="0">Select District</option>
-                              <option value="dasdasd">dasdasda</option>
                               <option value="Baitadi">Baitadi</option>
                               <option value="Bajhang">Bajhang</option>
                               <option value="Bajura">Bajura</option>

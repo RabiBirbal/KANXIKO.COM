@@ -125,7 +125,8 @@
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <small>
           <a class="dropdown-item" href="{{ route('buyer-profile-detail') }}">My profile</a>
-          <a class="dropdown-item" href="{{ route('buyer-change-password',Crypt::encryptString($buyer->id)) }}">Change Password</a>
+          <a class="dropdown-item" href="{{ route('my-order') }}">My Orders</a>
+          <a class="dropdown-item" href="{{ route('buyer-changes-password',Crypt::encryptString($buyer->id)) }}">Change Password</a>
           <a class="dropdown-item" href="{{ route('buyer_logout') }}">Logout</a>
         </small>
       </div>
@@ -156,7 +157,8 @@
                       <span class="input-group-text"> <i class="fa fa-key"></i> </span>
                   </div>
                   <input name="password" class="form-control" placeholder="Enter Password" type="password" required>
-              </div> <!-- form-group// -->  
+              </div> <!-- form-group// --> 
+              <a href="{{ route('buyer-forget-password') }}">Forgot Password?</a> <br>  
               Dont't have an account? <a href="{{ route('buyer-register') }}">Register Now</a>                           
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block"> Login </button>
@@ -198,6 +200,7 @@
   </div>
   <a href="{{ route('order-form') }}"><button class="button">Send Your Enquiry</button> </a>
 </div>
+
   <!-- home appliances -->
 <section class="details-card">
   <div class="container-fluid">

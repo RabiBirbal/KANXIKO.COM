@@ -27,7 +27,7 @@
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Seller Details</h2>
+                <h2>Buyer Details</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -52,6 +52,7 @@
                               <th scope="col">Address</th>
                               <th scope="col">Province</th>
                               <th scope="col">District</th>
+                              <th scope="col">Verified</th>
                               <th scope="col">Created At</th>
                               <th scope="col">Action</th>
                             </tr>
@@ -69,16 +70,16 @@
                               <td>{{$data->address}}</td>
                               <td>{{$data->province}}</td>
                               <td>{{$data->district}}</td>
+                              @if($data->is_verified == '1')
+                              <td>Verified</td>
+                              @else
+                              <td>Unverified</td>
+                              @endif
                               <td>{{$data->created_at->format('M d, Y H:i:s A')}}</td>
                               <td>
-                                <form action="{{ route('show_seller-detail') }}" method="post">
+                                <form action="{{ route('delete-buyer') }}" method="post">
                                   @csrf
-                                  <input type="hidden" name="seller_id" value="{{ $data['id'] }}">
-                                  <button type="submit" class="btn btn-primary">Full Details</button>
-                                </form>
-                                <form action="{{ route('delete_seller') }}" method="post">
-                                  @csrf
-                                  <input type="hidden" name="seller_id" value="{{ $data['id'] }}">
+                                  <input type="hidden" name="id" value="{{ $data['id'] }}">
                                   <button type="submit" onclick="return confirm('Are you sure want to continue?')" class="btn btn-danger">Remove</button>
                                 </form>
                               </td>
