@@ -10,11 +10,13 @@ use App\Models\User;
 
 class SubcategoryController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index($name)
     {   
         if(Session::has('admin')){
@@ -37,6 +39,7 @@ class SubcategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
@@ -48,11 +51,13 @@ class SubcategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request,$name)
     {
         $category=Category::where('name',$name)->first();
         $data= new Subcategory;
         $data->name=$request->name;
+        $data->title=$request->title;
         $data->category_id=$category->id;
         $data->save();
         Session::put('success','Sub-Category has been added successfully');
@@ -65,6 +70,7 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
@@ -76,6 +82,7 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Request $request)
     {
         if(Session::has('admin')){
@@ -99,15 +106,18 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         $data= Subcategory::find($id);
         $category=Category::find($data->category_id);
         $data->name=$request->name;
+        $data->title=$request->title;
         $data->update();
         Session::put('success','Sub-Category has been updated successfully');
         return redirect('9851240938/'.$category['name'].'/subcategory/details');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -115,6 +125,7 @@ class SubcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Request $request)
     {
         $id=$request->id;

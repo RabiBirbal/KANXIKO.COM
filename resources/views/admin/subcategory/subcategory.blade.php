@@ -47,6 +47,7 @@
                                       <thead>
                                         <tr>
                                           <th scope="col">Sub-Category Name</th>
+                                          <th scope="col">Page Title</th>
                                           <th scope="col">Action</th>
                                         </tr>
                                       </thead>
@@ -54,6 +55,7 @@
                                         @foreach ($subcategory as $data)
                                         <tr>
                                           <td>{{ $data->name }}</td>
+                                          <td>{{ $data->title }}</td>
                                           <td>
                                             <form action="{{ route('edit_subcategory') }}" method="post">
                                               @csrf
@@ -98,6 +100,13 @@
                                       <input type="text" id="name" name="name" required="required" class="form-control" placeholder="Enter Sub-Category Name" autofocus>
                                   </div>
                               </div>
+                              <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Page Title <span class="required"></span>
+                                </label>
+                                <div class="col-md-6 col-sm-7 ">
+                                  <input type="text" id="title" name="title" class="form-control" placeholder="Enter Page Title" autofocus >
+                              </div>
+                            </div>
                               <div class="ln_solid"></div>
                               <div class="item form-group">
                                   <div class="col-md-6 col-sm-6 offset-md-3">

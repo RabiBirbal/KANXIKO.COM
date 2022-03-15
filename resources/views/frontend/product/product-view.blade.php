@@ -3,7 +3,13 @@
 <head>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ $name }}</title>
+	<title>
+    @if ($cat->title)
+      {{ $cat->title }}
+    @else
+     {{ $cat->name }}
+    @endif
+  </title>
 	@include('layout/frontend/css')
   <style>
     body {

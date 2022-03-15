@@ -11,11 +11,13 @@ class CreateSubcategoriesTable extends Migration
      *
      * @return void
      */
+    
     public function up()
     {
         Schema::create('subcategories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('title')->nullable();
             $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
@@ -26,6 +28,7 @@ class CreateSubcategoriesTable extends Migration
      *
      * @return void
      */
+
     public function down()
     {
         Schema::dropIfExists('subcategories');

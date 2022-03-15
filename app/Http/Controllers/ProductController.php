@@ -21,6 +21,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         if(Session::has('admin')){
@@ -41,6 +42,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function view()
     {   
         if(Session::has('admin')){
@@ -67,6 +69,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {   
         if($request->category != '0'){
@@ -172,7 +175,8 @@ class ProductController extends Controller
         }
         $product=AvailableProduct::where('category',$name)->get();
         $category=Category::orderby('name','asc')->get();
-        return view('frontend/product/product-view',compact("buyer","product","name","category"));
+        $cat=Category::where('name',$name)->first();
+        return view('frontend/product/product-view',compact("buyer","product","name","category","cat"));
     }
 
     /**
@@ -221,6 +225,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request)
     {
         if($request->category != '0'){
@@ -279,6 +284,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(Request $request)
     {
         $id=$request->product_id;

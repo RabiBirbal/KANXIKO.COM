@@ -49,6 +49,7 @@ class CategoryController extends Controller
     {
         $data= new Category;
         $data->name=$request->name;
+        $data->title=$request->title;
         $data->save();
         Session::put('success','Category has been added successfully');
         return redirect()->route('category');
@@ -98,6 +99,7 @@ class CategoryController extends Controller
     {
         $data= Category::find($id);
         $data->name=$request->name;
+        $data->title=$request->title;
         $data->update();
         Session::put('success','Category has been updated successfully');
         return redirect()->route('category');
