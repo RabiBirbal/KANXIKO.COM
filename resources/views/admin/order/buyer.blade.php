@@ -17,12 +17,16 @@
     <div class="container body">
       <div class="main_container">
         {{-- sidenav and top nav --}}
+
         @include('layout/admin/sidenav')
         {{-- sidenav and top nav ends --}}
+
         <!-- page content -->
         <div class="right_col" role="main">
+
           {{-- alert message --}}
           @include('admin/alert-message')
+          
           <!-- top tiles -->
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
@@ -77,11 +81,13 @@
                               <td>{{ $data->size }}</td>
                               <td>{{ $data->color }}</td>
                               <td>{{ $data->created_at->format('M d, Y H:m:s A') }}</td>
+
                               {{-- <td>
                                 <a href="{{ url('products/details/edit/'.$data['id']) }}" class="btn btn-primary">Edit</a>
                                 <a href="{{ url('products/details/'.$data['id']) }}" class="btn btn-success">View</a>
                                 <a href="{{ url('products/details/delete/'.$data['id']) }}" onclick="return confirm('Are you sure want to continue?')" class="btn btn-danger">Remove</a>
                               </td> --}}
+
                             </tr>
                             <p hidden>{{ $n++; }}</p>
                             @endforeach
@@ -107,6 +113,6 @@
     </div>
     @include('layout/admin/js')
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
   </body>
 </html>

@@ -254,7 +254,7 @@
 	{{-- script --}}
 	@include('layout/admin/js')
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
 
 <script>
 $(document).ready(function(){
@@ -271,5 +271,6 @@ $(document).ready(function(){
     }).change();
 });
 </script>
+
   </body>
 </html>

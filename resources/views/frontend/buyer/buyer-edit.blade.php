@@ -58,10 +58,13 @@
 		.dashboard{
 			text-align: center;
 		}
+    .logo{
+            width: 35%;
+        }
 		}
 		.lead-manager{
 			/* margin-top: 50px; */
-			background-color: #dcd9cd;
+			background-color: #19465d;
 			padding-bottom: 10px;
 		}
 		.dashboard{
@@ -77,7 +80,7 @@
 		<div class="row">
 			<div class="col-md-6 text-light dashboard">
 				<a href="{{ route('index') }}" class="text-light">
-                    <img src="{{ asset('frontend/image/Kanxiko-01.png') }}" width="100px" alt="logo">
+          <img src="{{ asset('frontend/image/logo1.png') }}" width="15%" class="logo" alt="logo">
                 </a>
 			</div>
 			<div class="col-md-6 dropdown text-right">
@@ -275,6 +278,7 @@
     <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {{-- alert script --}}
     @include('admin/alert-script');
+    
     {{-- script --}}
     @include('layout/frontend/js')
     <script type="text/javascript">
@@ -333,6 +337,7 @@
           });
         });
       </script>
+
       <script type="text/javascript">
         $(document).ready(function(){
       
@@ -358,6 +363,7 @@
           });
         });
       </script>
+
       <script type="text/javascript">
         $('#cpassword').keyup(function(){
                 var password=$('#password').val();
@@ -376,6 +382,7 @@
                 }
               });
       </script>
+
       <script>
         $(document).ready(function(){
             $(".select1").change(function(){
@@ -391,5 +398,6 @@
             }).change();
         });
         </script>
+
 </body>
 </html>

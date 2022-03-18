@@ -85,11 +85,34 @@
   .drop1{
           background-color: #F5F5F5;
         }
+  .navbar{
+    background-color: #19465d;
+  }
+  .call_us{
+    margin-bottom: -30px;
+    margin-top: -20px;
+  }
+  @media only screen and (max-width: 600px) {
+    .call_us img{
+      height: 50px;;
+      margin-top: -25px;
+
+}
 </style>
 </head>
 <body>
   {{-- alert message --}}
   @include('admin/alert-message')
+  <div class="navbar">
+      <div class="row">
+        <div class="col-md-11">
+          <a href="{{ route('index') }}"><img src="{{ asset('frontend/image/logo1.png') }}" width="15%"></a>
+        </div>
+        <div class="col-md-1 text-right call_us">
+          <img src="{{ asset('frontend/image/call-us.png') }}" height="100px">
+        </div>
+      </div>
+  </div>
     <!-- slider -->
     <div id="demo" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->

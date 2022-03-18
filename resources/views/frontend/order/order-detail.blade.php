@@ -58,10 +58,13 @@
 		.dashboard{
 			text-align: center;
 		}
+    .logo{
+            width: 35%;
+        }
 		}
 		.lead-manager{
 			/* margin-top: 50px; */
-			background-color: #dcd9cd;
+			background-color: #19465d;
 			padding-bottom: 10px;
 		}
 		.dashboard{
@@ -77,7 +80,7 @@
 		<div class="row">
 			<div class="col-md-6 text-light dashboard">
 				<a href="{{ route('index') }}" class="text-light">
-                    <img src="{{ asset('frontend/image/Kanxiko-01.png') }}" width="100px" alt="logo">
+          <img src="{{ asset('frontend/image/logo1.png') }}" width="15%" class="logo" alt="logo">
                 </a>
 			</div>
 			<div class="col-md-6 dropdown text-right">
