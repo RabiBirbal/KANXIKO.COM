@@ -17,6 +17,7 @@ use App\Models\SellerInfo;
 use App\Mail\PasswordChangedSuccessful;
 use App\Models\User;
 use App\Models\Wallet;
+use Carbon\Carbon;
 
 class SellerController extends Controller
 {
@@ -26,7 +27,7 @@ class SellerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         if(Session::has('admin')){
             $admin=User::find(Session::get('admin')['id']);
         }
@@ -38,6 +39,21 @@ class SellerController extends Controller
         }
         $seller= Seller::orderby('id','desc')->get();
         return view('admin/user/seller',compact("seller","admin"));
+    }
+
+    public function expired()
+    { 
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
+        $seller= Seller::where('expiry_date','<',Carbon::now())->orderby('expiry_date','asc')->get();
+        return view('admin/user/seller-expired',compact("seller","admin"));
     }
 
     /**
@@ -211,6 +227,10 @@ class SellerController extends Controller
                     Mail::to($seller1->email)->send(new ReferSuccessfullMail($seller1));  
                     
                     $seller->email_verified_at=\Carbon\Carbon::now();
+                    $date = Carbon::now();
+                    $daysToAdd = 3;
+                    $date = $date->addDays($daysToAdd);
+                    $seller->expiry_date=$date;
                     $seller->update();
                     Session::put('success','Email Verified Successfully');
                     Mail::to($seller->email)->send(new RegistrationSuccessful($seller));
@@ -218,6 +238,10 @@ class SellerController extends Controller
                 }
                 else{
                     $seller->email_verified_at=\Carbon\Carbon::now();
+                    $date = Carbon::now();
+                    $daysToAdd = 3;
+                    $date = $date->addDays($daysToAdd);
+                    $seller->expiry_date=$date;
                     $seller->update();
                     Session::put('success','Email Verified Successfully');
                     Mail::to($seller->email)->send(new RegistrationSuccessful($seller));
@@ -322,6 +346,7 @@ class SellerController extends Controller
         $data->last_name=$request->lname;
         $data->email=$request->email;
         $data->mobile=$request->mobile;
+        $data->expiry_date=$request->expiry_date;
         
         $data->update();
 
@@ -339,7 +364,7 @@ class SellerController extends Controller
         $info->update();
 
         Session::put('success','Profile Details has been updated successfully');
-        return redirect()->route('seller');
+        return back();
     }
 
     /**

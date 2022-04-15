@@ -19,6 +19,7 @@ class CreateAvailableProductsTable extends Migration
             $table->string('product_image');
             $table->string('category');
             $table->string('subcategory');
+            $table->foreignId('seller_id')->nullable()->constrained('sellers')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

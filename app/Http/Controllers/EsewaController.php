@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Seller;
 use App\Models\Wallet;
 use App\Models\User;
+use Carbon\Carbon;
 
 class EsewaController extends Controller
 {
@@ -74,6 +75,10 @@ class EsewaController extends Controller
 
                     $seller=Seller::find(Session::get('seller')['id']);
                     $seller->wallet_points=$seller->wallet_points+$amt;
+                    $date = Carbon::now();
+                    $daysToAdd = 30;
+                    $date = $date->addDays($daysToAdd);
+                    $seller->expiry_date=$date;
                     $seller->update();
 
                     Mail::to(Session::get('seller')['email'])->send(new PointsCreditedSucessfullMail($wallet));

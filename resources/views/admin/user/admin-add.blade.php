@@ -146,7 +146,7 @@
     </div>
 	
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -173,6 +173,7 @@
           });
         });
       </script>
+
       <script type="text/javascript">
         $('#cpassword').keyup(function(){
                 var password=$('#password').val();
@@ -211,5 +212,6 @@
       }
     });
       </script>
+      
   </body>
 </html>

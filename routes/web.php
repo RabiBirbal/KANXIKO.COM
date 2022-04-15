@@ -26,6 +26,7 @@ use App\Http\Controllers\InviteController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\AvailableProductController;
 use App\Http\Controllers\EsewaController;
+use App\Http\Controllers\SellerProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +117,11 @@ Route::get('/registeration/terms-and-condition', [ProductController::class,'view
 
 //products
 Route::get('/user-product-details/{id}', [ProductController::class,'viewProductDetails'])->name('user-product-details');
+Route::get('/seller/product/add', [SellerProductController::class,'index'])->name('seller-product');
+Route::post('/seller/product/add', [SellerProductController::class,'store'])->name('seller-product-add');
+Route::get('/seller/products/list', [SellerProductController::class,'show'])->name('product-list');
+Route::get('/seller/products/{id}', [SellerProductController::class,'edit'])->name('seller-product-edit');
+Route::post('/seller/products', [SellerProductController::class,'update'])->name('seller-product-update');
 
 //balance
 Route::get('/seller/wallet/my-balance', [WalletController::class,'viewBalance'])->name('view-balance');
@@ -138,6 +144,7 @@ Route::post('/seller/delete',[SellerController::class,'destroy'])->name('delete_
 Route::post('/seller/view/details',[SellerController::class,'show'])->name('show_seller-detail');
 Route::get('/seller/edit/{id}',[SellerController::class,'edit'])->name('edit_seller');
 Route::get('/profile/edit/{id}',[SellerController::class,'editProfile'])->name('edit_profile');
+Route::get('/9851240938/seller/expired', [SellerController::class,'expired'])->name('seller-expire');
 
 //buyer
 Route::get('/9851240938/buyer', [BuyerController::class,'show'])->name('buyer-detail');

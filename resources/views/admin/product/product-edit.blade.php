@@ -97,7 +97,7 @@
                                             <select class="select1 form-control" name="category">
                                                 <option value="{{ $product->category }}">{{ $product->category }}</option>
                                                 @foreach ($category['a'] as $i => $a)
-                                                  <option value="{{ $a->name }}">{{ $a->name }}</option>
+                                                  <option value="{{ $a->slug }}">{{ $a->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -109,7 +109,7 @@
                                             <select class="form-control" name="subcategory">
                                                 <option value="{{ $product->subcategory }}">{{ $product->subcategory }}</option>
                                                 @foreach ($category['a'] as $i => $a)
-                                                <optgroup label="{{ $a->name }} " class="{{ $a->name }} box1">
+                                                <optgroup label="{{ $a->name }} " class="{{ $a->slug }} box1">
                                                   @foreach ($category['b'][$i] as $b)
                                                     <option value="{{ $b->name }}">{{ $b->name }}</option>
                                                   @endforeach
@@ -370,6 +370,7 @@
     </div>
 
     {{-- script --}}
+
     <!-- image preview -->
     <script type="text/javascript">
         function showPreview1(event){
@@ -381,6 +382,7 @@
             }
         }
     </script>
+
 	<script>
         $(document).ready(function(){
             $(".select1").change(function(){
@@ -401,7 +403,9 @@
             }).change();
         });
       </script>
+
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
+    
   </body>
 </html>

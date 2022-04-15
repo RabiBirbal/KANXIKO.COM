@@ -25,10 +25,13 @@
         {{-- sidenav and top nav --}}
         @include('layout/admin/sidenav')
         {{-- sidenav and top nav ends --}}
+
         <!-- page content -->
         <div class="right_col" role="main">
+
           {{-- alert message --}}
           @include('admin/alert-message')
+          
           <!-- top tiles -->
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
@@ -106,6 +109,6 @@
     </div>
     @include('layout/admin/js')
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
   </body>
 </html>

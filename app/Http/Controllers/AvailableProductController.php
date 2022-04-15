@@ -28,7 +28,7 @@ class AvailableProductController extends Controller
         else{
             $admin=User::find(Session::get('seller_department')['id']);
         }
-        $product = AvailableProduct::orderby('id','desc')->get();
+        $product = AvailableProduct::orderby('id','desc')->with('seller')->get();
         $category['a']=Category::orderby('name','asc')->get();
         $category['b']=[];
         foreach($category['a'] as $c){
@@ -57,8 +57,14 @@ class AvailableProductController extends Controller
     {
         $data = new AvailableProduct;
         $data->name = $request->name;
-        $data->category = $request->category;
+        $data->category=str_replace('-', ' ',$request->category);
         $data->subcategory = $request->subcategory;
+        if(Session::has('seller')){
+            $data->seller_id =  Session::get('seller')['id'];
+        }
+        else{
+            $data->seller_id  ="";
+        }
         if($request->category != '0'){
             if($request->subcategory != '0'){
                 if($request->hasfile('image')){
@@ -136,7 +142,7 @@ class AvailableProductController extends Controller
     {
         $data = AvailableProduct::find($request->id);
         $data->name=$request->name;
-        $data->category=$request->category;
+        $data->category=str_replace('-', ' ',$request->category);
         $data->subcategory=$request->subcategory;
         if($request->hasfile('image')){
             $file=$request->file('image');

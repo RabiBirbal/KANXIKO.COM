@@ -32,10 +32,10 @@ class IndexController extends Controller
         $banner=Banner::where('category','homepage')->orderby('id','desc')->get();
         $ads=Banner::where('category','homepage ads')->orderby('id','desc')->get();
         $facebook=Facebook::orderby('id','desc')->take(3)->get();
-        $houseAppliance=AvailableProduct::where('category','House-Appliances')->orderby('id','desc')->get()->take(4);
+        $houseAppliance=AvailableProduct::where('category','House Appliances')->orderby('id','desc')->get()->take(4);
         $furniture=AvailableProduct::where('category','furniture')->orderby('id','desc')->get()->take(4);
         $clothing=AvailableProduct::where('category','clothing')->orderby('id','desc')->get()->take(4);
-        $bag=AvailableProduct::where('category','Bags-and-Suitcase')->orderby('id','desc')->get()->take(4);
+        $bag=AvailableProduct::where('category','Bags and Suitcase')->orderby('id','desc')->get()->take(4);
         $footwear=AvailableProduct::where('category','Footwear')->orderby('id','desc')->get()->take(4);
         $category=Category::orderby('name','asc')->get();
 

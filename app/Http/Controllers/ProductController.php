@@ -84,7 +84,7 @@ class ProductController extends Controller
                     $data->quantity=$request->quantity;
                     $data->size=$request->size;
                     $data->color=$request->color;
-                    $data->category=$request->category;
+                    $data->category=str_replace('-', ' ',$request->category);
                     $data->subcategory=$request->subcategory;
                     $data->budget=$request->budget;
                     $data->description=$request->description;
@@ -173,9 +173,10 @@ class ProductController extends Controller
         else{
             $buyer=null;
         }
-        $product=AvailableProduct::where('category',$name)->get();
+        $cat=Category::where('slug',$name)->first();
+        $product=AvailableProduct::where('category',$cat->name)->orderby('created_at','desc')->paginate(12);
         $category=Category::orderby('name','asc')->get();
-        $cat=Category::where('name',$name)->first();
+        
         return view('frontend/product/product-view',compact("buyer","product","name","category","cat"));
     }
 
@@ -240,7 +241,7 @@ class ProductController extends Controller
                     $data->quantity=$request->quantity;
                     $data->size=$request->size;
                     $data->color=$request->color;
-                    $data->category=$request->category;
+                    $data->category=str_replace('-', ' ',$request->category);
                     $data->subcategory=$request->subcategory;
                     $data->budget=$request->budget;
                     $data->description=$request->description;

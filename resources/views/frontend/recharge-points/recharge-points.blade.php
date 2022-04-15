@@ -96,13 +96,22 @@
 	                <p>Recharge Your Points and pay from eSewa wallet.</p>
 	                <ol class="list-unstyled">
 	                    Note: 1 points = Nrs. 1
+                        <br>
+                        Note: Minimum points to be recharge = 1000 points
 	                </ol>
 	            </div>
 	            <form action="https://esewa.com.np/epay/main" method="POST">
                     @csrf
 	                <div class="card-body" style="background-color: white">
                         <strong><label for="points">Buy Points: </label></strong>
-                        <input value="" name="amt" id="amt" type="text" class="form-control">
+                        <input value="" name="amt" id="amt" type="text" class="form-control"><br>
+                        <div id="showErrorAmt"></div>
+
+                                @error('amt')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         {{-- <strong><label for="txAmt" class="mt-3">Tax Amount: </label></strong> --}}
                         <input value="0" name="txAmt" id="txAmt" type="hidden" class="form-control" readonly>
                         {{-- <strong><label for="Service Charge" class="mt-3">Service Charge: </label></strong> --}}
@@ -119,7 +128,7 @@
                         <input value="http://kanxiko.com/payment-verify?q=fu" type="hidden" name="fu">             
                     </div>
 	                <div class="card-footer">
-                        <input value="Buy Now" type="submit" return class="btn btn-primary">
+                        <input value="Buy Now" type="submit" id="submit" return class="btn btn-primary">
                     </div>
 	            </form>
 	        </div>
@@ -142,6 +151,23 @@
             $('#tAmt').val(total);
           });
         });
+      </script>
+      <script type="text/javascript">
+        $('#amt').keyup(function(){
+                var amt=$('#amt').val();
+      
+                if(amt < 1000){
+                  $('#showErrorAmt').html('1000 or more point should be recharged.');
+                   $('#showErrorAmt').css('color','red');
+                   document.getElementById("submit").disabled = true;
+                   return false;
+                }
+                else{
+                  $('#showErrorAmt').html('');
+                  document.getElementById("submit").disabled = false;
+                   return true;
+                }
+              });
       </script>
 </body>
 </html>

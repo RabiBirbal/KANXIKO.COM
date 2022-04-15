@@ -26,6 +26,7 @@ class CreateSellersTable extends Migration
             $table->string('email_verification_code')->nullable();
             $table->foreignId('refer_id')->nullable()->constrained('sellers');
             $table->string('refer_code');
+            $table->timestamp('expiry_date')->nullable();
             $table->timestamps();
         });
     }

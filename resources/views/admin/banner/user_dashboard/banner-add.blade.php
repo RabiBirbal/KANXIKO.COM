@@ -100,7 +100,7 @@
     </div>
 	
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
 
     <!-- image preview -->
     <script type="text/javascript">

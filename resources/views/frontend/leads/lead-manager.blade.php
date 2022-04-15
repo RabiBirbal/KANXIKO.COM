@@ -139,6 +139,35 @@
 	</div>
 </div>
 <!-- lead manager button ends -->
+
+<div class="container">
+	<!-- Trigger the modal with a button -->
+	{{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
+  
+	<!-- Modal -->
+	<div class="modal fade show" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	  
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			{{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
+			<h4 class="modal-title">Important Notice !!!!!</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>Your account has been expired. So, to excess this account and extends your validity date, please recharge your point.</p>
+		  </div>
+		  <div class="modal-footer">
+			{{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
+			<a href="{{ route('recharge-points') }}" class="btn btn-success">Recharge Now</a>
+		  </div>
+		</div>
+		
+	  </div>
+	</div>
+	
+  </div>
+
 <!-- table -->
 <div class="container-fluid content">        
 	<div class="card-box table-responsive">
@@ -227,5 +256,19 @@
 			  );
 		  });
   </script>
+
+@php
+$seller=App\Models\Seller::find(Session::get('seller')['id']);
+$expiry = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $seller->expiry_date);
+$current = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now());
+@endphp
+{{-- {{ dd($expiry < $current) }} --}}
+@if ($expiry < $current))
+<script type="text/javascript">
+$(window).on('load', function() {
+  $('#myModal').modal('show');
+});
+</script>
+@endif
 </body>
 </html>

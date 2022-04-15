@@ -48,8 +48,10 @@
     </style>
 </head>
 <body>
+
 {{-- alert message --}}
 @include('admin/alert-message')
+
     <div class="container padding-bottom-3x mb-2 mt-5">
 	    <div class="row justify-content-center">
 	        <div class="col-lg-8 col-md-10">
@@ -70,7 +72,7 @@
 	                </div>
 	                <div class="card-footer">
                         <button type="submit" class="btn btn-success" >Get Reset Password Link</button> 
-                        <a href="{{ route('user-login') }}" class="btn btn-primary">
+                        <a href="{{ route('index') }}" class="btn btn-primary">
                             Back to Login
                         </a> 
                     </div>
@@ -78,9 +80,12 @@
 	        </div>
 	    </div>
 	</div>
+
     <script href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     {{-- alert script --}}
     @include('admin/alert-script');
+
 </body>
 </html>

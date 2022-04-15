@@ -57,6 +57,7 @@ class SubcategoryController extends Controller
         $category=Category::where('name',$name)->first();
         $data= new Subcategory;
         $data->name=$request->name;
+        $data->slug=str_replace(' ', '-', $request->name);
         $data->title=$request->title;
         $data->category_id=$category->id;
         $data->save();
@@ -112,6 +113,7 @@ class SubcategoryController extends Controller
         $data= Subcategory::find($id);
         $category=Category::find($data->category_id);
         $data->name=$request->name;
+        $data->slug=str_replace(' ', '-', $request->name);
         $data->title=$request->title;
         $data->update();
         Session::put('success','Sub-Category has been updated successfully');

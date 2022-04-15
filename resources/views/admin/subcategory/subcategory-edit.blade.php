@@ -16,9 +16,11 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
+
         {{-- sidenav and top nav --}}
         @include('layout/admin/sidenav')
         {{-- sidenav and top nav ends --}}
+        
         <!-- page content -->
         <div class="right_col" role="main">
           @include('admin/alert-message')
@@ -84,6 +86,7 @@
     </div>
     
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
+
   </body>
 </html>

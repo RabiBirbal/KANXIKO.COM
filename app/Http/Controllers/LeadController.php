@@ -21,20 +21,20 @@ class LeadController extends Controller
      */
     public function index(Request $request)
     {   
-        if(Session::has('admin')){
-            $admin=User::find(Session::get('admin')['id']);
-        }
-        elseif(Session::has('buyer_department')){
-            $admin=User::find(Session::get('buyer_department')['id']);
-        }
-        else{
-            $admin=User::find(Session::get('seller_department')['id']);
-        }
+        // if(Session::has('admin')){
+        //     $admin=User::find(Session::get('admin')['id']);
+        // }
+        // elseif(Session::has('buyer_department')){
+        //     $admin=User::find(Session::get('buyer_department')['id']);
+        // }
+        // else{
+        //     $admin=User::find(Session::get('seller_department')['id']);
+        // }
         $product= Product::join('buyers', 'buyers.product_id', '=', 'products.id')
         ->orderby('products.id','desc')
         ->get();
         $seller=Seller::find(Session::get('seller')['id']);
-        return view('frontend/leads/buyleads',compact("product","seller","admin"));
+        return view('frontend/leads/buyleads',compact("product","seller"));
     }
 
     /**
@@ -106,32 +106,70 @@ class LeadController extends Controller
     {
         $seller=Seller::find($request->seller_id);
         if($seller->wallet_points >= $request->lead_point){
-            $data= new Lead;
-            $data->product_id=$request->product_id;
-            $data->seller_id=$request->seller_id;
-            $data->buyer_id=$request->buyer_id;
-            $data->enquiry_status="Lead Buy Successfully";
-            $data->last_comment="Thank You";
-            $data->save();
+            if($request->lead_category == 'Free'){
+                $lead = Lead::where('product_id',$request->product_id)->first();
+                if($lead){
+                    Session::put('error','Lead has been bought already.');
+                    return back();
+                }
+                else{
+                    $data= new Lead;
+                    $data->product_id=$request->product_id;
+                    $data->seller_id=$request->seller_id;
+                    $data->buyer_id=$request->buyer_id;
+                    $data->enquiry_status="Lead Buy Successfully";
+                    $data->last_comment="Thank You";
+                    $data->save();
 
-            $seller=Seller::find($request->seller_id);
-            $seller->wallet_points=$seller->wallet_points - $request->lead_point;
-            $seller->update();
+                    $seller=Seller::find($request->seller_id);
+                    $seller->wallet_points=$seller->wallet_points - $request->lead_point;
+                    $seller->update();
 
-            $product=Product::find($request->product_id);
-            $product->availability=$request->availability - 1;
-            $product->update();
+                    $product=Product::find($request->product_id);
+                    $product->availability=$request->availability - 1;
+                    $product->update();
 
-            $wallet=new Wallet;
-            $wallet->email=Session::get('seller')['email'];
-            $wallet->action="Debited";
-            $wallet->points=$request->lead_point;
-            $wallet->remarks=$request->lead_point." points has been debited form your wallet";
-            $wallet->lead_id=$data->id;
+                    $wallet=new Wallet;
+                    $wallet->email=Session::get('seller')['email'];
+                    $wallet->action="Debited";
+                    $wallet->points=$request->lead_point;
+                    $wallet->remarks=$request->lead_point." points has been debited form your wallet";
+                    $wallet->lead_id=$data->id;
 
-            $wallet->save();
-            Session::put('success','Lead has been bought successfully.'.$request->lead_point. ' points has been debited from your wallet');
-            return redirect()->route('user-product-details',Crypt::encryptString($request->product_id));
+                    $wallet->save();
+                    Session::put('success','Lead has been bought successfully.'.$request->lead_point. ' points has been debited from your wallet');
+                    return redirect()->route('user-product-details',Crypt::encryptString($request->product_id));
+                }
+            }
+            else{
+                $data= new Lead;
+                $data->product_id=$request->product_id;
+                $data->seller_id=$request->seller_id;
+                $data->buyer_id=$request->buyer_id;
+                $data->enquiry_status="Lead Buy Successfully";
+                $data->last_comment="Thank You";
+                $data->save();
+
+                $seller=Seller::find($request->seller_id);
+                $seller->wallet_points=$seller->wallet_points - $request->lead_point;
+                $seller->update();
+
+                $product=Product::find($request->product_id);
+                $product->availability=$request->availability - 1;
+                $product->update();
+
+                $wallet=new Wallet;
+                $wallet->email=Session::get('seller')['email'];
+                $wallet->action="Debited";
+                $wallet->points=$request->lead_point;
+                $wallet->remarks=$request->lead_point." points has been debited form your wallet";
+                $wallet->lead_id=$data->id;
+
+                $wallet->save();
+                Session::put('success','Lead has been bought successfully.'.$request->lead_point. ' points has been debited from your wallet');
+                return redirect()->route('user-product-details',Crypt::encryptString($request->product_id));
+            }
+            
         }
         else{
             Session::put('error','You have not enough points to buy this lead. Please recharge your wallet.');

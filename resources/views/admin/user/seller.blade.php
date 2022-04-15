@@ -19,10 +19,13 @@
         {{-- sidenav and top nav --}}
         @include('layout/admin/sidenav')
         {{-- sidenav and top nav ends --}}
+
         <!-- page content -->
         <div class="right_col" role="main">
+
           {{-- alert message --}}
           @include('admin/alert-message')
+          
           <!-- top tiles -->
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
@@ -116,33 +119,34 @@
     </div>
 	
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
 
     <script type="text/javascript">
-      $('select').change(function () {
-       var optionSelected = $(this).find("option:selected");
-       var valueSelected  = optionSelected.val();
-       var textSelected   = optionSelected.text();
-        var adminid = $(this).attr('uid');
-        alert("Are you sure want to change the status??");
-        // alert(valueSelected);
-        // alert(adminid);
-        $.ajax({
-        url: "{{route('seller-status-change')}}",
-        type:"POST",
-        data:{
-          "_token": "{{ csrf_token() }}",
-          value:valueSelected,
-          id: adminid,
-        },
-        success: function (data) {
-           alert('Status changed successfully.');
-        },
-        error: function(data){
-           alert('Error occured.');
-        }
-       });
-      });
+        $('select').change(function () {
+         var optionSelected = $(this).find("option:selected");
+         var valueSelected  = optionSelected.val();
+         var textSelected   = optionSelected.text();
+          var adminid = $(this).attr('uid');
+          alert("Are you sure want to change the status??");
+          // alert(valueSelected);
+          // alert(adminid);
+          $.ajax({
+          url: "{{route('seller-status-change')}}",
+          type:"POST",
+          data:{
+            "_token": "{{ csrf_token() }}",
+            value:valueSelected,
+            id: adminid,
+          },
+          success: function (data) {
+             alert('Status changed successfully.');
+          },
+          error: function(data){
+             alert('Error occured.');
+          }
+         });
+        });
     </script>
+
   </body>
 </html>

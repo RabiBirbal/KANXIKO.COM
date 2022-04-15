@@ -97,10 +97,12 @@
 
     {{-- footer --}}
     @include('layout/admin/js')
+    
       </div>
     </div>
 	
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
+
   </body>
 </html>

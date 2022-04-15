@@ -43,7 +43,7 @@ class EnquiryController extends Controller
     {
         $data = new Unverified_product;
         $data->name=$request->product_name;
-        $data->category=$request->category;
+        $data->category=str_replace('-', ' ',$request->category);
         $data->subcategory=$request->subcategory;
         $data->product_image=$request->product_image;
         $data->description=$request->description;

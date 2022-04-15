@@ -10,8 +10,102 @@
      {{ $cat->name }}
     @endif
   </title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,600' rel='stylesheet' type='text/css'>
 	@include('layout/frontend/css')
   <style>
+    body {
+font-family: Open Sans, sans-serif;
+color: coral;
+}
+h1 {
+font-weight: 300;
+font-size: 3em;
+}
+a {
+text-decoration: none;
+color: cornflowerblue;
+}
+a:hover {
+text-decoration: none;
+color: tomato;
+}
+.pro {
+width: 100%;
+height: auto;
+}
+.cerita {
+text-align: center;
+padding-top: 40px;
+}
+.karya {
+margin:0px auto;
+text-align:left;
+padding:15px;
+}
+.test {
+padding-top: 20px;
+margin-bottom: 50px
+}
+.menu {
+position: fixed;
+display: inline-block;
+width: 30px;
+height: 30px;
+margin: 25px;
+opacity: 0.5;
+}
+.menu:hover {
+opacity:1;
+}
+.menu::after {
+content: attr(data-dia);
+padding-left: 50px;
+color: deepskyblue;
+}
+.menu span {
+margin: 0 auto;
+position: relative;
+top: 12px;
+}
+.menu span:before, .menu span:after {
+position: absolute;
+content:'';
+}
+.menu span, .menu span:before, .menu span:after {
+width: 40px;
+height: 4px;
+background-color: deepskyblue;
+display: block;
+}
+.menu span:before {
+margin-top: -12px;
+}
+.menu span:after {
+margin-top: 12px;
+}
+.pusing span {
+-webkit-transition: .2s ease 0;
+}
+.pusing span:before, .pusing span:after {
+-webkit-transition-property: margin, opacity;
+-webkit-transition-duration: .2s, 0;
+-webkit-transition-delay: .2s;
+}
+.pusing:hover span {
+-webkit-transform: rotate(90deg);
+-webkit-transition-delay: .2s;
+}
+.pusing:hover span:before, .pusing:hover span:after {
+margin-top: 0px;
+opacity: 0;
+-webkit-transition-delay: 0, .2s;
+}
+</style>
+  <style>
+    .w-5{
+      display: none;
+    }
     body {
        background-position: center;
        background-color: #eee;
@@ -63,17 +157,20 @@
     .dashboard{
     text-align: center;
     }
+    .logo{
+            width: 35%;
+        }
     }
     .lead-manager{
     /* margin-top: 50px; */
-    background-color: #dcd9cd;
+    background-color: #19465d;
     padding-bottom: 10px;
     }
     .dashboard{
       margin-top: 30px;
     }
 </style>
-    <style>
+<style>
       .dropdown-item:hover{
         background-color: grey;
       }
@@ -148,7 +245,7 @@
         .drop1{
           background-color: #F5F5F5;
         }
-  </style>
+</style>
 </head>
 <body>
     {{-- alert message --}}
@@ -158,7 +255,7 @@
       <div class="row">
         <div class="col-md-6 text-light dashboard">
           <a href="{{ route('index') }}" class="text-light">
-                      <img src="{{ asset('frontend/image/Kanxiko-01.png') }}" width="100px" alt="logo">
+            <img src="{{ asset('frontend/image/logo1.png') }}" width="15%" class="logo" alt="logo">
                   </a>
         </div>
         <div class="col-md-6 dropdown text-right">
@@ -202,7 +299,7 @@
             <div class="row drop1">
             @foreach ($category as $data)
             <div class="col-md-3">
-                <a class="dropdown-item" href="{{ url('/products/'.$data['name']) }}">{{ $data->name }}</a>
+                <a class="dropdown-item" href="{{ url('/products/'.$data['slug']) }}">{{ $data->name }}</a>
             </div>
             @endforeach
             </div>
@@ -223,14 +320,14 @@
             @foreach ($product as $data)
           <div class="col-md-3 mb-3">
             <div class="card-content">
-                <h4 class="text-center pt-2">{{ $data->name }}</h4>
+                {{-- <h4 class="text-center pt-2">{{ $data->name }}</h4>
                 <div class="card-img">
                     <img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="" height="400px" width="300px">
-                </div>
+                </div> --}}
                 <div class="card-desc">
-                    <div class="text-center" >
+                    {{-- <div class="text-center" >
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
-                    </div>
+                    </div> --}}
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -332,10 +429,88 @@
                   </div>
             </div>
           </div>
-          @endforeach
+          @endforeach 
         </div>
+        {{-- <div class="mb-3">
+          {{ $product->links() }}
+        </div> --}}
+        
     </div>
 </section>
+<div class="karya">
+  <div class="row">
+    @foreach ($product as $data)
+    <div class="test col-md-3">
+      <div class="card-content">
+          <h4 class="text-center pt-2">{{ $data->name }}</h4>
+          <div class="card-img">
+              <img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="" height="400px" width="300px">
+          </div>
+          <div class="card-desc">
+              <div class="text-center" >
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+              </div>
+             
+            </div>
+      </div>
+  </div>
+    @endforeach
+    
+    {{-- <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div>
+    <div class="test col-md-3">
+      <img src="http://unsplash.it/790/390?image=339" class="pro" />
+    </div> --}}
+  </div>
+</div>
+
+END
 <!-- goto top arrow -->
 <a href="#top" class="goto-top mb-5"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 <!-- footer -->
@@ -355,6 +530,28 @@
 @include('layout/frontend/js')
 {{-- alert script --}}
 @include('admin/alert-script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+<script>
+     $(".karya div").slice(8).hide();
+
+var mincount = 5;
+var maxcount = 10;
+
+
+$(window).scroll(function () {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 50) {
+        $(".karya div").slice(mincount, maxcount).slideDown(50);
+
+        mincount = mincount + 4;
+        maxcount = maxcount + 4;
+
+    }
+});
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
       $('#phone').keyup(function(){

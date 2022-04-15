@@ -19,10 +19,13 @@
         {{-- sidenav and top nav --}}
         @include('layout/admin/sidenav')
         {{-- sidenav and top nav ends --}}
+
         <!-- page content -->
         <div class="right_col" role="main">
+
           {{-- alert message --}}
           @include('admin/alert-message')
+		  
           <!-- top tiles -->
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
@@ -59,9 +62,13 @@
 										<input type="text" name="lname" value="{{ $sellerInfo['last_name'] }}" placeholder="Enter Last Name Here.." class="form-control" required readonly>
 									</div>
 								</div>					
-								<div class="form-group">
+								<div class="form-group col-md-6">
 									<label>Address</label>
 									<input type="text" name="address" value="{{ $sellerInfo['address'] }}" placeholder="Enter address" class="form-control" required readonly>
+								</div>	
+								<div class="form-group col-md-6">
+									<label>Expiry Date</label>
+									<input type="text" name="expiry_date" value="{{ $sellerInfo['expiry_date'] }}" placeholder="Enter address" class="form-control" required readonly>
 								</div>	
 								<div class="row">
 									<div class="col-sm-4 form-group">
@@ -248,7 +255,7 @@
 	{{-- script --}}
 	@include('layout/admin/js')
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
 
 <script>
 $(document).ready(function(){
@@ -265,5 +272,6 @@ $(document).ready(function(){
     }).change();
 });
 </script>
+
   </body>
 </html>

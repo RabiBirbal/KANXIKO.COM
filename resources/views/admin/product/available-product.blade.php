@@ -49,7 +49,7 @@
                                   <select class="select1 form-control" name="category">
                                     <option value="0">Choose Category</option>
                                     @foreach ($category['a'] as $i => $a)
-                                      <option value="{{ $a->name }}">{{ $a->name }}</option>
+                                      <option value="{{ $a->slug }}">{{ $a->name }}</option>
                                     @endforeach
                                   </select>
                                 </div>
@@ -61,7 +61,7 @@
                                 <select class="form-control" name="subcategory">
                                   <option value="0">Choose Subcategory</option>
                                   @foreach ($category['a'] as $i => $a)
-                                  <optgroup label="{{ $a->name }} " class="{{ $a->name }} box1">
+                                  <optgroup label="{{ $a->name }} " class="{{ $a->slug }} box1">
                                     @foreach ($category['b'][$i] as $b)
                                       <option value="{{ $b->name }}">{{ $b->name }}</option>
                                     @endforeach
@@ -104,6 +104,8 @@
                                   <th scope="col">Image</th>
                                   <th scope="col">Category</th>
                                   <th scope="col">Sub-Category</th>
+                                  <th scope="col">Seller ID</th>
+                                  <th scope="col">Add By (Seller)</th>
                                   <th scope="col">#Action</th>
                               </tr>
                             </thead>
@@ -116,6 +118,15 @@
                                 <td class="text-center"><img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="product image" height="200px" width="200px"></td>
                                 <td>{{ $data->category }}</td>
                                 <td>{{ $data->subcategory }}</td>
+                                <td>{{ $data->seller_id }}</td>
+                                <td>
+                                  @if ($data->seller_id)
+                                  {{ $data->seller->first_name }} {{ $data->seller->last_name }}
+                                  @else
+                                  Add By Admin
+                                  @endif
+                                  
+                                </td>
                                 <td>
                                   <form action="{{ route('edit_available_product') }}" method="post">
                                     @csrf
@@ -154,7 +165,7 @@
     </div>
     
     {{-- alert script --}}
-    @include('admin/alert-script');
+    @include('admin/alert-script')
 
     <!-- image preview -->
     <script type="text/javascript">
@@ -166,6 +177,7 @@
                 preview.style.display="block";
             }
         }
+
         function showPreview2(event){
             if(event.target.files.length > 0){
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -175,6 +187,7 @@
             }
         }
       </script>
+
       <script>
         $(document).ready(function(){
             $(".select1").change(function(){
@@ -195,5 +208,6 @@
             }).change();
         });
       </script>
+      
   </body>
 </html>

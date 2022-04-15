@@ -77,7 +77,7 @@ class UnverifiedProductController extends Controller
                 $data->quantity=$request->quantity;
                 $data->size=$request->size;
                 $data->color=$request->color;
-                $data->category=$request->category;
+                $data->category=str_replace('-', ' ',$request->category);
                 $data->subcategory=$request->subcategory;
                 $data->budget=$request->budget;
                 $data->description=$request->description;
@@ -191,7 +191,7 @@ class UnverifiedProductController extends Controller
                     $data->quantity=$request->quantity;
                     $data->size=$request->size;
                     $data->color=$request->color;
-                    $data->category=$request->category;
+                    $data->category=str_replace('-', ' ',$request->category);
                     $data->subcategory=$request->subcategory;
                     $data->budget=$request->budget;
                     $data->description=$request->description;
