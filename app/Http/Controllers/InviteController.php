@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buyer;
+use App\Models\BuyerInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Seller;
@@ -18,6 +20,12 @@ class InviteController extends Controller
         $seller=Seller::find(Session::get('seller')['id']);
         // $refer=Session::get('seller')['id'] * 1111;
         return view('frontend/invite-friend',compact("seller"));
+    }
+
+    public function buyerInvite(){
+        $buyer=BuyerInfo::find(Session::get('buyer')['id']);
+        // $refer=Session::get('seller')['id'] * 1111;
+        return view('frontend.buyer.buyer-invite',compact("buyer"));
     }
 
     /**

@@ -25,6 +25,9 @@ class CreateBuyerInfosTable extends Migration
             $table->string('address');
             $table->string('province');
             $table->string('district');
+            $table->string('points');
+            $table->string('refer_code')->unique();
+            $table->foreignId('refer_id')->nullable()->constrained('buyer_infos');
             $table->timestamps();
         });
     }

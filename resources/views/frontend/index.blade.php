@@ -141,19 +141,7 @@
 </div>
   <div class="float-right mr-3 btngrp">
     @if(Session::has('buyer'))
-    <div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       {{ $buyer->first_name }} {{ $buyer->last_name }}
-      </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <small>
-          <a class="dropdown-item" href="{{ route('buyer-profile-detail') }}">My profile</a>
-          <a class="dropdown-item" href="{{ route('my-order') }}">My Orders</a>
-          <a class="dropdown-item" href="{{ route('buyer-changes-password',Crypt::encryptString($buyer->id)) }}">Change Password</a>
-          <a class="dropdown-item" href="{{ route('buyer_logout') }}">Logout</a>
-        </small>
-      </div>
-  </div>
+    @include('layout.frontend.buyer-profile')
     @else
     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Login</a>
     <!-- Modal -->
@@ -887,7 +875,7 @@
       <div class="row">
         <div class="col-md-8">
           <h1>Want to Purchase a Online Product</h1>
-          <h4>Just Remember Kanxiko.com</h4>
+          <h4>Just Remember Us</h4>
           <p>kanxiko.com a Perfect Online Shopping Platform for those living a busy life and have limited time for shopping where buyers can drop their Product /Service needs/Budget on Kanxiko.com and get direct call/message from the seller side.
               Buyers can buy the products and services according to their choice and budget. The time buyers running to Market for products is gone, Now the Sellers will contact you directly through kanxiko.com. Buyers just need to place their needs with product sample and budget on, kanxiko.com and the seller having the products of your need and budget will contact you. This platform reduces the time of buyer and can get the products according to their needs and budget.</p>
           <a href="{{ route('buyer-form') }}"><button type="button" class="btn btn-success">SHOP NOW</button></a>
@@ -904,7 +892,7 @@
       <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-12">
-                <h2>Why Kanxiko.com?</h2>
+                <h2>Why Us?</h2>
             </div>
              <div class="col-md-3">
                <div class="flip-card">

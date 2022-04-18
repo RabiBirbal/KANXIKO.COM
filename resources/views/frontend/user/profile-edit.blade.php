@@ -133,7 +133,7 @@
 				<a href="{{ route('profile-details') }}"><button class="btn btn-primary">Go Back</button></a>
         </div>
     </div>
-    <h1 class="well">Kanxiko.com</h1>
+    <h1 class="well">My Profile</h1>
 	<div class="col-lg-12 well">
 		<div class="row">
 			<form action="{{ url('profile-update') }}" method="post">

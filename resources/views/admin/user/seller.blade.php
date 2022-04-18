@@ -122,6 +122,7 @@
     @include('admin/alert-script')
 
     <script type="text/javascript">
+<<<<<<< HEAD
         $('select').change(function () {
          var optionSelected = $(this).find("option:selected");
          var valueSelected  = optionSelected.val();
@@ -146,6 +147,32 @@
           }
          });
         });
+=======
+      $('select').change(function () {
+       var optionSelected = $(this).find("option:selected");
+       var valueSelected  = optionSelected.val();
+       var textSelected   = optionSelected.text();
+        var adminid = $(this).attr('uid');
+        alert("Are you sure want to change the status??");
+        // alert(valueSelected);
+        // alert(adminid);
+        $.ajax({
+        url: "{{route('seller-status-change')}}",
+        type:"POST",
+        data:{
+          "_token": "{{ csrf_token() }}",
+          value:valueSelected,s
+          id: adminid,
+        },
+        success: function (data) {
+           alert('Status changed successfully.');
+        },
+        error: function(data){
+           alert('Error occured.');
+        }
+       });
+      });
+>>>>>>> d86d0822ce14858c6489d673a26e5fa7db1ce1be
     </script>
 
   </body>

@@ -28,27 +28,14 @@
                     <div class="card-body">
                         <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
                         <h2 class="py-3">Registration</h2>
-                        <p class="text-justify">
-                          Business Inquiry (Lead) Website, buyleadsnepal.com is widely used online   repository, where Verified Business (Lead) Inquiry generated are stored.This helps sellers to capture the Business Inquiry (Lead) according to their Product & Service in an organised way and convert those Business Inquiry into sales. It is flexible and a powerful solution for all business to generate new business revenue.
-                        </p>
-                        <br>
-                        <p class="text-justify">
-                          This Website: 
-                        </p>
-                        <p class="text-justify">
-                        - Reduces Marketing Cost <br>
-                        - Reduces Customer Tension <br>
-                        - Consume Time  <br>
-                        - Provides Quality Leads on Affordable Price <br><br>
-
-                        Register Now  & Get 1 Day Free Trial.
+                        <p>Tn online marketplace is an e-commerce site that connects sellers with buyers. It’s often known as an electronic marketplace and all transactions are managed by the website owner. Companies use online marketplaces to reach customers who want to purchase their products and services.
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-md-8 py-5 border">
                 <h4 class="pb-4">Please fill your details</h4>
-                <form action="{{ route('add-seller') }}" method="post" class="form">
+                <form action="{{ route('add-buyer') }}" method="post" class="form">
                   @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -95,43 +82,27 @@
                         </div>
                       </div>
                        <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <input id="email" name="email" placeholder="Primary Email *" class="form-control" type="email" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                          <input id="email" name="semail" placeholder="Secondary Email (optional)" class="form-control" type="email">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <input id="text" name="landline" placeholder="Landline (optional)" class="form-control" type="text">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <input id="mobile" name="mobile" placeholder="mobile *" class="form-control" type="text" required>
-                          <div id="showErrorPhone"></div>
-
-                                @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <input id="address" name="address" placeholder="Address *" class="form-control" type="text" required>
-                        </div>
-                        <div class="form-group col-md-2">
-                          <label for="refer-code">Referal Code</label>
+                        <div class="form-group col-md-4">
+                          <input id="email" name="email" placeholder="Email *" class="form-control" type="email" required>
                         </div>
                         <div class="form-group col-md-4">
-                          <input id="refer" name="refer" placeholder="(if any)" class="form-control" type="text">
-                        </div>
+                            <input id="mobile" name="mobile" placeholder="mobile *" class="form-control" type="text" required>
+                            <div id="showErrorPhone"></div>
+  
+                                  @error('mobile')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                          </div>
+                          <div class="form-group col-md-4">
+                            <input id="refer_code" name="refer_code" class="form-control" type="text" value="{{ $refercode }}" readonly>
+                          </div>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-4">
-                          <input id="city" name="city" placeholder="City *" class="form-control" type="text" required>
-                        </div>
+                            <input id="address" name="address" placeholder="Address *" class="form-control" type="text" required>
+                          </div>
                         <div class="form-group col-md-4">
                           <select class="select1 form-control" name="province" required>
                             <option value="one">Province 1</option>
@@ -226,6 +197,8 @@
                               <option value="Surkhet">Surkhet</option>
                             </optgroup>
                             <optgroup label="Province 7" class="seven box1">
+                              <option value="0">Select District</option>
+                              <option value="dasdasd">dasdasda</option>
                               <option value="Baitadi">Baitadi</option>
                               <option value="Bajhang">Bajhang</option>
                               <option value="Bajura">Bajura</option>
@@ -236,14 +209,6 @@
                               <option value="Kanchanpur">Kanchanpur</option>
                             </optgroup>
                             </select>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <input id="company_name" name="company_name" placeholder="Company Name *" class="form-control" type="text" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                          <input id="company_address" name="company_address" placeholder="Company Address *" class="form-control" type="text" required>
                         </div>
                       </div>
                     <div class="form-row">
@@ -265,22 +230,15 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            <p>१. kanxiko.com ले बिक्रेता र खरिदकर्ता लाई आफ्नो Platform मार्फत  Bridge को रुपमा  जोडाउने काम मात्र गर्दछ। </p>
-                            <p>२. बिक्रेताले kanxiko.com मा Register गर्दा आफ्नो पसल को सम्पूर्ण जानकारी राख्नु पर्ने छ।</p>  
-                            <p>३. बिक्रेताले  Register गर्दा तिरेको शुल्क बराबर Points प्राप्त गर्नेछन्। </p> 
-                            <p>४.उक्त Points Lead खरिद गर्नको लागि प्रयोग गर्न सक्नेछन्। </p>
-                            <p>५. बिक्रेताले kanxiko.com Platform मा Display भएका  Leads को Category मा गएर Leads खरिद गर्न सक्ने छन्। </p>
-                            <p>६. बिक्रेताले   Register भईसके पछि Unlimited Free Leads प्रयोग गर्न पाउनेछन्। </p>
-                            <p>७. Free Leads  बाहेक अन्य Leads को Category अनुसार मुल्य फरक रहने छ।  </p>
-                            <p>८. Leads खरिद गर्दा खरिदकर्ताको आवश्यकता / बजेट र लोकेशन आदि कुरा आफूमा Match भए अनुसार leads खरिद गर्न  सक्ने छन्।</p>
-                            <p>९. बिक्रेताले खरिद गर्न सक्ने leads मा कुनै सिमा छैन। आफ्नो आवश्यकता अनुसार जति पनि Leads खरिद गर्न सक्ने छन्।</p> 
-                            <p>१०. Leads खरिद गरिसके पछि खरिदकर्ता को सम्पर्क नं  सहित को Full Detail बिक्रेताले पाउने छन्। </p>
-                            <p>११. सम्पर्क नं सहितको जानकारी पाए पछि बिक्रेताले खरिदकर्ता लाई सम्पर्क गरि अगाडि Process गरि आफ्नो समान Sales गर्न सक्नेछन्।</p> 
-                            <p>१२.Regular Lead र Premium Lead Verify गरेको हुन्छ तर खरिद गरेको leads बाट  सामान बिक्रि हुन्छ  नै भन्ने Guarantee kanxiko.com ले गर्दैन। </p>   
-                            <p>१३. खरिदकर्ता सामान किन्न तयार भए पछि Billing /Payment Collection /Exchange / Delivery आदिको  प्रक्रिया बिक्रेता स्वयम्ले नै गर्नु पर्ने छ। </p>
-                            <p>१४.खरिदकर्ताले  खरिद गरेको  सामानमा केहि टुटफुट / Damage /Quality सम्बन्धि आउने गुनासाहरुको, बिक्रेता स्वयम्ले नै  जिम्मेवारी लिनु पर्ने छ। </p> 
-                            <p>१५.बिक्रेताले आफूले बेच्ने सामग्रीको मूल्य ,नापतौल तथा गुणस्तर (kanxiko.com Platform) राखिए बमोजिम हुनुपर्ने छ। </p>
-                            <p>१६. Registration शुल्क Non Refundable हो।</p>
+                            <p>१. खरिदकर्ता लाई kanxiko.com ले कम समयमा आफूले खोजे अनुसारको सामान, सेवा बिक्रि गर्ने बिक्रेतासँग Platform प्रदान गर्दछ।</p>
+                                        <p>२. खरिदकर्तालाई  यो Platform मा जोडिनको लागि कुनै शुल्क लाग्ने छैन। </p>
+                                        <p>३. kanxiko.com खरिदकर्तालाई Direct बिक्रेता संग जोडाउने Bridge मात्र हो। </p>
+                                        <p>४. खरिदकर्ताले आफूले किन्न चाहेको सामानको फोटो र कति बजेटमा किन्न चाहेको हो भन्ने कुरा खुलाएर Detail Submit गर्नु पर्नेछ र त्यसलाई देखेर बिक्रेताले खरिदकर्तासँग सम्पर्क गर्नेछन्।  </p>
+                                        <p>५. खरिदकर्ताले दिएको Demand/Criteria अनुसार  बिक्रेताहरुले सीधै सम्पर्क गर्ने छन्।  </p>
+                                        <p>६. सम्पर्कमा आउने बिक्रेताहरु मध्ये आफ्नो Criteria Match गरेमा कुनै पनि बिक्रेता बाट सामान किन्न सक्ने छन्। </p>
+                                        <p>७. खरिदकर्ताले आफूले कुन बिक्रेता बाट सामान किन्ने भन्ने पूर्ण स्वतन्त्रता रहनेछ।  </p>
+                                        <p>८. खरिद गरेको सामानको गुणस्तरको  र बिक्रि पश्चात सर्विस को  ग्यारेन्टी पूर्ण रुपमा बिक्रेताको हुनेछ। </p>
+                                        <p class="mt-5">Note: यो Platform प्रयोग गर्नको लागि  उमेर <span class="text-primary">18+</span> हुनु आवश्यक छ।  कम उमेरको खरिदकर्ता ले बढि उमेर देखाई Order गर्दा हुने क्षति वा कुनै पनि सार्वजनिक अपराध लागू भएमा खरिदकर्ता आफै जिम्मेवार हुनेछन्। </p>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -289,7 +247,7 @@
                       </div>
                     </div>
                     {{-- modal ends --}}
-                    <a href="{{ route('user-login') }}">Already have an account?</a>
+                    <a href="{{ route('index') }}">Already have an account?</a>
                     <div class="form-row">
                         <button type="submit" onclick="return confirm('Are you sure want to continue?')" id="submit" value="submit" class="btn btn-danger">Submit</button>
                     </div>

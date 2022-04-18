@@ -43,6 +43,12 @@ class BuyerController extends Controller
         return view('admin/order/buyer',compact("product","admin"));
     }
 
+    public function buyerInviteRegister($refer)
+    {   
+        $refercode=$refer;
+        return view('frontend/buyer/buyer-invite-register',compact("refercode"));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -71,22 +77,52 @@ class BuyerController extends Controller
                 return back();
               }
             else{
-                $data = new BuyerInfo;
-                $data->first_name=$request->fname;
-                $data->last_name=$request->lname;
-                $data->password=Hash::make($request->password);
-                $data->email=$request->email;
-                $data->email_verification_code=Str::random(40);
-                $data->is_verified="0";
-                $data->contact=$request->mobile;
-                $data->address=$request->address;
-                $data->province=$request->province;
-                $data->district=$request->district;
+                if($request->refer_code){
+                    $buyer=BuyerInfo::where('refer_code',$request->refer_code)->first();
+                    if($buyer){
+                        $data = new BuyerInfo;
+                        $data->first_name=$request->fname;
+                        $data->last_name=$request->lname;
+                        $data->password=Hash::make($request->password);
+                        $data->email=$request->email;
+                        $data->email_verification_code=Str::random(40);
+                        $data->is_verified="0";
+                        $data->contact=$request->mobile;
+                        $data->address=$request->address;
+                        $data->province=$request->province;
+                        $data->district=$request->district;
+                        $data->refer_code=Str::random(6);
+                        $data->refer_id=$buyer->id;
 
-                $data->save();
-                Mail::to($request->email)->send(new BuyerEmailVerificationMail($data));
-                Session::put('success','Registration has been done successfully.');
-                return redirect()->route('index');
+                        $data->save();
+                        Mail::to($request->email)->send(new BuyerEmailVerificationMail($data));
+                        Session::put('success','Registration has been done successfully.');
+                        return redirect()->route('index');
+                    }
+                    else{
+                        Session::put('error','Referal code is not valid');
+                        return back();
+                    }
+                }
+                else{
+                    $data = new BuyerInfo;
+                    $data->first_name=$request->fname;
+                    $data->last_name=$request->lname;
+                    $data->password=Hash::make($request->password);
+                    $data->email=$request->email;
+                    $data->email_verification_code=Str::random(40);
+                    $data->is_verified="0";
+                    $data->contact=$request->mobile;
+                    $data->address=$request->address;
+                    $data->province=$request->province;
+                    $data->district=$request->district;
+                    $data->refer_code=Str::random(6);
+
+                    $data->save();
+                    Mail::to($request->email)->send(new BuyerEmailVerificationMail($data));
+                    Session::put('success','Registration has been done successfully.');
+                    return redirect()->route('index');
+                }
             }
     }
 
@@ -102,11 +138,25 @@ class BuyerController extends Controller
                 return redirect()->route('index');
             }
             else{
-                $buyer->is_verified="1";
-                $buyer->update();
+                if($buyer->refer_id){
+                    $buyer1=BuyerInfo::find($buyer->refer_id);
+                    $buyer->is_verified="1";
+                    $buyer->points = "50";
+                    $buyer->update();
 
-                Session::put('success','Email has been verified successfully.');
-                return redirect()->route('index');
+                    $buyer1->points = "50";
+                    $buyer1->update();
+
+                    Session::put('success','Email has been verified successfully.');
+                    return redirect()->route('index');
+                }
+                else{
+                    $buyer->is_verified="1";
+                    $buyer->update();
+
+                    Session::put('success','Email has been verified successfully.');
+                    return redirect()->route('index');
+                }
             }
         }
      }

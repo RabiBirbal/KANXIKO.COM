@@ -27,6 +27,7 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\AvailableProductController;
 use App\Http\Controllers\EsewaController;
 use App\Http\Controllers\SellerProductController;
+use App\Http\Livewire\ProductViewComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::get('/buyer/profile', [BuyerController::class,'viewDetail'])->name('buyer
 Route::get('/buyer/profile-edit', [BuyerController::class,'edit'])->name('edit-buyer-profile');
 Route::post('/buyer/profile-edit', [BuyerController::class,'update'])->name('update-buyer');
 Route::post('/buyer/detail/delete', [BuyerController::class,'destroy'])->name('delete-buyer');
+Route::get('/buyer-register/ref={refer}', [BuyerController::class,'buyerInviteRegister'])->name('buyer-invite-register');
 
 //buyer login
 Route::post('/buyer-login', [LoginController::class,'buyerLogin'])->name('buyer-login');
@@ -72,6 +74,7 @@ Route::post('/profile-update', [SellerController::class,'update'])->name('update
 
 //invite
 Route::get('/invite', [InviteController::class,'index'])->name('invite');
+Route::get('/buyer/invite', [InviteController::class,'buyerInvite'])->name('buyer-invite');
 
 //change password
 Route::get('/user/change-password/{id}', [SellerController::class,'getChangePassword'])->name('get-change-password');
@@ -93,7 +96,9 @@ Route::get('/verify/buyer/email/{verification_code}',[UnverifiedProductControlle
 Route::get('/my-orders', [BuyerController::class,'myOrder'])->name('my-order');
 
 //product
-Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');
+// Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');
+// Route::get('/getPosts', [ProductController::class, 'getPosts'])->name('getPosts');
+Route::get('/products/{name}', ProductViewComponent::class)->name('view-product');
 
 //enquiry
 // Route::get('/{name}-{id}',[EnquiryController::class,'index'])->name('get-enquiry');

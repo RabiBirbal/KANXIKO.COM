@@ -246,6 +246,7 @@ opacity: 0;
           background-color: #F5F5F5;
         }
 </style>
+@livewireStyles
 </head>
 <body>
     {{-- alert message --}}
@@ -260,19 +261,7 @@ opacity: 0;
         </div>
         <div class="col-md-6 dropdown text-right">
           @if(Session::has('buyer'))
-          <div class="dropdown">
-                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       {{ $buyer->first_name }} {{ $buyer->last_name }}
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <small>
-                          <a class="dropdown-item" href="{{ route('buyer-profile-detail') }}">My profile</a>
-                          <a class="dropdown-item" href="{{ route('my-order') }}">My Orders</a>
-                          <a class="dropdown-item" href="{{ route('buyer-changes-password',Crypt::encryptString($buyer->id)) }}">Change Password</a>
-                          <a class="dropdown-item" href="{{ route('buyer_logout') }}">Logout</a>
-                        </small>
-                      </div>
-                  </div>
+          @include('layout.frontend.buyer-pfofile')
                   @endif
         </div>
       </div>
@@ -308,136 +297,8 @@ opacity: 0;
         </div>
     </div>
   </div>
-<section class="details-card">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-lg-6 mb-3 name">
-            	<h2 class="name1">{{ $name }}</h2>
-            </div>
-            <div class="col-md-6 col-sm-6 col-lg-6 mb-3 text-right back" style="margin-top: -30px;">
-            	<a href="{{ route('index') }}" class="btn btn-primary">Back</a>
-            </div>
-            @foreach ($product as $data)
-          <div class="col-md-3 mb-3">
-            <div class="card-content">
-                {{-- <h4 class="text-center pt-2">{{ $data->name }}</h4>
-                <div class="card-img">
-                    <img src="{{ asset('upload/images/'.$data['product_image']) }}" alt="" height="400px" width="300px">
-                </div> --}}
-                <div class="card-desc">
-                    {{-- <div class="text-center" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
-                    </div> --}}
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Send Enquiry</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">X</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form action="{{ route('post-enquiry') }}" method="post">
-                              @csrf
-                              <input type="hidden" name="product_image" value="{{ $data->product_image }}">
-                              <input type="hidden" name="category" value="{{ $data->category }}">
-                              <input type="hidden" name="subcategory" value="{{ $data->subcategory }}">
-                              <div class="form-group input-group">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                  </div>
-                              <input name="product_name" class="form-control" value="{{ $data['name'] }}" placeholder="Product name" type="text" readonly>
-                              </div> <!-- form-group// -->
-                              <div class="form-group input-group">
-                                  <div class="input-group-prepend">
-                                  <!--  <span class="input-group-text"> <i class="fa fa-envelope"></i> </span> -->
-                                  </div>
-                              <textarea name="description" class="form-control" placeholder="Description field" required></textarea>
-                              </div> <!-- form-group// -->
-                              <div class="form-group input-group">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                  </div>
-                                  <input name="buyer_name" class="form-control" placeholder="Customer name" type="text" 
-                                  @if (Session::has('buyer'))
-                                    value="{{ $buyer->first_name }} {{ $buyer->last_name }}" readonly
-                                  @endif required>
-                              </div> <!-- form-group// -->
-                      
-                              <div class="form-group input-group">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                                  </div>
-                                  <input name="buyer_email" class="form-control" placeholder="Email address" type="email" 
-                                  @if (Session::has('buyer'))
-                                    value="{{ $buyer->email }}" readonly
-                                  @endif required>
-                              </div> <!-- form-group// -->
-                      
-                              <div class="form-group input-group">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
-                                  </div>
-                                  <input name="buyer_address" class="form-control" placeholder="Address" type="text"
-                                  @if (Session::has('buyer'))
-                                    value="{{ $buyer->address }}" readonly
-                                  @endif required>
-                              </div>
-                              <div class="form-group input-group">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                                  </div>
-                                  @if (Session::has('buyer'))
-                                    <input type="text" class="form-control" name="phone" value="{{ $buyer->contact }}" readonly>  
-                                  @else
-                                    <select class="custom-select" name="phone_code" style="max-width: 120px;">
-                                      <option>+977</option>
-                                  <!--   <option value="1">+972</option>
-                                      <option value="2">+198</option>
-                                      <option value="3">+701</option> -->
-                                  </select>
-                                  <div class="col-md-9 phone">
-                                  <input name="phone" id="phone" class="form-control" placeholder="Phone number" type="text" required>
-                                  </div>
-                                  @endif
-                                  <br>
-                                  <div id="showErrorPhone"></div>
-                                  @error('phone')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                  @enderror
-                                                            
-                              </div> <!-- form-group// -->  
-                              <div class="form-group ml-4">
-                                <input class="form-check-input" type="checkbox" name="terms" value="" id="flexCheckDefault" required>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  I agree all the terms and conditions.
-                                </label>
-                            </div> <!-- form-group// -->                               
-                              <div class="form-group">
-                                  <button type="submit" onclick="return confirm('Are you sure want to continue?')" id="submit" value="submit" class="btn btn-primary btn-block"> Send </button>
-                              </div> <!-- form-group// -->                                                                       
-                          </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {{-- modal ends --}}
-                  </div>
-            </div>
-          </div>
-          @endforeach 
-        </div>
-        {{-- <div class="mb-3">
-          {{ $product->links() }}
-        </div> --}}
-        
-    </div>
-</section>
-<div class="karya">
+  @livewire('product-view-component', ['name' => $name])
+{{-- <div class="karya">
   <div class="row">
     @foreach ($product as $data)
     <div class="test col-md-3">
@@ -508,9 +369,9 @@ opacity: 0;
       <img src="http://unsplash.it/790/390?image=339" class="pro" />
     </div> --}}
   </div>
-</div>
+</div> --}}
 
-END
+{{-- END --}}
 <!-- goto top arrow -->
 <a href="#top" class="goto-top mb-5"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 <!-- footer -->
@@ -526,6 +387,7 @@ END
 </div>
 <!-- footer ends -->
 
+@livewireScripts
 {{-- script --}}
 @include('layout/frontend/js')
 {{-- alert script --}}

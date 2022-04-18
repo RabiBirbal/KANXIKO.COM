@@ -81,11 +81,11 @@
                                 @enderror
                         </div>
                       </div>
-                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                      <div class="form-row">
+                        <div class="form-group col-md-4">
                           <input id="email" name="email" placeholder="Email *" class="form-control" type="email" required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <input id="mobile" name="mobile" placeholder="mobile *" class="form-control" type="text" required>
                             <div id="showErrorPhone"></div>
   
@@ -94,6 +94,9 @@
                                           <strong>{{ $message }}</strong>
                                       </span>
                                   @enderror
+                          </div>
+                          <div class="form-group col-md-4">
+                            <input id="refer_code" name="refer_code" class="form-control" placeholder="Refer Code" type="text">
                           </div>
                       </div>
                       <div class="form-row">

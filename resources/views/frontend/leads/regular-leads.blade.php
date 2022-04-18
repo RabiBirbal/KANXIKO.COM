@@ -136,7 +136,13 @@
 			<h4 class="modal-title">Important Notice !!!!!</h4>
 		  </div>
 		  <div class="modal-body">
-			<p>Your account has been expired. So, to excess this account and extends your validity date, please recharge your point.</p>
+			<p class="text-justify">
+				Dear Valued Customer, <br>
+				Your Account Validity has been expired. Kindly Pay via Esewa & Extend your account. <br>
+				Thank You!
+				<br><br>
+				Seller Helpdesk No.- <a href="tel:+977-1591-1592">+977-1591-1592</a>
+			</p>
 		  </div>
 		  <div class="modal-footer">
 			{{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
