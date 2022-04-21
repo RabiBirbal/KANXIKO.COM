@@ -100,6 +100,7 @@
 <body>
 {{-- alert message --}}
 @include('admin/alert-message')
+
 <!-- lead manager button -->
 <div class="lead-manager">
 	<div class="container-fluid">

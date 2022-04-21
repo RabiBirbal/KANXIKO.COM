@@ -179,7 +179,6 @@ class ProductController extends Controller
         
         return view('frontend/product/product-view',compact("buyer","product","name","category","cat"));
     }
-
     /**
      * Show the form for editing the specified resource.
      *

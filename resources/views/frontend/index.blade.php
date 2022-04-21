@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>best online shopping store in nepal, find best seller for readymade garments, home appliances, furnitures, cosmetic products, bag and footware items etc..</title>
+  <title>kanxiko.com | best online shopping store in nepal, find best seller for readymade garments, home appliances, furnitures, cosmetic products, bag and footware items etc..</title>
   @include('layout/frontend/css')
   <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
   @include('layout/admin/css1')
@@ -232,7 +232,7 @@
                 </div>
                 <div class="card-desc">
                     <div class="text-center" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Order Now</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -359,7 +359,7 @@
                 </div>
                 <div class="card-desc">
                     <div class="text-center" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Order Now</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -486,7 +486,7 @@
                 </div>
                 <div class="card-desc">
                     <div class="text-center" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Order Now</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -613,7 +613,7 @@
                 </div>
                 <div class="card-desc">
                     <div class="text-center" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Order Now</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -740,7 +740,7 @@
                 </div>
                 <div class="card-desc">
                     <div class="text-center" >
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Order Now</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

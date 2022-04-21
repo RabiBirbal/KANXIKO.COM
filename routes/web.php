@@ -96,9 +96,9 @@ Route::get('/verify/buyer/email/{verification_code}',[UnverifiedProductControlle
 Route::get('/my-orders', [BuyerController::class,'myOrder'])->name('my-order');
 
 //product
-// Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');
+Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');
 // Route::get('/getPosts', [ProductController::class, 'getPosts'])->name('getPosts');
-Route::get('/products/{name}', ProductViewComponent::class)->name('view-product');
+// Route::get('/products/{name}', ProductViewComponent::class)->name('view-product');
 
 //enquiry
 // Route::get('/{name}-{id}',[EnquiryController::class,'index'])->name('get-enquiry');

@@ -251,6 +251,7 @@ opacity: 0;
 <body>
     {{-- alert message --}}
   @include('admin/alert-message')
+  
   <div class="lead-manager">
     <div class="container-fluid">
       <div class="row">
@@ -298,6 +299,7 @@ opacity: 0;
     </div>
   </div>
   @livewire('product-view-component', ['name' => $name])
+  <br><br>
 {{-- <div class="karya">
   <div class="row">
     @foreach ($product as $data)
@@ -369,7 +371,7 @@ opacity: 0;
       <img src="http://unsplash.it/790/390?image=339" class="pro" />
     </div> --}}
   </div>
-</div> --}}
+</div> 
 
 {{-- END --}}
 <!-- goto top arrow -->

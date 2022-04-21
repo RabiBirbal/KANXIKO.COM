@@ -195,6 +195,14 @@
 					<td><strong>Category:</strong><br>{{ $data->category }}</td>
 					<td><strong>Leads Category:</strong><br>{{ $data->leads_category }}</td>
 					<td><strong>Availability:</strong><br>{{ $data->availability }}</td>
+					@php
+						$seller=App\Models\Seller::find(Session::get('seller')['id']);
+						$expiry = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $seller->expiry_date);
+						$current = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now());
+					@endphp
+					@if ($expiry < $current)
+					<td><button class="btn btn-warning">Recharge Now</button> </td>
+					@else
 					<td>
 						<form action="{{ url('buy-lead') }}" method="post">
 							@csrf
@@ -202,10 +210,12 @@
 							<input type="hidden" name="availability" value="{{ $data['availability'] }}"/>
 							<input type="hidden" name="lead_point" value="{{ $data['points'] }}"/>
 							<input type="hidden" name="product_id" value="{{ $data['product_id'] }}"/>
+							<input type="hidden" name="lead_category" value="{{ $data['leads_category'] }}"/>
 							<input type="hidden" name="seller_id" value="{{ Session::get('seller')['id'] }}"/>
 							<button type="submit" onclick="return confirm('Are you sure want to continue?')" class="btn btn-primary">Buy Now</button>
 						</form>
 					</td>
+					@endif
 				  </tr>
 				  @endif
 				  <p hidden>{{ $n++; }}</p>

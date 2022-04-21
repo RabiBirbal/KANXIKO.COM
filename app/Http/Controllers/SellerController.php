@@ -228,7 +228,7 @@ class SellerController extends Controller
                     
                     $seller->email_verified_at=\Carbon\Carbon::now();
                     $date = Carbon::now();
-                    $daysToAdd = 3;
+                    $daysToAdd = 1;
                     $date = $date->addDays($daysToAdd);
                     $seller->expiry_date=$date;
                     $seller->update();
@@ -239,7 +239,7 @@ class SellerController extends Controller
                 else{
                     $seller->email_verified_at=\Carbon\Carbon::now();
                     $date = Carbon::now();
-                    $daysToAdd = 3;
+                    $daysToAdd = 1;
                     $date = $date->addDays($daysToAdd);
                     $seller->expiry_date=$date;
                     $seller->update();

@@ -265,6 +265,14 @@
 			<td><strong>Category:</strong><br>{{ $data->category }}</td>
 			<td><strong>Leads Category:</strong><br>{{ $data->leads_category }}</td>
 			<td><strong>Availability:</strong><br>{{ $data->availability }}</td>
+			@php
+				$seller=App\Models\Seller::find(Session::get('seller')['id']);
+				$expiry = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $seller->expiry_date);
+				$current = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now());
+			@endphp
+			@if ($expiry < $current)
+			<td><button class="btn btn-warning">Recharge Now</button> </td>
+			@else
 			<td>
 				<form action="{{ url('buy-lead') }}" method="post">
 					@csrf
@@ -277,6 +285,7 @@
 					<button type="submit" onclick="return confirm('Are you sure want to continue?')" class="btn btn-primary">Buy Now</button>
 				</form>
 			</td>
+			@endif
 		  </tr>
 		  @endif
 		  @endif
@@ -339,7 +348,7 @@
   @endphp
   {{-- {{ dd($expiry < $current) }} --}}
 @if ($expiry < $current)
-<script type="text/javascript">
+<script type="module">
 	$(window).on('load', function() {
 		$('#myModal').modal('show');
 	});

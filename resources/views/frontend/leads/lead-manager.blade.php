@@ -198,9 +198,21 @@
 					<td>{{ $n }}</td>
 					<td><strong> Purchase Date:</strong><br>{{ $data->created_at->format('M d, Y') }}<br>{{ $data->created_at->format('H:i:s A') }}</td>
 					<td><strong> Buyer Name:</strong><br>{{ $data->buyer_name }}</td>
+					{{-- <td>
+						<a href="{{ url('user-product-details',Crypt::encryptString($data->product_id)) }}" target="__blank"><button class="btn btn-primary">View Details</button></a>
+					</td> --}}
+					@php
+						$seller=App\Models\Seller::find(Session::get('seller')['id']);
+						$expiry = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $seller->expiry_date);
+						$current = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now());
+					@endphp
+					@if ($expiry < $current)
+					<td><button class="btn btn-warning">Recharge Now</button> </td>
+					@else
 					<td>
 						<a href="{{ url('user-product-details',Crypt::encryptString($data->product_id)) }}" target="__blank"><button class="btn btn-primary">View Details</button></a>
 					</td>
+					@endif
 					<td><strong> Product ID:</strong><br>{{ $data->product_id }}</td>
 					<td><strong> Product Name:</strong><br>{{ $data->name }}</td>
 					<form action="{{ url('lead/detail/update/'.$data->id) }}" method="post">

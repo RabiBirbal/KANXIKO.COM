@@ -1,5 +1,5 @@
 <div>
-    <section class="details-card">
+    <section class="details-card" wire:loading.delay.class="opacity-50">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-lg-6 mb-3 name">
@@ -9,7 +9,7 @@
                     <a href="{{ route('index') }}" class="btn btn-primary">Back</a>
                 </div>
                 @foreach ($product as $data)
-              <div class="col-md-3 mb-3">
+              <div class="col-md-3 mb-3" @if($loop->last) id="last_record" @endif>
                 <div class="card-content">
                     <h4 class="text-center pt-2">{{ $data->name }}</h4>
                     <div class="card-img">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-desc">
                         <div class="text-center" >
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Get Offer</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-{{ $data->id }}">Order Now</button>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="myModal-{{ $data->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -99,8 +99,7 @@
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
-                                      @enderror
-                                                                
+                                      @enderror                      
                                   </div> <!-- form-group// -->  
                                   <div class="form-group ml-4">
                                     <input class="form-check-input" type="checkbox" name="terms" value="" id="flexCheckDefault" required>
@@ -128,4 +127,28 @@
             
         </div>
     </section>
+    @if ($loadAmount >= $totalRecords)
+    <p class="text-gray-800 font-bold text-2xl text-center my-10">No More Records</p>
+    @else
+    <div class="text-center">
+      <img src="{{ asset('frontend/image/loading.gif') }}" alt="loading" height="100px">
+    </div>
+    @endif
+
+    <script>
+      const lastRecord = document.getElementById('last_record');
+      const options = {
+          root: null,
+          threshold: 1,
+          rootMargin: '0px'
+      }
+      const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  @this.loadMore()
+              }
+          });
+      });
+      observer.observe(lastRecord);
+  </script>
 </div>

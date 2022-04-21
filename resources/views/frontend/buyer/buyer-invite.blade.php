@@ -75,6 +75,7 @@
 <body>
 {{-- alert message --}}
 @include('admin/alert-message')
+
 <div class="lead-manager">
 	<div class="container-fluid">
 		<div class="row">
