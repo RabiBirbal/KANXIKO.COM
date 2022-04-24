@@ -262,8 +262,8 @@ opacity: 0;
         </div>
         <div class="col-md-6 dropdown text-right">
           @if(Session::has('buyer'))
-          @include('layout.frontend.buyer-pfofile')
-                  @endif
+          @include('layout.frontend.buyer-profile')
+          @endif
         </div>
       </div>
     </div>
