@@ -13,9 +13,14 @@ class AvailableProduct extends Model
     protected $fillable=[
         'name',
         'product_image',
+        'images',
         'category',
         'subcategory',
-        'seller_id'
+        'seller_id',
+        'description',
+        'price',
+        'status',
+        'trending'
     ];
     
     function seller(){

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertisementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginController;
@@ -99,6 +100,7 @@ Route::get('/my-orders', [BuyerController::class,'myOrder'])->name('my-order');
 Route::get('/products/{name}', [ProductController::class,'viewProduct'])->name('view-product');
 // Route::get('/getPosts', [ProductController::class, 'getPosts'])->name('getPosts');
 // Route::get('/products/{name}', ProductViewComponent::class)->name('view-product');
+
 
 //enquiry
 // Route::get('/{name}-{id}',[EnquiryController::class,'index'])->name('get-enquiry');
@@ -209,6 +211,14 @@ Route::post('/unverified-product/delete',[UnverifiedProductController::class,'de
 //enquiry
 Route::get('/9851240938/enquiry/details',[EnquiryController::class,'show'])->name('enquiry-show');
 Route::post('/enquiry/delete/{id}',[EnquiryController::class,'destroy'])->name('enquiry-delete');
+
+// Ads
+Route::get('/9851240938/ads/add',[AdvertisementController::class,'index'])->name('admin.ads');
+Route::post('/9851240938/ads/add',[AdvertisementController::class,'store'])->name('ads.add');
+Route::post('/9851240938/ads/edit',[AdvertisementController::class,'edit'])->name('ads.edit');
+Route::post('/9851240938/ads/update',[AdvertisementController::class,'update'])->name('ads.update');
+Route::post('/9851240938/ads/delete',[AdvertisementController::class,'destroy'])->name('ads.delete');
+
 
 //orders
 //buyer

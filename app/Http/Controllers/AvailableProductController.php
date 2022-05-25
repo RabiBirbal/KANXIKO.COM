@@ -59,11 +59,23 @@ class AvailableProductController extends Controller
         $data->name = $request->name;
         $data->category=str_replace('-', ' ',$request->category);
         $data->subcategory = $request->subcategory;
-        if(Session::has('seller')){
-            $data->seller_id =  Session::get('seller')['id'];
+        $data->quantity = $request->quantity;
+        $data->description = $request->description;
+        $data->price = $request->price;
+        if($request->status){
+            $data->status = "on";
         }
         else{
-            $data->seller_id  ="";
+            $data->status = "off";
+        }
+        if($request->trending){
+            $data->trending = "on";
+        }
+        else{
+            $data->trending = "off";
+        }
+        if(Session::has('seller')){
+            $data->seller_id =  Session::get('seller')['id'];
         }
         if($request->category != '0'){
             if($request->subcategory != '0'){
@@ -77,6 +89,19 @@ class AvailableProductController extends Controller
                 else{
                     return $request;
                     $data->product_image='';
+                }
+                // multiple file
+                if($request->hasFile('images'))
+                {
+                    $names = [];
+                    foreach($request->file('images') as $image)
+                    {
+                        $filename = $image->getClientOriginalName();
+                        $image->move('upload/images/', $filename);
+                        array_push($names, $filename);          
+
+                    }
+                    $data->images = json_encode($names);
                 }
 
                 $data->save();
@@ -139,11 +164,26 @@ class AvailableProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
+    { 
         $data = AvailableProduct::find($request->id);
         $data->name=$request->name;
         $data->category=str_replace('-', ' ',$request->category);
         $data->subcategory=$request->subcategory;
+        $data->description = $request->description;
+        $data->quantity = $request->quantity;
+        $data->price = $request->price;
+        if($request->status){
+            $data->status = "on";
+        }
+        else{
+            $data->status = "off";
+        }
+        if($request->trending){
+            $data->trending = "on";
+        }
+        else{
+            $data->trending = "off";
+        }
         if($request->hasfile('image')){
             $file=$request->file('image');
             $extension=$file->getClientOriginalExtension(); //getting image extension
@@ -151,10 +191,19 @@ class AvailableProductController extends Controller
             $file->move('upload/images/',$filename);
             $data->product_image=$filename;
         }
-        else{
-            $data->update();
-            Session::put('success','Product has been updated successfully.');
-            return redirect()->route('available-product');
+
+        // multiple file
+        if($request->hasFile('images'))
+        {
+            $names = [];
+            foreach($request->file('images') as $image)
+            {
+                $filename = $image->getClientOriginalName();
+                $image->move('upload/images/', $filename);
+                array_push($names, $filename);          
+
+            }
+            $data->images = json_encode($names);
         }
 
         $data->update();
