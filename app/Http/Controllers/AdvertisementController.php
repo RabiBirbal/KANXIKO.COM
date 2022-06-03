@@ -25,8 +25,8 @@ class AdvertisementController extends Controller
         else{
             $admin=User::find(Session::get('seller_department')['id']);
         }
-        $ads = Advertisement::orderby('created_at','desc')->get();
-        return view('admin.ads.ads-add',compact("admin","ads"));
+        
+        return view('admin.ads.ads-add',compact("admin"));
     }
 
     /**
@@ -48,7 +48,9 @@ class AdvertisementController extends Controller
     public function store(Request $request)
     {
         $ads = new Advertisement;
+        $ads->title = $request->title;
         $ads->link = $request->link;
+        $ads->description = $request->description;
         if($request->status){
             $ads->status = "on";
         }
@@ -75,9 +77,20 @@ class AdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        if(Session::has('admin')){
+            $admin=User::find(Session::get('admin')['id']);
+        }
+        elseif(Session::has('buyer_department')){
+            $admin=User::find(Session::get('buyer_department')['id']);
+        }
+        else{
+            $admin=User::find(Session::get('seller_department')['id']);
+        }
+        $ads = Advertisement::orderby('created_at','desc')->get();
+
+        return view('admin.ads.ads-show',compact("ads","admin"));
     }
 
     /**
@@ -111,7 +124,9 @@ class AdvertisementController extends Controller
     public function update(Request $request)
     {
         $ads = Advertisement::find($request->id);
+        $ads->title = $request->title;
         $ads->link = $request->link;
+        $ads->description = $request->description;
         if($request->status){
             $ads->status = "on";
         }
@@ -129,7 +144,7 @@ class AdvertisementController extends Controller
 
         $ads->update();
         Session::put('success','Advertisement has been updated successfully.');
-        return redirect()->route('admin.ads');
+        return redirect()->route('ads.show');
     }
 
     /**

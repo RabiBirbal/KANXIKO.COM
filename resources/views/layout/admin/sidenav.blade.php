@@ -74,6 +74,12 @@
                 <li><a href="{{ route('user_dashboard_banner') }}">User Dashboard Banner</a></li>
               </ul>
             </li>
+            <li><a><i class="fa fa-image"></i> Advertisement  <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('admin.ads') }}">Add Advertisement</a></li>
+                <li><a href="{{ route('ads.show') }}">List Advertisements</a></li>
+              </ul>
+            </li>
             <li><a href="{{ route('category') }}"><i class="fa fa-filter"></i> Category Management</a></li>
             <li><a href="{{ route('embed-facebook') }}"><i class="fa fa-facebook"></i> Embed Facebook</a></li>
             

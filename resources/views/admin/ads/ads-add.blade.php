@@ -109,6 +109,14 @@
                             <form action="{{ route('ads.add') }}" method="post" id="demo-form2" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left was-validated">
                               @csrf
                               <div class="form-group col-md-6">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="link">Link</label>
+                                <input type="text" id="link" name="link" class="form-control" placeholder="Enter Link">
+                              </div>
+                              <div class="form-group col-md-6">
                                 <label for="image">Image</label>
                                 <input type="file" id="file-ip-2" accept="image/*" class="form-control-file border" onchange="showPreview2(event);" name="image" >
                                 
@@ -117,9 +125,11 @@
                                   </div>
                                   
                               </div>
-                            <div class="form-group col-md-6">
-                              <label for="link">Link</label>
-                              <input type="text" id="link" name="link" class="form-control" placeholder="Enter Link">
+
+                            <div class="form-group col-md-12">
+                              <label for="description">Description</label>
+                              <textarea id="summernote" name="description"  placeholder="Enter Description">
+                              </textarea>
                             </div>
                             
                           <!-- Rounded switch -->
@@ -141,44 +151,6 @@
                           </form>
                           <div class="ln_solid"></div>
                           </div>
-                          <div class="card-box table-responsive">
-                            <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                              <tr>
-                                <th scope="col">SN</th>
-                                  <th scope="col">Image</th>
-                                  <th scope="col">Link</th>
-                                  <th scope="col">Status</th>
-                                  <th scope="col">#Action</th>
-                              </tr>
-                            </thead>
-                            <tbody id="myTable">
-                              <p hidden>{{ $n=1; }}</p>
-                              @foreach ($ads as $data)
-                              <tr>
-                                <td>{{ $n }}</td>
-                                <td class="text-center"><img src="{{ asset('upload/images/'.$data['image']) }}" alt="product image" width="100px"></td>
-                                <td>{{ $data->link }}</td>
-                                <td>{{ $data->status }}</td>
-                                </td>
-                                <td>
-                                  <form action="{{ route('ads.edit') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                    <button type="submit" class="btn btn-primary">Edit</button>
-                                  </form>
-                                  <form action="{{ route('ads.delete') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                    <button type="submit" onclick="return confirm('Are you sure want to continue?')" class="btn btn-danger">Remove</button>
-                                  </form>
-                                </td>
-                              </tr>
-                              <p hidden>{{ $n++; }}</p>
-                              @endforeach
-                            </tbody>
-                          </table>
-                        </div>
                       </div>
                   </div>
                 </div>
@@ -222,6 +194,33 @@
             }
         }
       </script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+  <script>
+      $('textarea#summernote').summernote({
+      placeholder: 'Write Introduction Here ......',
+      tabsize: 2,
+      height: 250,
+toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'italic', 'underline', 'clear']],
+      // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+      //['fontname', ['fontname']],
+     // ['fontsize', ['fontsize']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['height', ['height']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'hr']],
+      //['view', ['fullscreen', 'codeview']],
+      ['help', ['help']]
+    ],
+    });
+  </script>
       
   </body>
 </html>

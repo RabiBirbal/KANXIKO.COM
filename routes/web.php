@@ -215,6 +215,7 @@ Route::post('/enquiry/delete/{id}',[EnquiryController::class,'destroy'])->name('
 // Ads
 Route::get('/9851240938/ads/add',[AdvertisementController::class,'index'])->name('admin.ads');
 Route::post('/9851240938/ads/add',[AdvertisementController::class,'store'])->name('ads.add');
+Route::get('/9851240938/ads/list',[AdvertisementController::class,'show'])->name('ads.show');
 Route::post('/9851240938/ads/edit',[AdvertisementController::class,'edit'])->name('ads.edit');
 Route::post('/9851240938/ads/update',[AdvertisementController::class,'update'])->name('ads.update');
 Route::post('/9851240938/ads/delete',[AdvertisementController::class,'destroy'])->name('ads.delete');

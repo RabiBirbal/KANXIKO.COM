@@ -110,6 +110,14 @@
                               @csrf
                               <input type="hidden" name="id" value="{{ $ads->id }}">
                               <div class="form-group col-md-6">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="title" class="form-control" value="{{ $ads['title'] }}" placeholder="Enter Title">
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="link">Link</label>
+                                <input type="text" id="link" name="link" class="form-control" value="{{ $ads->link }}" placeholder="Enter Link">
+                              </div>
+                              <div class="form-group col-md-6">
                                   <img src="{{ asset('upload/images/'.$ads['image']) }}" alt="" width="200px">
                                   <br>
                                 <label for="image">Image</label>
@@ -120,9 +128,11 @@
                                   </div>
                                   
                               </div>
-                            <div class="form-group col-md-6">
-                              <label for="link">Link</label>
-                              <input type="text" id="link" name="link" class="form-control" value="{{ $ads->link }}" placeholder="Enter Link">
+                            <div class="form-group col-md-12">
+                              <label for="description">Description</label>
+                              <textarea id="summernote" name="description"  placeholder="Enter Description">
+                                {{ $ads->description }}
+                              </textarea>
                             </div>
                             
                           <!-- Rounded switch -->
@@ -189,6 +199,33 @@
             }
         }
       </script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+<script>
+  $('textarea#summernote').summernote({
+  placeholder: 'Write Introduction Here ......',
+  tabsize: 2,
+  height: 250,
+toolbar: [
+  ['style', ['style']],
+  ['font', ['bold', 'italic', 'underline', 'clear']],
+  // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+  //['fontname', ['fontname']],
+ // ['fontsize', ['fontsize']],
+  ['color', ['color']],
+  ['para', ['ul', 'ol', 'paragraph']],
+  ['height', ['height']],
+  ['table', ['table']],
+  ['insert', ['link', 'picture', 'hr']],
+  //['view', ['fullscreen', 'codeview']],
+  ['help', ['help']]
+],
+});
+</script>
       
   </body>
 </html>
