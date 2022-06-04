@@ -50,6 +50,13 @@
                 <li><a href="{{ route('product') }}">Product Details</a></li>
               </ul>
             </li>
+            <li><a><i class="fa fa-tasks"></i> Redeem Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{ route('redeem.product.create') }}">Add Redeem Product</a></li>
+                <li><a href="{{ route('redeem.product.index') }}">List Redeem Product</a></li>
+                <li><a href="{{ route('buyer.redeem.order') }}">Redeem Order</a></li>
+              </ul>
+            </li>
             {{-- <li><a href="{{ route('enquiry-show') }}"><i class="fa fa-bullhorn"></i> Enquiry Details</a></li> --}}
             <li><a><i class="fa fa-money"></i> Wallet Management <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
@@ -93,6 +100,7 @@
                 <li><a href="{{ route('product') }}">Product Details</a></li>
               </ul>
             </li>
+            
             <li><a><i class="fa fa-image"></i> Banner Management <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="{{ route('homepage_banner') }}">Homepage Banner</a></li>

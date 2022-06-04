@@ -27,6 +27,7 @@ use App\Http\Controllers\InviteController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\AvailableProductController;
 use App\Http\Controllers\EsewaController;
+use App\Http\Controllers\RedeemProductController;
 use App\Http\Controllers\SellerProductController;
 use App\Http\Livewire\ProductViewComponent;
 
@@ -211,6 +212,16 @@ Route::post('/unverified-product/delete',[UnverifiedProductController::class,'de
 //enquiry
 Route::get('/9851240938/enquiry/details',[EnquiryController::class,'show'])->name('enquiry-show');
 Route::post('/enquiry/delete/{id}',[EnquiryController::class,'destroy'])->name('enquiry-delete');
+
+// Redeem Product
+Route::get('/9851240938/redeem-product/add',[RedeemProductController::class,'create'])->name('redeem.product.create');
+Route::post('/9851240938/redeem-product/add',[RedeemProductController::class,'store'])->name('redeem.product.store');
+Route::get('/9851240938/redeem-product',[RedeemProductController::class,'index'])->name('redeem.product.index');
+Route::get('/9851240938/redeem-product/edit/{id}',[RedeemProductController::class,'edit'])->name('redeem.product.edit');
+Route::post('/9851240938/redeem-product/update',[RedeemProductController::class,'update'])->name('redeem.product.update');
+Route::post('/9851240938/redeem-product/delete',[RedeemProductController::class,'destroy'])->name('redeem.product.destroy');
+Route::get('/9851240938/buyer/redeem/order',[RedeemProductController::class,'view'])->name('buyer.redeem.order');
+Route::get('/9851240938/buyer/redeem/status/change/{id}',[RedeemProductController::class,'changeStatus'])->name('redeem.status.change');
 
 // Ads
 Route::get('/9851240938/ads/add',[AdvertisementController::class,'index'])->name('admin.ads');
